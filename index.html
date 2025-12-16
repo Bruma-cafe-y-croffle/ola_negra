@@ -80,8 +80,9 @@
             <p class="text-xl text-accent font-extrabold mb-4 uppercase text-glow">
                 "Sabor Bravo: La Identidad Costeña Sin Filtros."
             </p>
+            <!-- Párrafo actualizado con la descripción completa del concepto -->
             <p class="text-lg text-gray-400 mb-8 max-w-2xl">
-                CALLE BRAVA es más que comida rápida: es el auténtico sabor y la actitud sin filtros de Barranquilla. <span class="font-semibold text-gray-300">¡Aquí se come full, se come cargado y se come al carbón!</span>
+                CALLE BRAVA es más que comida rápida: es el auténtico sabor y la actitud sin filtros de Barranquilla. Cada mordida es un homenaje a la cultura de la calle, donde la generosidad se mide en queso costeño, lechuga fresca y el toque infaltable de la brasa. <span class="font-semibold text-gray-300">¡Aquí se come full, se come cargado y se come al carbón!</span>
             </p>
             <a href="#menu-secciones" class="inline-block bg-red-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-red-700 transition duration-300 shadow-xl transform hover:scale-[1.03] uppercase tracking-wider focus:ring-4 focus:ring-red-500/50">
                 Explorar el Menú Completo
@@ -90,11 +91,12 @@
 
         <!-- 3. Contenedor Dinámico del Menú -->
         <section id="menu-secciones" class="py-12">
-            <h2 class="text-5xl font-black mb-10 uppercase text-center text-red-600">
+            <!-- TÍTULO PRINCIPAL REDUCIDO A text-4xl en móvil -->
+            <h2 class="text-4xl sm:text-5xl font-black mb-10 uppercase text-center text-red-600">
                 <span class="text-white">NUESTRA</span> CARTA <span class="text-accent text-glow">🔥</span>
             </h2>
             <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto text-lg italic border-b border-red-600/30 pb-4">
-                El auténtico sabor y la actitud sin filtros. Generosidad que se mide en queso costeño, lechuga fresca y el toque infaltable de la brasa.
+                El auténtico sabor y la actitud sin filtros. Generosidad que se mide en queso costeño, lechuga fresca y el toque infaltable de la brasa. ¡Aquí se come full, se come cargado y se come al carbón!
             </p>
 
             <!-- Este div será rellenado por JavaScript -->
@@ -113,7 +115,7 @@
                 <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Hamburguesa+Brava" onerror="this.onerror=null;this.src='https://placehold.co/400x400/27272a/FFFFFF?text=';" alt="" class="w-full h-48 object-cover rounded-lg shadow-xl border-2 border-red-600/50 hover:border-accent transition duration-300 cursor-pointer transform hover:scale-[1.02]">
                 <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Perro+Al+Carbon" onerror="this.onerror=null;this.src='https://placehold.co/400x400/27272a/FFFFFF?text=';" alt="" class="w-full h-48 object-cover rounded-lg shadow-xl border-2 border-red-600/50 hover:border-accent transition duration-300 cursor-pointer transform hover:scale-[1.02]">
                 <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Salchipapa+Jefe" onerror="this.onerror=null;this.src='https://placehold.co/400x400/27272a/FFFFFF?text=';" alt="" class="w-full h-48 object-cover rounded-lg shadow-xl border-2 border-red-600/50 hover:border-accent transition duration-300 cursor-pointer transform hover:scale-[1.02]">
-                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Mojito+Callejero" onerror="this.onerror=null;this.src='https://placehold.co/400x400/27272a/FFFFFF?text=';" alt="" class="w-full h-48 object-cover rounded-lg shadow-xl border-2 border-red-600/50 hover:border-accent transition duration-300 cursor-pointer transform hover:scale-[1.02]">
+                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Butifarra+Extrema" onerror="this.onerror=null;this.src='https://placehold.co/400x400/27272a/FFFFFF?text=';" alt="" class="w-full h-48 object-cover rounded-lg shadow-xl border-2 border-red-600/50 hover:border-accent transition duration-300 cursor-pointer transform hover:scale-[1.02]">
             </div>
             <div class="text-center mt-10">
                 <a href="#menu-secciones" class="inline-block border-2 border-accent text-accent font-bold py-2 px-6 rounded-full hover:bg-accent hover:text-gray-900 transition duration-300 uppercase tracking-wider shadow-lg transform hover:scale-105">
@@ -135,74 +137,78 @@
     <!-- Script de Menú Móvil y Lógica de Renderizado -->
     <script>
         // 1. Datos del Menú (La Lógica de Datos)
-        // Datos extraídos del archivo menu_calle_brava.md
+        // Datos extraídos del archivo CALLE BRAVA.docx
         const menuData = [
             {
                 id: 'hamburguesas',
-                // CORRECCIÓN APLICADA AQUÍ: 'Al Carbón' con minúscula.
-                title: '🍔 Hamburguesas al Carbón', 
-                subtitle: 'The Classics',
+                title: '🍔 Hamburguesas',
+                subtitle: 'El auténtico sabor Bravo. (con papa francesa)',
                 accentColor: 'color-brava',
                 items: [
-                    { name: 'H-CB1. La Brava Sencilla', description: 'Carne AL CARBÓN, queso americano, lechuga y tomate.', price: '18.000' },
-                    { name: 'H-CB2. Doble Carne Bravo', description: 'Doble Carne AL CARBÓN, doble queso, tocineta y salsas especiales.', price: '26.000' },
-                    { name: 'H-CB3. Crispy Pollo', description: 'Pechuga crocante, lechuga, tomate, queso costeño y salsa tártara.', price: '20.000' },
-                    { name: 'H-CB4. Vegetariana Brava', description: 'Portobello AL CARBÓN, aguacate, lechuga y queso costeño.', price: '17.000' }
+                    { name: 'La Clásica Currambera', description: 'Carne de res (150g), queso cheddar, tomate, lechuga fresca y salsas de la casa.', price: '18.000' },
+                    { name: 'La Extrema', description: 'Carne (150g), pollo (150g), queso mozzarella, tocineta, lechuga, tomate, cebolla, salsa de la casa.', price: '29.000' },
+                    { name: 'Hamburguesa Gratinada', description: 'Carne (150g), doble queso (costeño y mozzarella) y gratinado con lechuga.', price: '20.000' },
+                    { name: 'La Rebelde', description: 'Doble carne de res (300g), doble queso cheddar, tocineta y cebolla encurtida.', price: '28.000' },
+                    { name: 'La Identidad Costeña', description: 'Carne (150g), queso costeño asado, chicharrón crocante y suero costeño.', price: '24.000' },
+                    { name: 'La 'Callejera' ', description: 'Carne (150g), queso, maíz tierno, papitas ripio y salsas especiales.', price: '12.000' }
                 ]
             },
             {
                 id: 'perros',
-                title: '🌭 Perros Callejeros',
+                title: '🌭 Perros Calientes',
                 subtitle: 'Al Vapor y Al Carbón',
                 accentColor: 'text-accent',
                 items: [
-                    // Al Vapor
-                    { name: 'P-V1. Perro Clásico', description: 'Salchicha americana, ripio, queso costeño.', price: '12.000', subcategory: 'Perros Al Vapor (Clásicos)' },
-                    { name: 'P-V2. Perro Hawaiano', description: 'Salchicha, piña en trozos, jamón y queso costeño.', price: '16.000' },
-                    // Al Carbón
-                    { name: 'P-C1. Perro Suiza Bravo', description: 'Salchicha suiza AL CARBÓN, tocineta, queso mozzarella.', price: '18.000', subcategory: 'Perros Al Carbón (Premium)' },
-                    { name: 'P-C2. Perro Ranchero', description: 'Salchicha, carne desmechada, maíz tierno y queso costeño.', price: '22.000' }
+                    // Perros Al Vapor
+                    { name: 'P-V1. Perro Clásico Barranquillero', description: 'Salchicha americana, pan suave, mucha lechuga, queso costeño rallado y salsas.', price: '12.000', subcategory: 'Perros Al Vapor (Clásicos)' },
+                    { name: 'P-V2. Perro Maicero Gratinado', description: 'Salchicha americana, pan, lechuga, maíz tierno, y queso mozzarella gratinado.', price: '14.000' },
+                    { name: 'P-V3. Perro Ranchero', description: 'Salchicha americana, pan, lechuga, queso costeño, y trozos de tocineta y jamón picados.', price: '13.000' },
+                    { name: 'P-V4. El "Bravo" Desmechado', description: 'Salchicha americana, pan, lechuga, queso costeño y generosa carne desmechada guisada.', price: '15.000' },
+                    { name: 'P-V5. El Sucio (Full Queso)', description: 'Salchicha americana, pan, lechuga, y una mezcla abundante de queso costeño y mozzarella fundido.', price: '14.000' },
+                    { name: 'P-V6. Perro con Butifarra', description: 'Salchicha americana, pan, lechuga, queso costeño y trozos de butifarra (¡El toque local!).', price: '16.000' },
+                    // Perros Al Carbón
+                    { name: 'P-C1. El Perro Carbón Clásico', description: 'Salchicha americana al carbón, pan grillé, lechuga, queso costeño rallado y papitas ripio.', price: '14.000', subcategory: 'Perros Al Carbón (Nuestra Especialidad)' },
+                    { name: 'P-C2. Dogo Suizo Al Carbón', description: 'Salchicha suiza premium al carbón, lechuga, tocineta y queso mozzarella gratinado.', price: '17.000' },
+                    { name: 'P-C3. Perro Al Carbón \'Full Carne\'', description: 'Salchicha americana al carbón, lechuga, queso costeño y generosa porción de carne desmechada.', price: '18.000' },
+                    { name: 'P-C4. Chuzo-Pan de la Calle', description: 'Trozos de carne y pollo al carbón en pan de perro, con lechuga, queso costeño y salsa tártara.', price: '16.000' },
+                    { name: 'P-C5. El "Toro" Parrillero', description: 'Salchicha suiza al carbón, queso costeño, butifarra y un toque de chimichurri costeño.', price: '20.000' },
+                    { name: 'P-C6. El "Rebelde" Tocineta', description: 'Salchicha suiza al carbón, doble tocineta, queso cheddar líquido y lechuga.', price: '18.000' },
+                    { name: 'P-C7. Perro Americano "Bravísimo"', description: 'Salchicha americana al carbón, maíz tierno, queso costeño, lechuga y aderezo de piña.', price: '15.000' }
                 ]
             },
             {
                 id: 'salchipapas',
                 title: '🍟 Salchipapas',
-                subtitle: 'Para el Combo Completo',
+                subtitle: 'Para el Combo Completo y Cargas Bravas',
                 accentColor: 'color-brava',
                 items: [
                     // Personales
-                    { name: 'SP-P1. La Clásica', description: 'Papas, salchicha americana y queso costeño.', price: '13.000', subcategory: 'Salchipapas Personales' },
-                    { name: 'SP-P3. De Tocineta', description: 'Papas, salchicha suiza, tocineta y queso costeño.', price: '18.000' },
+                    { name: 'SP-P1. La Clásica con Queso', description: 'Papas francesas, salchicha americana, lechuga picada y queso costeño rallado.', price: '13.000', subcategory: 'Salchipapas Personales' },
+                    { name: 'SP-P4. Salchi-Pollo Desmechado', description: 'Papas francesas, salchicha americana, pollo desmechado y queso costeño.', price: '15.000' },
+                    { name: 'SP-P6. La Solitaria (Butifarra)', description: 'Papas francesas, salchicha americana, y trozos de butifarra con suero costeño.', price: '15.000' },
+                    { name: 'SP-P8. Salchipapa "Al Carbón"', description: 'Papas francesas, salchicha americana AL CARBÓN, lechuga y queso costeño.', price: '17.000' },
                     // Dúo
-                    { name: 'SP-D1. La Dupla Desmechada', description: 'Papas, salchicha, carne y pollo desmechado, y queso costeño.', price: '27.000', subcategory: 'Salchipapas Dúo (Para compartir)' },
+                    { name: 'SP-D1. La Dupla Desmechada', description: 'Papas, salchicha, carne y pollo desmechado, y queso costeño.', price: '27.000', subcategory: 'Salchipapas Dúo (Para Compartir)' },
                     { name: 'SP-D2. Dúo Tocineta Gratinado', description: 'Papas, salchicha suiza, tocineta, queso mozzarella y gratinado.', price: '28.000' },
                     { name: 'SP-D5. El \'Peleador\' (Chicharrón)', description: 'Papas, salchicha, chicharrón crocante, y queso costeño.', price: '30.000' },
+                    { name: 'SP-D6. Dúo Granjero', description: 'Papas, salchicha, pollo desmechado, champiñones y queso mozzarella.', price: '28.000' },
                     // Familiar
-                    { name: 'SP-F2. La Tabla de Carnes Bravas', description: 'Papas, carne y pollo desmechado, chorizo, y chicharrón con mucho queso costeño.', price: '55.000', subcategory: 'Salchipapas Familiar (Mega Cargas)' }
+                    { name: 'SP-F1. El Súper-Familiar', description: 'Papas francesas grandes, salchicha, jamón, tocineta, maíz tierno, y queso costeño.', price: '48.000', subcategory: 'Salchipapas Familiar (Mega Cargas)' },
+                    { name: 'SP-F2. La Tabla de Carnes Bravas', description: 'Papas, carne y pollo desmechado, chorizo, y chicharrón con mucho queso costeño.', price: '55.000' },
+                    { name: 'SP-F3. Desgranado Full Topping', description: 'Base de maíz tierno, pollo y carne desmechada, queso costeño, papitas ripio y salsas.', price: '50.000' },
+                    { name: 'SP-F5. La Butifarra Extrema', description: 'Papas, salchicha, y la adición abundante de butifarra y chicharrón.', price: '58.000' },
+                    { name: 'SP-F8. La Carga Full \'Jefe\'', description: 'Papas, carne desmechada, pollo desmechado, tocineta, chorizo y gratinado de mozzarella.', price: '65.000' }
                 ]
             },
-            {
-                id: 'cocteles',
-                title: '🍹 Cócteles Bravos',
-                subtitle: 'La Actitud Sin Filtros',
-                accentColor: 'text-accent',
-                items: [
-                    { name: 'Brava Tropical Picante', description: 'Ron blanco, maracuyá, un toque picante de ají y granadina.', price: '22.000' },
-                    { name: 'Mojito Callejero', description: 'Ron, hierbabuena, limón, soda y azúcar morena. Clásico con actitud.', price: '18.000' },
-                    { name: 'Margarita del Caribe', description: 'Tequila, Triple Sec, limón y borde de sal marina.', price: '24.000' },
-                    { name: 'Michelada Suprema', description: 'Cerveza, limón, sal, y un toque secreto de la casa.', price: '15.000' },
-                    { name: 'Cerveza Artesanal (Local)', description: 'Pregunta por la selección de cervezas frías locales.', price: '12.000' }
-                ]
-            },
-            // Añadido por contexto previo
             {
                 id: 'bebidas',
                 title: '🥤 Jugos y Gaseosas',
-                subtitle: 'Refrescos',
+                subtitle: 'Refrescos para aplacar la sed brava',
                 accentColor: 'color-brava',
                 items: [
                     { name: 'El Corozo \'Bravo\'', description: 'Jugo natural refrescante.', price: '7.000' },
                     { name: 'Limonada de Coco', description: 'El sabor de la playa en tu mesa.', price: '10.000' },
+                    { name: 'Lulada Fría', description: 'El toque agridulce.', price: '8.000' },
                     { name: 'Jugos Naturales', description: 'Mango, Maracuyá o Limonada.', price: '7.000' },
                     { name: 'Gaseosas / Agua', description: 'Personal (Lata/Botella).', price: '5.000' }
                 ]
@@ -221,7 +227,8 @@
                 // Inicio de la tarjeta de categoría con un borde brillante
                 let html = `
                     <div class="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl border-4 border-red-600/50 hover:border-red-500 transition duration-500 transform hover:scale-[1.005]">
-                        <h3 class="text-4xl font-black text-center mb-6 pb-2 border-b-4 border-accent uppercase text-glow">
+                        <!-- CORRECCIÓN FINAL: text-sm en móvil (mínimo para título) y text-4xl en sm: (escritorio) -->
+                        <h3 class="text-sm sm:text-4xl font-black text-center mb-6 pb-2 border-b-4 border-accent uppercase text-glow">
                             <span class="${category.accentColor}">${category.title.split(' ')[0]}</span> ${category.title.split(' ').slice(1).join(' ')}
                         </h3>
                         <p class="text-center text-gray-400 mb-6 italic text-sm">${category.subtitle}</p>
@@ -245,8 +252,8 @@
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-5 ${borderClass} transition duration-300 hover:bg-gray-700/30 rounded-lg px-2 -mx-2">
                             <!-- APLICACIÓN DE flex-grow y max-w-full para asegurar que el texto use todo el espacio disponible antes que el precio -->
                             <div class="mb-2 sm:mb-0 max-w-full flex-grow">
-                                <!-- Nombre del plato (text-lg en todos los tamaños) -->
-                                <h5 class="text-lg font-bold text-white tracking-wide">${item.name}</h5>
+                                <!-- Nombre del plato: text-base en móvil (16px) y text-lg en escritorio -->
+                                <h5 class="text-base sm:text-lg font-bold text-white tracking-wide">${item.name}</h5>
                                 <!-- Descripción del plato (text-xs en todos los tamaños) -->
                                 <p class="text-gray-400 text-xs italic mt-1">${item.description}</p>
                             </div>
