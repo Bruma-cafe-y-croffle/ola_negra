@@ -242,14 +242,15 @@
 
                     html += `
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-5 ${borderClass} transition duration-300 hover:bg-gray-700/30 rounded-lg px-2 -mx-2">
-                            <div class="mb-2 sm:mb-0 max-w-full sm:max-w-[70%]">
+                            <!-- APLICACIÓN DE flex-grow y max-w-full para asegurar que el texto use todo el espacio disponible antes que el precio -->
+                            <div class="mb-2 sm:mb-0 max-w-full flex-grow">
                                 <!-- Nombre del plato (text-lg en todos los tamaños) -->
                                 <h5 class="text-lg font-bold text-white tracking-wide">${item.name}</h5>
                                 <!-- Descripción del plato (text-xs en todos los tamaños) -->
                                 <p class="text-gray-400 text-xs italic mt-1">${item.description}</p>
                             </div>
-                            <!-- Precio: text-lg en móvil, text-xl en sm+ (Más compacto en móvil) -->
-                            <span class="text-lg sm:text-xl font-black text-accent ml-0 sm:ml-4 bg-gray-900 px-3 py-1 rounded-full shadow-lg border border-red-600/50 text-glow transform transition duration-300 hover:scale-105">$${item.price} COP</span>
+                            <!-- El precio se mantiene fijo y se alinea automáticamente al final del espacio (flex-shrink-0 previene que el precio se encoja) -->
+                            <span class="text-lg sm:text-xl font-black text-accent ml-0 sm:ml-4 bg-gray-900 px-3 py-1 rounded-full shadow-lg border border-red-600/50 text-glow transform transition duration-300 hover:scale-105 flex-shrink-0">$${item.price} COP</span>
                         </div>
                     `;
                 });
