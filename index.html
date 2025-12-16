@@ -73,6 +73,7 @@
         
         <!-- Sección de Héroe (Inicio) -->
         <section id="inicio" class="bg-gray-800 p-8 md:p-16 rounded-3xl shadow-2xl mb-12 border-l-8 border-red-600">
+            <!-- Ajuste para que el texto sea text-5xl en móvil y no se desborde -->
             <h1 class="text-5xl md:text-7xl font-black uppercase mb-4 leading-tight">
                 VIVE LA <span class="color-brava">ACTITUD</span>. <br> SÉ CALLE BRAVA.
             </h1>
@@ -230,25 +231,25 @@
                 category.items.forEach((item, index) => {
                     // Manejar subcategorías (ej: Perros Al Vapor vs Al Carbón)
                     if (item.subcategory && item.subcategory !== currentSubcategory) {
-                        // REDUCIDO: De text-2xl a text-xl
+                        // Título de subcategoría (bien organizado)
                         html += `<h4 class="text-xl font-extrabold text-accent mt-8 mb-4 border-l-4 border-red-600 pl-4 uppercase">${item.subcategory}</h4>`;
                         currentSubcategory = item.subcategory;
                     }
 
-                    // Renderizar el ítem del menú con nuevo diseño de tarjeta
+                    // Renderizar el ítem del menú con diseño ajustado para móvil
                     const isLast = index === category.items.length - 1;
                     const borderClass = isLast ? '' : 'border-b border-gray-700/50';
 
                     html += `
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-5 ${borderClass} transition duration-300 hover:bg-gray-700/30 rounded-lg px-2 -mx-2">
                             <div class="mb-2 sm:mb-0 max-w-full sm:max-w-[70%]">
-                                <!-- REDUCIDO: De text-xl a text-lg para el nombre -->
+                                <!-- Nombre del plato (text-lg en todos los tamaños) -->
                                 <h5 class="text-lg font-bold text-white tracking-wide">${item.name}</h5>
-                                <!-- REDUCIDO: De text-sm a text-xs para la descripción -->
+                                <!-- Descripción del plato (text-xs en todos los tamaños) -->
                                 <p class="text-gray-400 text-xs italic mt-1">${item.description}</p>
                             </div>
-                            <!-- REDUCIDO: De text-2xl a text-xl para el precio -->
-                            <span class="text-xl font-black text-accent ml-0 sm:ml-4 bg-gray-900 px-3 py-1 rounded-full shadow-lg border border-red-600/50 text-glow transform transition duration-300 hover:scale-105">$${item.price} COP</span>
+                            <!-- Precio: text-lg en móvil, text-xl en sm+ (Más compacto en móvil) -->
+                            <span class="text-lg sm:text-xl font-black text-accent ml-0 sm:ml-4 bg-gray-900 px-3 py-1 rounded-full shadow-lg border border-red-600/50 text-glow transform transition duration-300 hover:scale-105">$${item.price} COP</span>
                         </div>
                     `;
                 });
