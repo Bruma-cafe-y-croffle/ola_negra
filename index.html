@@ -69,18 +69,17 @@
     </header>
 
     <!-- 2. Contenido Principal -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
         <!-- Sección de Héroe (Inicio) -->
         <section id="inicio" class="bg-gray-800 p-8 md:p-16 rounded-3xl shadow-2xl mb-12 border-l-8 border-red-600">
-            <!-- Ajuste para que el texto sea text-5xl en móvil y no se desborde -->
-            <h1 class="text-5xl md:text-7xl font-black uppercase mb-4 leading-tight">
+            <!-- Título H1 ajustado para ser más prudente en escritorio (text-6xl) -->
+            <h1 class="text-5xl md:text-6xl font-black uppercase mb-4 leading-tight">
                 VIVE LA <span class="color-brava">ACTITUD</span>. <br> SÉ CALLE BRAVA.
             </h1>
             <p class="text-xl text-accent font-extrabold mb-4 uppercase text-glow">
                 "Sabor Bravo: La Identidad Costeña Sin Filtros."
             </p>
-            <!-- Párrafo actualizado con la descripción completa del concepto -->
             <p class="text-lg text-gray-400 mb-8 max-w-2xl">
                 CALLE BRAVA es más que comida rápida: es el auténtico sabor y la actitud sin filtros de Barranquilla. Cada mordida es un homenaje a la cultura de la calle, donde la generosidad se mide en queso costeño, lechuga fresca y el toque infaltable de la brasa. <span class="font-semibold text-gray-300">¡Aquí se come full, se come cargado y se come al carbón!</span>
             </p>
@@ -91,7 +90,6 @@
 
         <!-- 3. Contenedor Dinámico del Menú -->
         <section id="menu-secciones" class="py-12">
-            <!-- TÍTULO PRINCIPAL REDUCIDO A text-4xl en móvil -->
             <h2 class="text-4xl sm:text-5xl font-black mb-10 uppercase text-center text-red-600">
                 <span class="text-white">NUESTRA</span> CARTA <span class="text-accent text-glow">🔥</span>
             </h2>
@@ -141,16 +139,16 @@
         const menuData = [
             {
                 id: 'hamburguesas',
-                title: '🍔 Hamburguesas',
-                subtitle: 'El auténtico sabor Bravo. con papa francesa',
+                title: '🍔 Hamburguesas Al Carbón',
+                subtitle: 'El auténtico sabor Bravo.',
                 accentColor: 'color-brava',
                 items: [
-                    { name: 'La Clásica Currambera', description: 'Carne de res (150g), queso cheddar, tomate, lechuga fresca y salsas de la casa.', price: '18.000' },
-                    { name: 'La Extrema', description: 'Carne (150g), pollo (150g), queso mozzarella, tocineta, lechuga, tomate, cebolla, salsa de la casa.', price: '29.000' },
-                    { name: 'Hamburguesa Gratinada', description: 'Carne (150g), doble queso (costeño y mozzarella) y gratinado con lechuga.', price: '20.000' },
-                    { name: 'La Rebelde', description: 'Doble carne de res (300g), doble queso cheddar, tocineta y cebolla encurtida.', price: '28.000' },
-                    { name: 'La Identidad Costeña', description: 'Carne (150g), queso costeño asado, chicharrón crocante y suero costeño.', price: '24.000' },
-                    { name: 'La Callejera', description: 'Carne (150g), queso, maíz tierno, papitas ripio y salsas especiales.', price: '12.000' }
+                    { name: 'H-1. La Clásica Currambera', description: 'Carne de res (150g), queso cheddar, tomate, lechuga fresca y salsa especial.', price: '18.000' },
+                    { name: 'H-2. La Desmechada Extrema', description: 'Carne (150g), queso mozzarella, tocineta, y carne desmechada guisada.', price: '22.000' },
+                    { name: 'H-3. Hamburguesa Gratinada', description: 'Carne (150g), doble queso (costeño y mozzarella) y gratinado con lechuga.', price: '20.000' },
+                    { name: 'H-4. La Rebelde', description: 'Doble carne de res (300g), doble queso cheddar, tocineta y cebolla encurtida.', price: '28.000' },
+                    { name: 'H-5. La Identidad Costeña', description: 'Carne (150g), queso costeño asado, chicharrón crocante y suero costeño.', price: '24.000' },
+                    { name: 'H-6. La \'Callejera\' Maicera', description: 'Carne (150g), queso fundido, maíz tierno, papitas ripio y salsas especiales.', price: '19.000' }
                 ]
             },
             {
@@ -163,7 +161,7 @@
                     { name: 'P-V1. Perro Clásico Barranquillero', description: 'Salchicha americana, pan suave, mucha lechuga, queso costeño rallado y salsas.', price: '12.000', subcategory: 'Perros Al Vapor (Clásicos)' },
                     { name: 'P-V2. Perro Maicero Gratinado', description: 'Salchicha americana, pan, lechuga, maíz tierno, y queso mozzarella gratinado.', price: '14.000' },
                     { name: 'P-V3. Perro Ranchero', description: 'Salchicha americana, pan, lechuga, queso costeño, y trozos de tocineta y jamón picados.', price: '13.000' },
-                    { name: 'P-V4. El "Bravo" Desmechado', description: 'Salchicha americana, pan, lechuga, queso costeño y generosa carne desmechada guisada.', price: '15.000' },
+                    { name: 'P-V4. El "Bravo" Desmechado', description: 'Salchicha americana, pan, lechuga, queso costeño, y generosa carne desmechada guisada.', price: '15.000' },
                     { name: 'P-V5. El Sucio (Full Queso)', description: 'Salchicha americana, pan, lechuga, y una mezcla abundante de queso costeño y mozzarella fundido.', price: '14.000' },
                     { name: 'P-V6. Perro con Butifarra', description: 'Salchicha americana, pan, lechuga, queso costeño y trozos de butifarra (¡El toque local!).', price: '16.000' },
                     // Perros Al Carbón
@@ -227,8 +225,8 @@
                 // Inicio de la tarjeta de categoría con un borde brillante
                 let html = `
                     <div class="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl border-4 border-red-600/50 hover:border-red-500 transition duration-500 transform hover:scale-[1.005]">
-                        <!-- CORRECCIÓN FINAL: text-sm en móvil (mínimo para título) y text-4xl en sm: (escritorio) -->
-                        <h3 class="text-sm sm:text-4xl font-black text-center mb-6 pb-2 border-b-4 border-accent uppercase text-glow">
+                        <!-- Título H3 ajustado: text-2xl en móvil, text-3xl en escritorio (más prudente) -->
+                        <h3 class="text-2xl sm:text-3xl font-black text-center mb-6 pb-2 border-b-4 border-accent uppercase text-glow">
                             <span class="${category.accentColor}">${category.title.split(' ')[0]}</span> ${category.title.split(' ').slice(1).join(' ')}
                         </h3>
                         <p class="text-center text-gray-400 mb-6 italic text-sm">${category.subtitle}</p>
@@ -239,7 +237,7 @@
                 category.items.forEach((item, index) => {
                     // Manejar subcategorías (ej: Perros Al Vapor vs Al Carbón)
                     if (item.subcategory && item.subcategory !== currentSubcategory) {
-                        // Título de subcategoría (bien organizado)
+                        // Título de subcategoría
                         html += `<h4 class="text-xl font-extrabold text-accent mt-8 mb-4 border-l-4 border-red-600 pl-4 uppercase">${item.subcategory}</h4>`;
                         currentSubcategory = item.subcategory;
                     }
@@ -250,14 +248,14 @@
 
                     html += `
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-5 ${borderClass} transition duration-300 hover:bg-gray-700/30 rounded-lg px-2 -mx-2">
-                            <!-- APLICACIÓN DE flex-grow y max-w-full para asegurar que el texto use todo el espacio disponible antes que el precio -->
+                            <!-- Nombre y descripción usan todo el espacio disponible -->
                             <div class="mb-2 sm:mb-0 max-w-full flex-grow">
-                                <!-- Nombre del plato: text-base en móvil (16px) y text-lg en escritorio -->
+                                <!-- Nombre del plato: text-base en móvil y text-lg en escritorio (tamaño prudente) -->
                                 <h5 class="text-base sm:text-lg font-bold text-white tracking-wide">${item.name}</h5>
-                                <!-- Descripción del plato (text-xs en todos los tamaños) -->
+                                <!-- Descripción del plato (text-xs para discreción) -->
                                 <p class="text-gray-400 text-xs italic mt-1">${item.description}</p>
                             </div>
-                            <!-- El precio se mantiene fijo y se alinea automáticamente al final del espacio (flex-shrink-0 previene que el precio se encoja) -->
+                            <!-- El precio se mantiene visible y alinea al final -->
                             <span class="text-lg sm:text-xl font-black text-accent ml-0 sm:ml-4 bg-gray-900 px-3 py-1 rounded-full shadow-lg border border-red-600/50 text-glow transform transition duration-300 hover:scale-105 flex-shrink-0">$${item.price} COP</span>
                         </div>
                     `;
