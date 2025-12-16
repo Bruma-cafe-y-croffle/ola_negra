@@ -3,516 +3,519 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CALLE BRAVA - Estilo Urbano y Diseño</title>
+    <title>CALLE BRAVA - La Identidad Costeña</title>
     <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuración de la fuente Inter -->
+    <!-- Configuración de color y fuente (Inter es moderno y limpio) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brava-red': '#B91C1C',      // Rojo fuerte para la brasa y actitud brava
+                        'brava-gold': '#FACC15',     // Amarillo/Dorado para resaltar
+                        'brava-dark': '#1F2937',     // Gris oscuro para el fondo
+                        'brava-light': '#F9FAFB',    // Blanco roto para el texto
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Bebas Neue', 'sans-serif'], 
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d; /* Fondo muy oscuro */
+        /* Estilos personalizados para un toque "bravo" */
+        .shadow-brava {
+            box-shadow: 0 10px 15px -3px rgba(185, 28, 28, 0.5), 0 4px 6px -2px rgba(185, 28, 28, 0.05);
         }
-        /* Color de acento para la paleta "Brava" */
-        .color-brava {
-            color: #dc2626; /* red-600 */
+        .text-stroke {
+            /* Simulación de stroke para el título principal */
+            text-shadow: 
+                -1px -1px 0 #1F2937,  
+                1px -1px 0 #1F2937,
+                -1px 1px 0 #1F2937,
+                1px 1px 0 #1F2937;
         }
-        .bg-brava {
-            background-color: #dc2626; /* red-600 */
+        /* Clase para la fuente de título llamativa */
+        .font-impact {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.1em;
         }
-        .text-accent {
-            color: #fbbf24; /* amber-400 */
+        /* Pequeña animación para la llama (emoji) */
+        @keyframes pulse-fire {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .animate-pulse-fire {
+            animation: pulse-fire 1.5s ease-in-out infinite;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen">
 
-    <!-- 1. Encabezado Fijo y Navegación (Menú Completo) -->
-    <header class="sticky top-0 z-50 bg-gray-900 shadow-xl border-b-4 border-red-600/70">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo CALLE BRAVA -->
-                <a href="#" class="flex-shrink-0 text-3xl font-extrabold tracking-widest uppercase">
-                    CALLE <span class="color-brava">BRAVA</span>
-                </a>
+<body class="bg-brava-dark font-sans text-brava-light min-h-screen p-4 sm:p-8">
 
-                <!-- Menú de Navegación (Desktop) -->
-                <nav class="hidden md:block">
-                    <div class="flex items-baseline space-x-4">
-                        <a href="#inicio" class="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-150">Inicio</a>
-                        <!-- Enlace a la nueva sección de La Carta -->
-                        <a href="#menu" class="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-150">La Carta</a>
-                        <a href="#galeria" class="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-150">Galería</a>
-                        <a href="#contacto" class="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-full text-sm font-medium transition duration-200 shadow-md">Contacto</a>
-                    </div>
-                </nav>
-
-                <!-- Botón de Menú (Mobile) - Toggle -->
-                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-red-600" aria-controls="mobile-menu" aria-expanded="false">
-                    <!-- Icono de Menú SVG (Hamburguesa) -->
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Menú Móvil (Oculto por defecto) -->
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#inicio" class="text-gray-300 hover:bg-gray-800 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
-                <!-- Enlace a la nueva sección de La Carta -->
-                <a href="#menu" class="text-gray-300 hover:bg-gray-800 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">La Carta</a>
-                <a href="#galeria" class="text-gray-300 hover:bg-gray-800 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Galería</a>
-                <a href="#contacto" class="bg-red-600 text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium mt-2">Contacto</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- 2. Contenido Principal -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-        <!-- Sección de Héroe (Inicio) -->
-        <section id="inicio" class="bg-gray-800 p-8 md:p-16 rounded-3xl shadow-2xl mb-12 border-l-8 border-red-600">
-            <h1 class="text-5xl md:text-7xl font-black uppercase mb-4 leading-tight">
-                VIVE LA <span class="color-brava">ACTITUD</span>. <br> SÉ CALLE BRAVA.
+    <!-- Contenedor Principal Centrado -->
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- HEADER / IDENTIDAD DE MARCA -->
+        <header class="text-center mb-10 py-6 bg-brava-red rounded-xl shadow-2xl shadow-brava">
+            <h1 class="font-impact text-6xl sm:text-7xl font-black text-brava-gold text-stroke leading-none">
+                CALLE BRAVA <span class="inline-block animate-pulse-fire">🔥</span>
             </h1>
-            <p class="text-xl text-gray-400 mb-8 max-w-2xl">
-                Diseño atrevido, calidad insuperable. Inspirados por el arte urbano y la energía de la ciudad. 
-                <span class="text-accent font-semibold">¡Aquí se come full, se come cargado y se come al carbón!</span>
+            <p class="mt-1 text-lg sm:text-xl font-bold italic text-brava-light">
+                ¡La Identidad Costeña, el sabor bravo!
             </p>
-            <a href="#menu" class="inline-block bg-accent text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-500 transition duration-300 shadow-lg transform hover:scale-105">
-                Ver La Carta Completa
-            </a>
-        </section>
-
-        <!-- Sección de Menú / Carta Completa -->
-        <section id="menu" class="py-12">
-            <h2 class="text-5xl font-black mb-10 uppercase text-center">
-                <span class="color-brava">NUESTRA</span> CARTA <span class="text-accent">🔥</span>
-            </h2>
-            <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto text-lg italic">
-                El auténtico sabor y la actitud sin filtros de Barranquilla. Cada mordida es un homenaje a la cultura de la calle, donde la generosidad se mide en queso costeño, lechuga fresca y el toque infaltable de la brasa.
+            <p class="mt-3 max-w-2xl mx-auto text-xs sm:text-sm px-4">
+                Aquí se come <span class="font-extrabold">full</span>, se come <span class="font-extrabold">cargado</span> y se come <span class="font-extrabold">al carbón</span>.
             </p>
+        </header>
 
-            <!-- Contenedor del Menú (Responsive grid 1-col, 2-col large) -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-                <!-- I. HAMBURGUESAS -->
-                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-accent">
-                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
-                        <span class="text-accent">|</span> Hamburguesas
-                    </h3>
-                    
-                    <!-- Item 1 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">H-1. La Clásica Currambera</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$18.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Carne de res (150g), queso cheddar, tomate, lechuga fresca y salsa especial.</p>
-                    </div>
-                    <!-- Item 2 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">H-2. La Desmechada Extrema</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$22.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Carne (150g), queso mozzarella, tocineta, y carne desmechada guisada.</p>
-                    </div>
-                    <!-- Item 3 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">H-3. Hamburguesa Gratinada</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$20.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Carne (150g), doble queso (costeño y mozzarella) y gratinado con lechuga.</p>
-                    </div>
-                    <!-- Item 4 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold color-brava">H-4. La Rebelde (¡Doble Carne!)</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$28.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Doble carne de res (300g), doble queso cheddar, tocineta y cebolla encurtida.</p>
-                    </div>
-                    <!-- Item 5 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">H-5. La Identidad Costeña</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$24.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Carne (150g), queso costeño asado, chicharrón crocante y suero costeño.</p>
-                    </div>
-                    <!-- Item 6 -->
-                    <div class="mb-4 pb-4 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">H-6. La 'Callejera' Maicera</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$19.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Carne (150g), queso fundido, maíz tierno, papitas ripio y salsas especiales.</p>
-                    </div>
-                </div>
-
-                <!-- II. PERROS CALIENTES (AL VAPOR) -->
-                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-accent">
-                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
-                        <span class="text-accent">|</span> Perros Calientes (Al Vapor)
-                    </h3>
-                    
-                    <!-- Item 1 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-V1. Perro Clásico Barranquillero</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$12.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan suave, mucha lechuga, queso costeño rallado y salsas.</p>
-                    </div>
-                    <!-- Item 2 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-V2. Perro Maicero Gratinado</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$14.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, maíz tierno, y queso mozzarella gratinado.</p>
-                    </div>
-                    <!-- Item 3 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-V3. Perro Ranchero</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$13.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, queso costeño, y trozos de tocineta y jamón picados.</p>
-                    </div>
-                    <!-- Item 4 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-V4. El "Bravo" Desmechado</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$15.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, queso costeño y generosa carne desmechada guisada.</p>
-                    </div>
-                    <!-- Item 5 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-V5. El Sucio (Full Queso)</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$14.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, y una mezcla abundante de queso costeño y mozzarella fundido.</p>
-                    </div>
-                    <!-- Item 6 -->
-                    <div class="mb-4 pb-4 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-V6. Perro con Butifarra</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$16.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, queso costeño y trozos de butifarra (¡El toque local!).</p>
-                    </div>
-                </div>
-
-                <!-- III. PERROS CALIENTES (AL CARBÓN) -->
-                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-accent">
-                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
-                        <span class="text-accent">|</span> Perros Calientes <span class="text-white">(Al Carbón - ¡Especialidad!)</span>
-                    </h3>
-                    
-                    <!-- Item 1 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-C1. El Perro Carbón Clásico</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$14.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana al carbón, pan grillé, lechuga, queso costeño rallado y papitas ripio.</p>
-                    </div>
-                    <!-- Item 2 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-C2. Dogo Suizo Al Carbón</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$17.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha suiza premium al carbón, lechuga, tocineta y queso mozzarella gratinado.</p>
-                    </div>
-                    <!-- Item 3 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-C3. Perro Al Carbón 'Full Carne'</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$18.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana al carbón, lechuga, queso costeño y generosa porción de carne desmechada.</p>
-                    </div>
-                    <!-- Item 4 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-C4. Chuzo-Pan de la Calle</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$16.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Trozos de carne y pollo al carbón en pan de perro, con lechuga, queso costeño y salsa tártara.</p>
-                    </div>
-                    <!-- Item 5 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-C5. El "Toro" Parrillero</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$20.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha suiza al carbón, queso costeño, butifarra y un toque de chimichurri costeño.</p>
-                    </div>
-                    <!-- Item 6 -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-C6. El "Rebelde" Tocineta</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$18.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha suiza al carbón, doble tocineta, queso cheddar líquido y lechuga.</p>
-                    </div>
-                    <!-- Item 7 -->
-                    <div class="mb-4 pb-4 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-xl font-bold">P-C7. Perro Americano "Bravísimo"</h4>
-                            <span class="text-xl font-extrabold text-accent ml-4">$15.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Salchicha americana al carbón, maíz tierno, queso costeño, lechuga y aderezo de piña.</p>
-                    </div>
-                </div>
-
-                <!-- IV. SALCHIPAPAS (PERSONALES Y DÚO) -->
-                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-red-600">
-                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
-                        <span class="text-accent">|</span> Salchipapas (Personales y Dúo)
-                    </h3>
-                    
-                    <h4 class="text-2xl font-semibold text-white mt-4 mb-4">Porción Personal (SP-P)</h4>
-                    
-                    <!-- Item 1 (P) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-P1. La Clásica con Queso</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$13.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana, lechuga picada y queso costeño rallado.</p>
-                    </div>
-                    <!-- Item 2 (P) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-P4. Salchi-Pollo Desmechado</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$15.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana, pollo desmechado y queso costeño.</p>
-                    </div>
-                    <!-- Item 3 (P) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-P6. La Solitaria (Butifarra)</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$15.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana, y trozos de butifarra con suero costeño.</p>
-                    </div>
-                    <!-- Item 4 (P) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-P8. Salchipapa "Al Carbón"</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$17.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana AL CARBÓN, lechuga y queso costeño.</p>
-                    </div>
-
-                    <h4 class="text-2xl font-semibold text-white mt-8 mb-4">Porción Dúo (SP-D)</h4>
-
-                    <!-- Item 1 (D) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-D1. La Dupla Desmechada</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$27.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas, salchicha, carne y pollo desmechado, y queso costeño.</p>
-                    </div>
-                    <!-- Item 2 (D) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-D2. Dúo Tocineta Gratinado</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$28.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas, salchicha suiza, tocineta, queso mozzarella y gratinado.</p>
-                    </div>
-                    <!-- Item 3 (D) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-D5. El 'Peleador' (Chicharrón)</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$30.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas, salchicha, chicharrón crocante, y queso costeño.</p>
-                    </div>
-                    <!-- Item 4 (D) -->
-                    <div class="mb-4 pb-4 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-D6. Dúo Granjero</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$28.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas, salchicha, pollo desmechado, champiñones y queso mozzarella.</p>
-                    </div>
-                </div>
-
-                <!-- V. SALCHIPAPAS (FAMILIAR) Y BEBIDAS -->
-                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-red-600">
-                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
-                        <span class="text-accent">|</span> Porción Familiar <span class="text-white">(SP-F)</span>
-                    </h3>
-                    
-                    <!-- Item 1 (F) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-F1. El Súper-Familiar</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$48.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas francesas grandes, salchicha, jamón, tocineta, maíz tierno, y queso costeño.</p>
-                    </div>
-                    <!-- Item 2 (F) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-F2. La Tabla de Carnes Bravas</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$55.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas, carne y pollo desmechado, chorizo, y chicharrón con mucho queso costeño.</p>
-                    </div>
-                    <!-- Item 3 (F) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-F3. Desgranado Full Topping</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$50.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Base de maíz tierno, pollo y carne desmechada, queso costeño, papitas ripio y salsas.</p>
-                    </div>
-                    <!-- Item 4 (F) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">SP-F5. La Butifarra Extrema</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$58.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas, salchicha, y la adición abundante de butifarra y chicharrón.</p>
-                    </div>
-                    <!-- Item 5 (F) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold color-brava">SP-F8. La Carga Full 'Jefe'</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$65.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Papas, carne desmechada, pollo desmechado, tocineta, chorizo y gratinado de mozzarella.</p>
-                    </div>
-
-                    <h3 class="text-3xl font-extrabold color-brava mt-8 mb-6 border-b pb-2 border-gray-700">
-                        <span class="text-accent">|</span> Bebidas
-                    </h3>
-                    
-                    <!-- Item 1 (B) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">El Corozo 'Bravo'</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$7.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Jugo natural refrescante.</p>
-                    </div>
-                    <!-- Item 2 (B) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">Limonada de Coco</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$10.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">El sabor de la playa en tu mesa.</p>
-                    </div>
-                    <!-- Item 3 (B) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">Lulada Fría</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$8.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">El toque agridulce perfecto.</p>
-                    </div>
-                    <!-- Item 4 (B) -->
-                    <div class="mb-4 pb-4 border-b border-gray-700/50">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">Jugos Naturales</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$7.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Mango, Maracuyá o Limonada.</p>
-                    </div>
-                    <!-- Item 5 (B) -->
-                    <div class="mb-4 pb-4 last:border-b-0">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-lg font-bold">Gaseosas / Agua</h5>
-                            <span class="text-lg font-extrabold text-accent ml-4">$5.000 COP</span>
-                        </div>
-                        <p class="text-gray-400 text-sm italic">Personal (Lata/Botella).</p>
-                    </div>
-
-                </div>
+        <!-- Navegación de Categorías (Scrollable en Mobile) -->
+        <nav class="sticky top-0 z-10 bg-brava-dark py-3 overflow-x-auto whitespace-nowrap rounded-lg mb-8 shadow-md">
+            <div class="inline-flex space-x-3 px-4 sm:px-0 mx-auto w-max sm:w-full sm:justify-center">
+                <a href="#hamburguesas" class="menu-nav-item">🍔 Hamburguesas</a>
+                <a href="#perros-vapor" class="menu-nav-item">🌭 Perros Al Vapor</a>
+                <a href="#perros-carbon" class="menu-nav-item font-bold text-brava-gold border-brava-gold">⭐ Al Carbón</a>
+                <a href="#salchipapas" class="menu-nav-item">🍟 Salchipapas</a>
+                <a href="#bebidas" class="menu-nav-item">🥤 Bebidas</a>
             </div>
-        </section>
-
-
-        <!-- Sección de Galería/Colección (moved down) -->
-        <section id="galeria" class="py-12 mt-12">
-            <h2 class="text-4xl font-bold mb-8 uppercase border-b pb-2 border-gray-700">
-                <span class="color-brava">|</span> Galería <span class="text-accent">Urbana</span>
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Hamburguesa+Rebelde" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
-                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Perro+Al+Carbon" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
-                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Salchipapa+Jefe" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
-                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Limonada+Coco" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
-            </div>
-            <div class="text-center mt-8">
-                <a href="#menu" class="inline-block border-2 border-accent text-accent font-bold py-2 px-6 rounded-full hover:bg-accent hover:text-gray-900 transition duration-300">
-                    Ver Más Platos en La Carta
-                </a>
-            </div>
-        </section>
-
-        <!-- Sección de Contacto -->
-        <section id="contacto" class="py-12">
-            <h2 class="text-4xl font-bold mb-8 uppercase border-b pb-2 border-gray-700">
-                <span class="text-accent">|</span> Contacto
-            </h2>
-            <div class="bg-gray-800 p-8 rounded-xl shadow-xl max-w-lg mx-auto border-r-8 border-red-600">
-                <form>
-                    <div class="mb-4">
-                        <label for="nombre" class="block text-sm font-medium text-gray-300 mb-1">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:ring-red-600 focus:border-red-600 transition duration-150 text-white" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:ring-red-600 focus:border-red-600 transition duration-150 text-white" required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="mensaje" class="block text-sm font-medium text-gray-300 mb-1">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:ring-red-600 focus:border-red-600 transition duration-150 text-white" required></textarea>
-                    </div>
-                    <button type="submit" class="bg-red-600 text-white font-bold py-3 px-6 rounded-full w-full hover:bg-red-700 transition duration-300 uppercase tracking-wider shadow-lg">
-                        Enviar Mensaje
-                    </button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Pie de Página -->
-    <footer class="bg-gray-900 border-t border-gray-700 py-8 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-gray-400">&copy; 2025 CALLE BRAVA. Todos los derechos reservados.</p>
-            <p class="text-xs text-gray-500 mt-2">Hecho con actitud y la paleta de colores urbana.</p>
-        </div>
-    </footer>
-
-    <!-- Script para el Menú Móvil -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const button = document.getElementById('mobile-menu-button');
-            const menu = document.getElementById('mobile-menu');
-
-            button.addEventListener('click', () => {
-                const isExpanded = button.getAttribute('aria-expanded') === 'true' || false;
-                button.setAttribute('aria-expanded', !isExpanded);
-                menu.classList.toggle('hidden');
+        </nav>
+        
+        <!-- Definición de la clase para los botones de navegación -->
+        <script>
+            document.querySelectorAll('.menu-nav-item').forEach(item => {
+                item.classList.add('px-3', 'py-1.5', 'rounded-full', 'bg-brava-dark', 'text-xs', 'font-semibold', 'border', 'border-brava-red', 'hover:bg-brava-red', 'transition', 'duration-300');
             });
+        </script>
+
+        <!-- SECCIÓN 1: HAMBURGUESAS -->
+        <section id="hamburguesas" class="mb-12">
+            <h2 class="section-title">🍔 HAMBURGUESAS BRAVAS</h2>
+            <div class="grid gap-4">
+                <!-- H-4: La más cara / Rebelde -->
+                <div class="menu-item bg-brava-red/20 border-brava-red border-2 shadow-lg shadow-brava-red/30 p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name text-brava-gold font-impact text-xl">H-4. LA REBELDE 👑 (DOBLE CARNE)</h3>
+                        <p class="item-desc">
+                            <span class="font-bold">Doble carne</span> de res (300g), doble queso cheddar, tocineta y cebolla encurtida. ¡La más brutal!
+                        </p>
+                    </div>
+                    <div class="item-price">$28.000</div>
+                </div>
+
+                <!-- H-5: Identidad Costeña (Destacado) -->
+                <div class="menu-item bg-brava-red/10 border-brava-gold border p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name text-brava-light">H-5. LA IDENTIDAD COSTEÑA</h3>
+                        <p class="item-desc">
+                            Carne (150g), queso costeño asado, <span class="font-semibold text-brava-gold">chicharrón crocante</span> y suero costeño.
+                        </p>
+                    </div>
+                    <div class="item-price">$24.000</div>
+                </div>
+                
+                <!-- H-2: Desmechada Extrema (AÑADIDO) -->
+                 <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">H-2. LA DESMECHADA EXTREMA</h3>
+                        <p class="item-desc">Carne (150g), queso mozzarella, tocineta, y <span class="font-semibold">carne desmechada guisada</span>.</p>
+                    </div>
+                    <div class="item-price">$22.000</div>
+                </div>
+
+                <!-- H-3: Gratinada -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">H-3. HAMBURGUESA GRATINADA</h3>
+                        <p class="item-desc">Carne (150g), <span class="font-semibold">doble queso</span> (costeño y mozzarella) y gratinado con lechuga.</p>
+                    </div>
+                    <div class="item-price">$20.000</div>
+                </div>
+                
+                <!-- H-6: Callejera -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">H-6. LA 'CALLEJERA' MAICERA</h3>
+                        <p class="item-desc">Carne (150g), queso fundido, <span class="font-semibold">maíz tierno</span>, papitas ripio y salsas especiales.</p>
+                    </div>
+                    <div class="item-price">$19.000</div>
+                </div>
+                
+                <!-- H-1: Clásica -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">H-1. LA CLÁSICA CURRAMBERA</h3>
+                        <p class="item-desc">Carne de res (150g), queso cheddar, tomate, lechuga fresca y salsa especial.</p>
+                    </div>
+                    <div class="item-price">$18.000</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: PERROS AL VAPOR -->
+        <section id="perros-vapor" class="mb-12">
+            <h2 class="section-title">🌭 PERROS CALIENTES (Al Vapor)</h2>
+            <div class="grid gap-4">
+                <!-- P-V6: Butifarra -->
+                <div class="menu-item bg-brava-dark/50 border-brava-gold border-b p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name text-brava-light">P-V6. PERRO CON BUTIFARRA (Toque Local)</h3>
+                        <p class="item-desc">Salchicha americana, pan suave, lechuga, queso costeño y trozos de <span class="font-semibold">butifarra</span>.</p>
+                    </div>
+                    <div class="item-price">$16.000</div>
+                </div>
+
+                <!-- P-V4: Desmechado -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-V4. EL "BRAVO" DESMECHADO</h3>
+                        <p class="item-desc">Salchicha americana, pan, lechuga, queso costeño y generosa <span class="font-semibold">carne desmechada</span> guisada.</p>
+                    </div>
+                    <div class="item-price">$15.000</div>
+                </div>
+                
+                <!-- P-V2: Maicero Gratinado (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-V2. PERRO MAICERO GRATINADO</h3>
+                        <p class="item-desc">Salchicha americana, pan, lechuga, <span class="font-semibold">maíz tierno</span>, y queso mozzarella <span class="font-semibold">gratinado</span>.</p>
+                    </div>
+                    <div class="item-price">$14.000</div>
+                </div>
+                
+                <!-- P-V5: El Sucio (Full Queso) (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-V5. EL SUCIO (FULL QUESO)</h3>
+                        <p class="item-desc">Salchicha americana, pan, lechuga, y una mezcla abundante de <span class="font-semibold">queso costeño y mozzarella fundido</span>.</p>
+                    </div>
+                    <div class="item-price">$14.000</div>
+                </div>
+                
+                <!-- P-V3: Ranchero (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-V3. PERRO RANCHERO</h3>
+                        <p class="item-desc">Salchicha americana, pan, lechuga, queso costeño, y trozos de <span class="font-semibold">tocineta y jamón</span> picados.</p>
+                    </div>
+                    <div class="item-price">$13.000</div>
+                </div>
+
+                <!-- P-V1: Clásico -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-V1. PERRO CLÁSICO BARRANQUILLERO</h3>
+                        <p class="item-desc">Salchicha americana, pan suave, mucha lechuga, <span class="font-semibold">queso costeño rallado</span> y salsas.</p>
+                    </div>
+                    <div class="item-price">$12.000</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECCIÓN 3: PERROS AL CARBÓN (ESPECIALIDAD) -->
+        <section id="perros-carbon" class="mb-12 bg-brava-red/10 p-5 rounded-xl shadow-inner shadow-brava-red/20">
+            <h2 class="section-title bg-brava-red/70 py-3 rounded-t-lg">🌟 PERROS CALIENTES (¡Nuestra Especialidad Al Carbón!)</h2>
+            <div class="grid gap-4 mt-4">
+
+                <!-- P-C5: El Toro Parrillero (Destacado) -->
+                <div class="menu-item bg-brava-red/30 border-brava-gold border-2 shadow-md shadow-brava-gold/30 p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name text-brava-gold font-impact text-xl">P-C5. EL "TORO" PARRILLERO</h3>
+                        <p class="item-desc">
+                            Salchicha suiza <span class="font-bold">al carbón</span>, queso costeño, butifarra y un toque de chimichurri costeño. 
+                        </p>
+                    </div>
+                    <div class="item-price">$20.000</div>
+                </div>
+
+                <!-- P-C6: El "Rebelde" Tocineta (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-C6. EL "REBELDE" TOCINETA</h3>
+                        <p class="item-desc">Salchicha suiza <span class="font-semibold">al carbón</span>, <span class="font-semibold">doble tocineta</span>, queso cheddar líquido y lechuga.</p>
+                    </div>
+                    <div class="item-price">$18.000</div>
+                </div>
+                
+                <!-- P-C3: Full Carne -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-C3. PERRO AL CARBÓN 'FULL CARNE'</h3>
+                        <p class="item-desc">Salchicha americana <span class="font-semibold">al carbón</span>, lechuga, queso costeño y generosa porción de <span class="font-semibold">carne desmechada</span>.</p>
+                    </div>
+                    <div class="item-price">$18.000</div>
+                </div>
+
+                <!-- P-C2: Dogo Suizo -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-C2. DOGO SUIZO AL CARBÓN</h3>
+                        <p class="item-desc">Salchicha suiza premium <span class="font-semibold">al carbón</span>, lechuga, tocineta y queso mozzarella <span class="font-semibold">gratinado</span>.</p>
+                    </div>
+                    <div class="item-price">$17.000</div>
+                </div>
+                
+                <!-- P-C4: Chuzo-Pan -->
+                 <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-C4. CHUZO-PAN DE LA CALLE</h3>
+                        <p class="item-desc">Trozos de carne y pollo <span class="font-semibold">al carbón</span> en pan de perro, con queso costeño y salsa tártara.</p>
+                    </div>
+                    <div class="item-price">$16.000</div>
+                </div>
+                
+                <!-- P-C7: Americano Bravísimo (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-C7. PERRO AMERICANO "BRAVÍSIMO"</h3>
+                        <p class="item-desc">Salchicha americana <span class="font-semibold">al carbón</span>, maíz tierno, queso costeño, lechuga y aderezo de piña.</p>
+                    </div>
+                    <div class="item-price">$15.000</div>
+                </div>
+                
+                <!-- P-C1: Carbón Clásico (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">P-C1. EL PERRO CARBÓN CLÁSICO</h3>
+                        <p class="item-desc">Salchicha americana <span class="font-semibold">al carbón</span>, pan grillé, lechuga, queso costeño rallado y papitas ripio.</p>
+                    </div>
+                    <div class="item-price">$14.000</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: SALCHIPAPAS -->
+        <section id="salchipapas" class="mb-12">
+            <h2 class="section-title">🍟 SALCHIPAPAS (Para uno, Dúo y Familia)</h2>
+            <div class="grid gap-6">
+                
+                <!-- Subcategoría: Personales -->
+                <h3 class="text-2xl font-impact text-brava-gold border-b-2 border-brava-red pb-1 mt-4">1. Personales</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- SP-P8: Al Carbón (Destacado) -->
+                    <div class="menu-item p-2 bg-brava-red/10 border-brava-red">
+                         <div class="flex-grow">
+                            <h4 class="item-name font-bold">SP-P8. SALCHIPAPA "AL CARBÓN"</h4>
+                            <p class="item-desc">Papas francesas y salchicha americana <span class="font-extrabold">AL CARBÓN</span> y queso costeño.</p>
+                        </div>
+                        <div class="item-price">$17.000</div>
+                    </div>
+                    
+                    <!-- SP-P4: Salchi-Pollo Desmechado (AÑADIDO) -->
+                    <div class="menu-item p-2">
+                        <div class="flex-grow">
+                            <h4 class="item-name">SP-P4. SALCHI-POLLO DESMECHADO</h4>
+                            <p class="item-desc">Papas francesas, salchicha americana, <span class="font-semibold">pollo desmechado</span> y queso costeño.</p>
+                        </div>
+                        <div class="item-price">$15.000</div>
+                    </div>
+                    
+                    <!-- SP-P6: La Solitaria (Butifarra) (AÑADIDO) -->
+                    <div class="menu-item p-2">
+                        <div class="flex-grow">
+                            <h4 class="item-name">SP-P6. LA SOLITARIA (BUTIFARRA)</h4>
+                            <p class="item-desc">Papas francesas, salchicha, y trozos de <span class="font-semibold">butifarra</span> con suero costeño.</p>
+                        </div>
+                        <div class="item-price">$15.000</div>
+                    </div>
+                    
+                    <!-- SP-P1: Clásica -->
+                    <div class="menu-item p-2">
+                        <div class="flex-grow">
+                            <h4 class="item-name">SP-P1. LA CLÁSICA CON QUESO</h4>
+                            <p class="item-desc">Papas francesas, salchicha americana, lechuga picada y queso costeño rallado.</p>
+                        </div>
+                        <div class="item-price">$13.000</div>
+                    </div>
+                </div>
+
+                <!-- Subcategoría: Dúo -->
+                <h3 class="text-2xl font-impact text-brava-gold border-b-2 border-brava-red pb-1 mt-4">2. Dúo (Para 2 Personas)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                     <!-- SP-D1: Dupla Desmechada -->
+                    <div class="menu-item p-2 bg-brava-dark/50 border-brava-gold">
+                        <div class="flex-grow">
+                            <h4 class="item-name">SP-D1. LA DUPLA DESMECHADA</h4>
+                            <p class="item-desc">Papas, salchicha, <span class="font-semibold">carne y pollo desmechado</span>, y queso costeño.</p>
+                        </div>
+                        <div class="item-price">$27.000</div>
+                    </div>
+                    <!-- SP-D2: Dúo Tocineta Gratinado (AÑADIDO) -->
+                    <div class="menu-item p-2">
+                        <div class="flex-grow">
+                            <h4 class="item-name">SP-D2. DÚO TOCINETA GRATINADO</h4>
+                            <p class="item-desc">Papas, salchicha suiza, <span class="font-semibold">tocineta</span>, queso mozzarella y <span class="font-semibold">gratinado</span>.</p>
+                        </div>
+                        <div class="item-price">$28.000</div>
+                    </div>
+                    
+                    <!-- SP-D6: Dúo Granjero (AÑADIDO) -->
+                    <div class="menu-item p-2">
+                        <div class="flex-grow">
+                            <h4 class="item-name">SP-D6. DÚO GRANJERO</h4>
+                            <p class="item-desc">Papas, salchicha, <span class="font-semibold">pollo desmechado, champiñones</span> y queso mozzarella.</p>
+                        </div>
+                        <div class="item-price">$28.000</div>
+                    </div>
+                    
+                    <!-- SP-D5: Peleador (Chicharrón) -->
+                    <div class="menu-item p-2">
+                         <div class="flex-grow">
+                            <h4 class="item-name">SP-D5. EL 'PELEADOR' (Chicharrón)</h4>
+                            <p class="item-desc">Papas, salchicha, <span class="font-semibold">chicharrón crocante</span>, y queso costeño.</p>
+                        </div>
+                        <div class="item-price">$30.000</div>
+                    </div>
+                </div>
+
+                <!-- Subcategoría: Familiar -->
+                <h3 class="text-2xl font-impact text-brava-gold border-b-2 border-brava-red pb-1 mt-4">3. Familiar (Mega Carga)</h3>
+                
+                <!-- SP-F8: La Carga Full 'Jefe' (La más Cargada) -->
+                <div class="menu-item bg-brava-red/20 border-brava-red border-2 p-4 shadow-lg shadow-brava-red/30">
+                    <div class="flex-grow">
+                        <h3 class="item-name text-brava-gold font-impact text-2xl">SP-F8. LA CARGA FULL 'JEFE'</h3>
+                        <p class="item-desc">
+                            <span class="font-extrabold">¡La más full!</span> Papas, carne desmechada, pollo desmechado, tocineta, chorizo y <span class="font-bold">gratinado de mozzarella</span>.
+                        </p>
+                    </div>
+                    <div class="item-price text-2xl font-impact">$65.000</div>
+                </div>
+                
+                <!-- SP-F5: La Butifarra Extrema (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">SP-F5. LA BUTIFARRA EXTREMA</h3>
+                        <p class="item-desc">Papas, salchicha, y la adición abundante de <span class="font-semibold">butifarra y chicharrón</span>.</p>
+                    </div>
+                    <div class="item-price">$58.000</div>
+                </div>
+                
+                <!-- SP-F2: Tabla de Carnes -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">SP-F2. LA TABLA DE CARNES BRAVAS</h3>
+                        <p class="item-desc">Papas, <span class="font-semibold">carne y pollo desmechado</span>, chorizo, y chicharrón con mucho queso costeño.</p>
+                    </div>
+                    <div class="item-price">$55.000</div>
+                </div>
+                
+                <!-- SP-F3: Desgranado Full Topping (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">SP-F3. DESGRANADO FULL TOPPING</h3>
+                        <p class="item-desc">Base de <span class="font-semibold">maíz tierno</span>, pollo y carne desmechada, queso costeño, papitas ripio y salsas.</p>
+                    </div>
+                    <div class="item-price">$50.000</div>
+                </div>
+                
+                 <!-- SP-F1: El Súper-Familiar (AÑADIDO) -->
+                <div class="menu-item p-3">
+                    <div class="flex-grow">
+                        <h3 class="item-name">SP-F1. EL SÚPER-FAMILIAR</h3>
+                        <p class="item-desc">Papas francesas grandes, salchicha, jamón, tocineta, maíz tierno, y queso costeño.</p>
+                    </div>
+                    <div class="item-price">$48.000</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: BEBIDAS -->
+        <section id="bebidas" class="mb-12">
+            <h2 class="section-title">🥤 BEBIDAS REFRESCANTES</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Limonada de Coco (Destacado) -->
+                <div class="menu-item p-2 bg-brava-dark/50 border-brava-gold/50">
+                    <div class="flex-grow">
+                        <h4 class="item-name font-bold">LIMONADA DE COCO 🌴</h4>
+                        <p class="item-desc">El sabor de la playa.</p>
+                    </div>
+                    <div class="item-price">$10.000</div>
+                </div>
+                
+                <!-- Lulada -->
+                <div class="menu-item p-2">
+                    <div class="flex-grow">
+                        <h4 class="item-name">LULADA FRÍA</h4>
+                        <p class="item-desc">El toque agridulce.</p>
+                    </div>
+                    <div class="item-price">$8.000</div>
+                </div>
+
+                <!-- Corozo Bravo -->
+                <div class="menu-item p-2 bg-brava-dark/50 border-brava-gold/50">
+                    <div class="flex-grow">
+                        <h4 class="item-name font-bold">EL COROZO 'BRAVO'</h4>
+                        <p class="item-desc">Jugo natural de la costa.</p>
+                    </div>
+                    <div class="item-price">$7.000</div>
+                </div>
+                
+                <!-- Jugos Frescos (AÑADIDO) -->
+                <div class="menu-item p-2">
+                    <div class="flex-grow">
+                        <h4 class="item-name">JUGO DE MANGO, MARACUYÁ, LIMONADA</h4>
+                        <p class="item-desc">Jugos naturales frescos.</p>
+                    </div>
+                    <div class="item-price">$7.000</div>
+                </div>
+
+                <!-- Gaseosas -->
+                <div class="menu-item p-2">
+                    <div class="flex-grow">
+                        <h4 class="item-name">GASEOSAS / AGUA</h4>
+                        <p class="item-desc">Personal (Lata/Botella).</p>
+                    </div>
+                    <div class="item-price">$5.000</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center py-4 border-t border-brava-red/50 mt-8">
+            <p class="text-xs text-gray-400">¡Gracias por ser parte de la cultura de la calle! Precios en COP.</p>
+        </footer>
+
+    </div>
+
+    <!-- Definición de clases globales para estilos consistentes y ajustes de tamaño de letra -->
+    <script>
+        // Título de la sección
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.classList.add('font-impact', 'text-3xl', 'sm:text-4xl', 'text-center', 'text-brava-light', 'bg-brava-red', 'rounded-t-xl', 'py-3', 'mb-4', 'shadow-md', 'shadow-brava-red/50');
+        });
+
+        // Contenedor de cada ítem de menú
+        document.querySelectorAll('.menu-item').forEach(item => {
+            // Añade clases base para todos los items
+            item.classList.add('flex', 'justify-between', 'items-center', 'rounded-xl', 'bg-gray-800/70', 'transition', 'duration-300', 'hover:bg-gray-700/80', 'border', 'border-brava-dark');
+            
+            // Si no tiene clases de fondo específicas, añade una sutil
+            if (!item.style.backgroundColor && !item.classList.contains('bg-brava-red/20') && !item.classList.contains('bg-brava-red/10')) {
+                 item.classList.add('bg-brava-dark/50', 'border-brava-red/50');
+            }
+        });
+
+        // Nombre del plato (REDUCIDO: text-lg)
+        document.querySelectorAll('.item-name').forEach(name => {
+            name.classList.add('text-lg', 'font-extrabold', 'mb-0.5', 'text-brava-light');
+        });
+
+        // Descripción del plato (REDUCIDO: text-xs)
+        document.querySelectorAll('.item-desc').forEach(desc => {
+            desc.classList.add('text-xs', 'text-gray-300');
+        });
+
+        // Precio del plato (REDUCIDO: text-lg)
+        document.querySelectorAll('.item-price').forEach(price => {
+            price.classList.add('text-lg', 'font-bold', 'text-brava-gold', 'ml-3', 'flex-shrink-0');
         });
     </script>
 </body>
