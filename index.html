@@ -1,1330 +1,519 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Ola Negra | Vibra que arrastra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --black: #000000;
-      --neon-green: #39FF14;
-      --electric-purple: #7D3CFF;
-      --turquoise: #00FFD1;
-      --dark-gray: #1a1a1a;
-      --light-gray: #cccccc;
-      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      --glow: 0 0 15px rgba(57, 255, 20, 0.4);
-      --glow-purple: 0 0 15px rgba(125, 60, 255, 0.4);
-      --glow-turquoise: 0 0 15px rgba(0, 255, 209, 0.4);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--black);
-      color: var(--light-gray);
-      overflow-x: hidden;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Background texture */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)),
-        url('https://placehold.co/1920x1080/000000/333333?text=Santa+Marta+Urban') center/cover no-repeat;
-      z-index: -1;
-      opacity: 0.4;
-    }
-
-    /* Loader */
-    .loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--black);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
-    }
-
-    .loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .loader-logo {
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--light-gray);
-      margin-bottom: 8px;
-      letter-spacing: 2px;
-      opacity: 0;
-      animation: fadeInUp 1s forwards 0.5s;
-    }
-
-    .loader-logo span {
-      color: var(--neon-green);
-    }
-
-    .loader-slogan {
-      font-size: 14px;
-      color: var(--neon-green);
-      font-weight: 600;
-      opacity: 0;
-      animation: fadeInUp 1s forwards 1s;
-    }
-
-    /* Header */
-    header {
-      padding: 15px 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(10px);
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 15px;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--light-gray);
-      text-decoration: none;
-      letter-spacing: 1px;
-    }
-
-    .logo span {
-      color: var(--neon-green);
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 12px;
-    }
-
-    .social-icon {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: transparent;
-      border: 1px solid var(--light-gray);
-      color: var(--light-gray);
-      font-size: 14px;
-      text-decoration: none;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .social-icon:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--glow);
-    }
-
-    .social-icon svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    /* Hero */
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.3;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 90%;
-      margin: 0 auto;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
-    }
-
-    .hero-content.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero-logo {
-      font-size: 42px;
-      font-weight: 700;
-      color: var(--light-gray);
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      display: block;
-    }
-
-    .hero-logo span {
-      color: var(--neon-green);
-    }
-
-    .hero-slogan {
-      font-size: 18px;
-      color: var(--neon-green);
-      margin-bottom: 25px;
-      font-weight: 600;
-      position: relative;
-      display: inline-block;
-    }
-
-    .hero-slogan::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 1px;
-      background: var(--neon-green);
-      box-shadow: var(--glow);
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      background: transparent;
-      color: var(--light-gray);
-      border: 2px solid var(--neon-green);
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--neon-green);
-      transform: scale(0);
-      transition: transform 0.5s ease;
-      z-index: -1;
-    }
-
-    .btn:hover {
-      color: var(--black);
-      box-shadow: var(--glow);
-    }
-
-    .btn:hover::before {
-      transform: scale(1);
-    }
-
-    /* Categories */
-    .categories {
-      padding: 60px 0 30px;
-    }
-
-    .category-filters {
-      display: flex;
-      justify-content: start;
-      gap: 12px;
-      margin-bottom: 20px;
-      padding: 0 15px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-
-    .category-filters::-webkit-scrollbar {
-      display: none;
-    }
-
-    .category-btn {
-      flex-shrink: 0;
-      padding: 8px 16px;
-      background: rgba(125, 60, 255, 0.2);
-      color: var(--light-gray);
-      border: 1px solid var(--electric-purple);
-      border-radius: 20px;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 13px;
-      scroll-snap-align: start;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .category-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--electric-purple);
-      transform: scale(0);
-      transition: transform 0.4s ease;
-      z-index: -1;
-    }
-
-    .category-btn.active, .category-btn:hover {
-      color: var(--black);
-      box-shadow: var(--glow-purple);
-    }
-
-    .category-btn.active::before, .category-btn:hover::before {
-      transform: scale(1);
-    }
-
-    /* Products */
-    .products {
-      padding: 30px 0 60px;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 22px;
-      margin-bottom: 25px;
-      color: var(--light-gray);
-      font-weight: 600;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 2px;
-      background: var(--turquoise);
-      box-shadow: var(--glow-turquoise);
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 0 15px;
-    }
-
-    /* Product Card */
-    .product-card {
-      background: rgba(30, 30, 30, 0.7);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: var(--transition);
-      opacity: 0;
-      transform: translateY(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .product-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(57, 255, 20, 0.1);
-      border-color: var(--neon-green);
-    }
-
-    .product-image {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .product-card:hover .product-image {
-      transform: scale(1.05);
-    }
-
-    .product-info {
-      padding: 15px;
-    }
-
-    .product-name {
-      font-size: 16px;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: var(--light-gray);
-    }
-
-    .product-price {
-      color: var(--neon-green);
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .product-sizes {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .size {
-      padding: 4px 8px;
-      background: rgba(125, 60, 255, 0.2);
-      border: 1px solid var(--electric-purple);
-      border-radius: 6px;
-      font-size: 12px;
-      color: var(--light-gray);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .size.selected {
-      background: var(--electric-purple);
-      color: var(--black);
-      box-shadow: var(--glow-purple);
-    }
-
-    .add-to-cart {
-      width: 100%;
-      padding: 12px;
-      background: rgba(57, 255, 20, 0.1);
-      color: var(--neon-green);
-      border: 1px solid var(--neon-green);
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .add-to-cart:hover {
-      background: var(--neon-green);
-      color: var(--black);
-      box-shadow: var(--glow);
-    }
-
-    /* Cart */
-    .cart {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 2000;
-      transition: right 0.4s ease;
-      border-left: 1px solid var(--neon-green);
-      overflow-y: auto;
-      backdrop-filter: blur(10px);
-    }
-
-    .cart.open {
-      right: 0;
-    }
-
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
-    }
-
-    .close-cart {
-      background: none;
-      border: none;
-      color: var(--light-gray);
-      font-size: 24px;
-      cursor: pointer;
-      padding: 5px;
-    }
-
-    .close-cart:hover {
-      color: var(--neon-green);
-      text-shadow: var(--glow);
-    }
-
-    .cart-items {
-      padding: 15px 0;
-    }
-
-    .cart-item {
-      display: flex;
-      gap: 12px;
-      margin: 0 15px 15px;
-      padding: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-    }
-
-    .cart-item-img {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .cart-item-info {
-      flex: 1;
-    }
-
-    .cart-item-name {
-      font-size: 14px;
-      margin-bottom: 4px;
-      color: var(--light-gray);
-    }
-
-    .cart-item-price {
-      color: var(--neon-green);
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .cart-item-details {
-      display: flex;
-      gap: 10px;
-      margin-top: 4px;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .cart-item-quantity {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .quantity-btn {
-      width: 24px;
-      height: 24px;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: var(--light-gray);
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .quantity-btn:hover {
-      background: var(--neon-green);
-      color: var(--black);
-    }
-
-    .cart-total {
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--turquoise);
-      text-align: center;
-      border-top: 1px solid rgba(0, 255, 209, 0.2);
-      box-shadow: var(--glow-turquoise);
-    }
-
-    .checkout-btn {
-      width: 100%;
-      padding: 16px;
-      background: var(--neon-green);
-      color: var(--black);
-      border: none;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 15px;
-      border-radius: 8px;
-      box-shadow: var(--glow);
-      font-family: 'Poppins', sans-serif;
-    }
-
-    /* Modal */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 2100;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal-content {
-      background: rgba(30, 30, 30, 0.9);
-      border-radius: 16px;
-      width: 100%;
-      max-width: 400px;
-      max-height: 90vh;
-      overflow-y: auto;
-      border: 1px solid var(--neon-green);
-      box-shadow: var(--glow);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
-    }
-
-    .modal-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--light-gray);
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      color: var(--light-gray);
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-      color: var(--light-gray);
-      font-weight: 500;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      color: var(--light-gray);
-      font-size: 14px;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--neon-green);
-      box-shadow: var(--glow);
-    }
-
-    .form-control::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    .radio-group {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .radio-option {
-      flex: 1;
-      padding: 12px;
-      background: rgba(125, 60, 255, 0.1);
-      border: 1px solid var(--electric-purple);
-      border-radius: 8px;
-      color: var(--light-gray);
-      font-size: 14px;
-      text-align: center;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .radio-option.active {
-      background: var(--electric-purple);
-      border-color: var(--electric-purple);
-      color: var(--black);
-      box-shadow: var(--glow-purple);
-    }
-
-    .modal-footer {
-      padding: 15px 20px 20px;
-      text-align: center;
-    }
-
-    .modal-btn {
-      width: 100%;
-      padding: 14px;
-      background: var(--neon-green);
-      color: var(--black);
-      border: none;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-      box-shadow: var(--glow);
-    }
-
-    /* QR Payment Modal */
-    .qr-container {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .qr-title {
-      font-size: 18px;
-      color: var(--neon-green);
-      margin-bottom: 15px;
-      font-weight: 600;
-    }
-
-    .qr-text {
-      color: var(--light-gray);
-      font-size: 14px;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .qr-image {
-      width: 180px;
-      height: 180px;
-      background: var(--light-gray);
-      margin: 0 auto 20px;
-      border-radius: 12px;
-      padding: 6px;
-      box-shadow: var(--glow);
-    }
-
-    .qr-buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--light-gray);
-      border: 1px solid var(--light-gray);
-    }
-
-    .btn-secondary:hover {
-      background: var(--light-gray);
-      color: var(--black);
-    }
-
-    /* Footer */
-    footer {
-      padding: 30px 0;
-      background: rgba(0, 0, 0, 0.8);
-      margin-top: 60px;
-    }
-
-    .footer-content {
-      text-align: center;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 12px;
-      padding: 0 15px;
-    }
-
-    .footer-links {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .footer-link {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .footer-link:hover {
-      color: var(--neon-green);
-    }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    /* Responsive */
-    @media (min-width: 768px) {
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-        padding: 0 30px;
-      }
-
-      .hero-logo {
-        font-size: 56px;
-      }
-
-      .hero-slogan {
-        font-size: 24px;
-      }
-
-      .btn {
-        font-size: 16px;
-        padding: 14px 32px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- Loader -->
-  <div class="loader">
-    <div class="loader-logo">OLA<span>NEGRA</span></div>
-    <div class="loader-slogan">Vibra que arrastra</div>
-  </div>
-
-  <!-- Header -->
-  <header>
-    <div class="header-content">
-      <a href="#" class="logo">OLA<span>NEGRA</span></a>
-      <div class="social-icons">
-        <a href="https://instagram.com/olanegra" target="_blank" class="social-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.474 16.999c-2.321 0-4.196-1.875-4.196-4.196s1.875-4.196 4.196-4.196 4.196 1.875 4.196 4.196-1.875 4.196-4.196 4.196zm7.548-1.999c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm3.563-10.001c-.966 0-1.75-0.784-1.75-1.75s0.784-1.75 1.75-1.75 1.75 0.784 1.75 1.75-0.784 1.75-1.75 1.75z"/>
-          </svg>
-        </a>
-        <a href="https://tiktok.com/@olanegra" target="_blank" class="social-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.525.02c1.31-.02 2.61-.02 3.91-.02 1.75 0 3.09.86 3.97 2.29.84 1.4 1.4 3.14 1.43 5.09.03 2.05-.6 3.94-1.67 5.51-1.04 1.5-2.55 2.77-4.42 3.59-.09.04-.18.07-.27.1-.72.23-1.46.41-2.22.55v4.13c0 1.04-.09 2.08-.25 3.09-.16 1.01-.44 1.98-.84 2.9-.39.93-.93 1.77-1.56 2.52-.63.75-1.43 1.36-2.24 1.8-.79.43-1.71.7-2.63.8-1.01.11-2.03.1-3.04.05-1.01-.04-2.01-.19-2.98-.45-.98-.26-1.88-.71-2.7-1.28-.82-.57-1.52-1.28-2.08-2.08-.57-.81-1.01-1.72-1.3-2.68-.28-.97-.42-1.98-.42-2.99-.01-1.02 0-2.03.04-3.04.04-1.02.19-2.02.45-2.99.26-.98.71-1.88 1.28-2.7.57-.82 1.28-1.52 2.08-2.08.81-.57 1.72-1.01 2.68-1.3.97-.28 1.98-.42 2.99-.42 1.02-.01 2.03 0 3.04.04 1.02.04 2.02.19 2.99.45.98.26 1.88.71 2.7 1.28.82.57 1.52 1.28 2.08 2.08.57.81 1.01 1.72 1.3 2.68.29.97.43 1.98.43 2.99v4.05c-1.18-.1-2.34-.38-3.43-.84-1.09-.46-2.08-1.1-2.94-1.9v-14.7c1.45.02 2.9.02 4.35.02z"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <video autoplay muted loop class="hero-video">
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-sea-waves-in-a-beach-in-the-mountains-1267-large.mp4" type="video/mp4">
-    </video>
-    <div class="hero-content">
-      <h1 class="hero-logo">OLA<span>NEGRA</span></h1>
-      <p class="hero-slogan">Vibra que arrastra</p>
-      <a href="#products" class="btn">Explora la colección</a>
-    </div>
-  </section>
-
-  <!-- Categories -->
-  <section class="categories">
-    <div class="category-filters">
-      <button class="category-btn active" data-category="all">Todas</button>
-      <button class="category-btn" data-category="hoodies">Hoodies</button>
-      <button class="category-btn" data-category="oversize">Oversize</button>
-      <button class="category-btn" data-category="jeans">Jean</button>
-      <button class="category-btn" data-category="cargos">Cargos</button>
-      <button class="category-btn" data-category="bermudas">Bermudas</button>
-      <button class="category-btn" data-category="accessories">Accesorios</button>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section id="products" class="products">
-    <h2 class="section-title">Colección Urbana Santa Marta</h2>
-    <div class="products-grid" id="products-grid">
-      <!-- Products will be inserted here -->
-    </div>
-  </section>
-
-  <!-- Cart -->
-  <div class="cart" id="cart">
-    <div class="cart-header">
-      <h3>Carrito</h3>
-      <button class="close-cart" id="close-cart">×</button>
-    </div>
-    <div class="cart-items" id="cart-items">
-      <!-- Cart items will be inserted here -->
-    </div>
-    <div class="cart-total" id="cart-total">Total: $0</div>
-    <button class="checkout-btn" id="checkout-btn">Finalizar pedido</button>
-  </div>
-
-  <!-- Checkout Modal -->
-  <div class="modal" id="checkout-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Confirmar Pedido</h3>
-        <button class="modal-close" id="close-checkout">×</button>
-      </div>
-      <div class="modal-body">
-        <div id="checkout-products">
-          <p style="color: var(--light-gray); margin-bottom: 15px;">🧾 Productos:</p>
-        </div>
-        <div class="form-group">
-          <label for="checkout-name">Nombre completo</label>
-          <input type="text" id="checkout-name" class="form-control" placeholder="Tu nombre completo">
-        </div>
-        <div class="form-group">
-          <label for="checkout-address">Dirección</label>
-          <input type="text" id="checkout-address" class="form-control" placeholder="Tu dirección en Santa Marta">
-        </div>
-        <div class="form-group">
-          <label for="checkout-phone">Teléfono</label>
-          <input type="tel" id="checkout-phone" class="form-control" placeholder="Tu número de contacto">
-        </div>
-        <div class="form-group">
-          <label>Método de pago</label>
-          <div class="radio-group">
-            <div class="radio-option active" data-payment="Nequi QR">Nequi QR</div>
-            <div class="radio-option" data-payment="Contraentrega">Contraentrega</div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="modal-btn" id="confirm-whatsapp">Confirmar por WhatsApp</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Payment Modal -->
-  <div class="modal" id="payment-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Pago con Nequi</h3>
-        <button class="modal-close" id="close-payment">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="qr-container">
-          <div class="qr-title">Escanea este QR</div>
-          <p class="qr-text">Realiza el pago y envía el comprobante por WhatsApp para confirmar tu pedido.</p>
-          <img src="https://raw.githubusercontent.com/Bruma-cafe-y-croffle/bruma-asses/refs/heads/main/unnamed.png" alt="QR Nequi" class="qr-image">
-          <div class="qr-buttons">
-            <a href="https://wa.me/573000000000" class="btn btn-secondary" target="_blank">Abrir WhatsApp</a>
-            <button class="btn btn-primary" id="continue-shopping">Seguir comprando</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <p>OLA NEGRA – Flow eterno · 2025</p>
-      <div class="footer-links">
-        <a href="https://instagram.com/olanegra" target="_blank" class="footer-link">Instagram</a>
-        <a href="https://tiktok.com/@olanegra" target="_blank" class="footer-link">TikTok</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Products data
-    const products = [
-      {
-        id: 1,
-        name: "Hoodie Vibra Negra",
-        price: 129900,
-        image: "https://the.princessace.com/cdn/shop/files/cartoon-idea-print-rap-hoodie-black-m-40-50kg-hoodies-241228-184.webp?v=1746357096&width=823",
-        sizes: ["S", "M", "L", "XL"],
-        category: "hoodies"
-      },
-      {
-        id: 2,
-        name: "Suéter Oversize Street",
-        price: 119900,
-        image: "https://placehold.co/600x800/7D3CFF/ffffff?text=Sueter+Oversize",
-        sizes: ["S", "M", "L", "XL"],
-        category: "oversize"
-      },
-      {
-        id: 3,
-        name: "Jean Negro Urbano",
-        price: 159900,
-        image: "https://placehold.co/600x800/000000/ffffff?text=Jean+Urbano",
-        sizes: ["30", "32", "34", "36"],
-        category: "jeans"
-      },
-      {
-        id: 4,
-        name: "Cargo Verde Místico",
-        price: 89900,
-        image: "https://placehold.co/600x800/39FF14/000000?text=Cargo+Verde",
-        sizes: ["30", "32", "34", "36"],
-        category: "cargos"
-      },
-      {
-        id: 5,
-        name: "Bermuda Turquesa Flow",
-        price: 69900,
-        image: "https://placehold.co/600x800/00FFD1/000000?text=Bermuda+Turquesa",
-        sizes: ["30", "32", "34", "36"],
-        category: "bermudas"
-      },
-      {
-        id: 6,
-        name: "Gorra Neón Santa Marta",
-        price: 49900,
-        image: "https://placehold.co/600x800/39FF14/000000?text=Gorra+Neon",
-        sizes: ["Única"],
-        category: "accessories"
-      },
-      {
-        id: 7,
-        name: "Camiseta Arrastra Vibra",
-        price: 79900,
-        image: "https://placehold.co/600x800/000000/7D3CFF?text=Camiseta+Arrastra",
-        sizes: ["S", "M", "L", "XL"],
-        category: "oversize"
-      },
-      {
-        id: 8,
-        name: "Chaqueta Hoodie Dual",
-        price: 219900,
-        image: "https://placehold.co/600x800/7D3CFF/ffffff?text=Chaqueta+Dual",
-        sizes: ["M", "L", "XL"],
-        category: "hoodies"
-      }
-    ];
-
-    // DOM elements
-    const productsGrid = document.getElementById('products-grid');
-    const cart = document.getElementById('cart');
-    const closeCart = document.getElementById('close-cart');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const checkoutBtn = document.getElementById('checkout-btn');
-    const checkoutModal = document.getElementById('checkout-modal');
-    const closeCheckout = document.getElementById('close-checkout');
-    const paymentModal = document.getElementById('payment-modal');
-    const closePayment = document.getElementById('close-payment');
-    const continueShopping = document.getElementById('continue-shopping');
-    const confirmWhatsapp = document.getElementById('confirm-whatsapp');
-    const checkoutProducts = document.getElementById('checkout-products');
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const loader = document.querySelector('.loader');
-    const heroContent = document.querySelector('.hero-content');
-    const radioOptions = document.querySelectorAll('.radio-option');
-
-    // Cart array
-    let cartList = [];
-    let currentCategory = 'all';
-    let selectedPayment = 'Nequi QR';
-
-    // Hide loader and show content
-    function hideLoader() {
-      loader.classList.add('hidden');
-      setTimeout(() => {
-        heroContent.classList.add('show');
-      }, 100);
-    }
-
-    // Load products
-    function loadProducts(category = 'all') {
-      productsGrid.innerHTML = '';
-      const filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
-      
-      filteredProducts.forEach((product, index) => {
-        const productEl = document.createElement('div');
-        productEl.className = 'product-card';
-        
-        // Create product HTML with size selection
-        productEl.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="product-image"/>
-          <div class="product-info">
-            <h3 class="product-name">${product.name}</h3>
-            <p class="product-price">$${product.price.toLocaleString()}</p>
-            <div class="product-sizes">
-              <label style="display: block; margin-bottom: 6px; font-size: 12px; color: rgba(255,255,255,0.7);">Selecciona talla:</label>
-              ${product.sizes.map(size => `<span class="size" data-size="${size}">${size}</span>`).join('')}
-            </div>
-            <button class="add-to-cart" data-id="${product.id}" disabled>Agregar al carrito</button>
-          </div>
-        `;
-        productsGrid.appendChild(productEl);
-
-        // Add animation
-        setTimeout(() => {
-          productEl.classList.add('visible');
-        }, 100 * (index % 6));
-
-        // Add size selection functionality
-        const sizes = productEl.querySelectorAll('.size');
-        let selectedSize = null;
-        
-        sizes.forEach(size => {
-          size.addEventListener('click', () => {
-            sizes.forEach(s => s.classList.remove('selected'));
-            size.classList.add('selected');
-            selectedSize = size.dataset.size;
-            const addToCartBtn = productEl.querySelector('.add-to-cart');
-            addToCartBtn.disabled = false;
-            addToCartBtn.dataset.size = selectedSize;
-          });
-        });
-      });
-    }
-
-    // Filter products
-    categoryBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        categoryBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentCategory = btn.dataset.category;
-        loadProducts(currentCategory);
-      });
-    });
-
-    // Add to cart
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('add-to-cart') && !e.target.disabled) {
-        const productId = parseInt(e.target.dataset.id);
-        const product = products.find(p => p.id === productId);
-        const size = e.target.dataset.size;
-        
-        const existingItem = cartList.find(item => item.id === productId && item.size === size);
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          cartList.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            size: size,
-            quantity: 1
-          });
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALLE BRAVA - Estilo Urbano y Diseño</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de la fuente Inter -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d; /* Fondo muy oscuro */
         }
+        /* Color de acento para la paleta "Brava" */
+        .color-brava {
+            color: #dc2626; /* red-600 */
+        }
+        .bg-brava {
+            background-color: #dc2626; /* red-600 */
+        }
+        .text-accent {
+            color: #fbbf24; /* amber-400 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
 
-        updateCart();
-        openCart();
-        
-        // Reset size selection
-        const productCard = e.target.closest('.product-card');
-        const sizes = productCard.querySelectorAll('.size');
-        sizes.forEach(s => s.classList.remove('selected'));
-        e.target.disabled = true;
-      }
-    });
+    <!-- 1. Encabezado Fijo y Navegación (Menú Completo) -->
+    <header class="sticky top-0 z-50 bg-gray-900 shadow-xl border-b-4 border-red-600/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo CALLE BRAVA -->
+                <a href="#" class="flex-shrink-0 text-3xl font-extrabold tracking-widest uppercase">
+                    CALLE <span class="color-brava">BRAVA</span>
+                </a>
 
-    // Update cart
-    function updateCart() {
-      cartItems.innerHTML = '';
-      let total = 0;
+                <!-- Menú de Navegación (Desktop) -->
+                <nav class="hidden md:block">
+                    <div class="flex items-baseline space-x-4">
+                        <a href="#inicio" class="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-150">Inicio</a>
+                        <!-- Enlace a la nueva sección de La Carta -->
+                        <a href="#menu" class="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-150">La Carta</a>
+                        <a href="#galeria" class="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-150">Galería</a>
+                        <a href="#contacto" class="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-full text-sm font-medium transition duration-200 shadow-md">Contacto</a>
+                    </div>
+                </nav>
 
-      cartList.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-
-        const cartItemEl = document.createElement('div');
-        cartItemEl.className = 'cart-item';
-        cartItemEl.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="cart-item-img"/>
-          <div class="cart-item-info">
-            <p class="cart-item-name">${item.name}</p>
-            <p class="cart-item-price">$${item.price.toLocaleString()}</p>
-            <div class="cart-item-details">
-              <span>Talla: ${item.size}</span>
-              <div class="cart-item-quantity">
-                <button class="quantity-btn minus" data-id="${item.id}" data-size="${item.size}">-</button>
-                <span>${item.quantity}</span>
-                <button class="quantity-btn plus" data-id="${item.id}" data-size="${item.size}">+</button>
-              </div>
+                <!-- Botón de Menú (Mobile) - Toggle -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-red-600" aria-controls="mobile-menu" aria-expanded="false">
+                    <!-- Icono de Menú SVG (Hamburguesa) -->
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
             </div>
-          </div>
-        `;
-        cartItems.appendChild(cartItemEl);
-      });
+        </div>
 
-      cartTotal.textContent = `Total: $${total.toLocaleString()}`;
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="text-gray-300 hover:bg-gray-800 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+                <!-- Enlace a la nueva sección de La Carta -->
+                <a href="#menu" class="text-gray-300 hover:bg-gray-800 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">La Carta</a>
+                <a href="#galeria" class="text-gray-300 hover:bg-gray-800 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Galería</a>
+                <a href="#contacto" class="bg-red-600 text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium mt-2">Contacto</a>
+            </div>
+        </div>
+    </header>
 
-      // Add event listeners for quantity buttons
-      document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
-        btn.addEventListener('click', removeFromCart);
-      });
+    <!-- 2. Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-      document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
-        btn.addEventListener('click', addToCartFromCart);
-      });
-    }
+        <!-- Sección de Héroe (Inicio) -->
+        <section id="inicio" class="bg-gray-800 p-8 md:p-16 rounded-3xl shadow-2xl mb-12 border-l-8 border-red-600">
+            <h1 class="text-5xl md:text-7xl font-black uppercase mb-4 leading-tight">
+                VIVE LA <span class="color-brava">ACTITUD</span>. <br> SÉ CALLE BRAVA.
+            </h1>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl">
+                Diseño atrevido, calidad insuperable. Inspirados por el arte urbano y la energía de la ciudad. 
+                <span class="text-accent font-semibold">¡Aquí se come full, se come cargado y se come al carbón!</span>
+            </p>
+            <a href="#menu" class="inline-block bg-accent text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-500 transition duration-300 shadow-lg transform hover:scale-105">
+                Ver La Carta Completa
+            </a>
+        </section>
 
-    // Remove from cart
-    function removeFromCart(e) {
-      const productId = parseInt(e.target.dataset.id);
-      const size = e.target.dataset.size;
-      const itemIndex = cartList.findIndex(item => item.id === productId && item.size === size);
-      
-      if (cartList[itemIndex].quantity > 1) {
-        cartList[itemIndex].quantity -= 1;
-      } else {
-        cartList.splice(itemIndex, 1);
-      }
+        <!-- Sección de Menú / Carta Completa -->
+        <section id="menu" class="py-12">
+            <h2 class="text-5xl font-black mb-10 uppercase text-center">
+                <span class="color-brava">NUESTRA</span> CARTA <span class="text-accent">🔥</span>
+            </h2>
+            <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto text-lg italic">
+                El auténtico sabor y la actitud sin filtros de Barranquilla. Cada mordida es un homenaje a la cultura de la calle, donde la generosidad se mide en queso costeño, lechuga fresca y el toque infaltable de la brasa.
+            </p>
 
-      updateCart();
-    }
+            <!-- Contenedor del Menú (Responsive grid 1-col, 2-col large) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-    // Add from cart
-    function addToCartFromCart(e) {
-      const productId = parseInt(e.target.dataset.id);
-      const size = e.target.dataset.size;
-      const item = cartList.find(item => item.id === productId && item.size === size);
-      item.quantity += 1;
-      updateCart();
-    }
+                <!-- I. HAMBURGUESAS -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-accent">
+                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
+                        <span class="text-accent">|</span> Hamburguesas
+                    </h3>
+                    
+                    <!-- Item 1 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">H-1. La Clásica Currambera</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$18.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Carne de res (150g), queso cheddar, tomate, lechuga fresca y salsa especial.</p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">H-2. La Desmechada Extrema</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$22.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Carne (150g), queso mozzarella, tocineta, y carne desmechada guisada.</p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">H-3. Hamburguesa Gratinada</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$20.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Carne (150g), doble queso (costeño y mozzarella) y gratinado con lechuga.</p>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold color-brava">H-4. La Rebelde (¡Doble Carne!)</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$28.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Doble carne de res (300g), doble queso cheddar, tocineta y cebolla encurtida.</p>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">H-5. La Identidad Costeña</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$24.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Carne (150g), queso costeño asado, chicharrón crocante y suero costeño.</p>
+                    </div>
+                    <!-- Item 6 -->
+                    <div class="mb-4 pb-4 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">H-6. La 'Callejera' Maicera</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$19.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Carne (150g), queso fundido, maíz tierno, papitas ripio y salsas especiales.</p>
+                    </div>
+                </div>
 
-    // Open cart
-    function openCart() {
-      cart.classList.add('open');
-    }
+                <!-- II. PERROS CALIENTES (AL VAPOR) -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-accent">
+                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
+                        <span class="text-accent">|</span> Perros Calientes (Al Vapor)
+                    </h3>
+                    
+                    <!-- Item 1 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-V1. Perro Clásico Barranquillero</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$12.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan suave, mucha lechuga, queso costeño rallado y salsas.</p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-V2. Perro Maicero Gratinado</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$14.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, maíz tierno, y queso mozzarella gratinado.</p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-V3. Perro Ranchero</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$13.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, queso costeño, y trozos de tocineta y jamón picados.</p>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-V4. El "Bravo" Desmechado</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$15.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, queso costeño y generosa carne desmechada guisada.</p>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-V5. El Sucio (Full Queso)</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$14.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, y una mezcla abundante de queso costeño y mozzarella fundido.</p>
+                    </div>
+                    <!-- Item 6 -->
+                    <div class="mb-4 pb-4 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-V6. Perro con Butifarra</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$16.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana, pan, lechuga, queso costeño y trozos de butifarra (¡El toque local!).</p>
+                    </div>
+                </div>
 
-    // Close cart
-    closeCart.addEventListener('click', () => {
-      cart.classList.remove('open');
-    });
+                <!-- III. PERROS CALIENTES (AL CARBÓN) -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-accent">
+                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
+                        <span class="text-accent">|</span> Perros Calientes <span class="text-white">(Al Carbón - ¡Especialidad!)</span>
+                    </h3>
+                    
+                    <!-- Item 1 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-C1. El Perro Carbón Clásico</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$14.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana al carbón, pan grillé, lechuga, queso costeño rallado y papitas ripio.</p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-C2. Dogo Suizo Al Carbón</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$17.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha suiza premium al carbón, lechuga, tocineta y queso mozzarella gratinado.</p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-C3. Perro Al Carbón 'Full Carne'</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$18.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana al carbón, lechuga, queso costeño y generosa porción de carne desmechada.</p>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-C4. Chuzo-Pan de la Calle</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$16.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Trozos de carne y pollo al carbón en pan de perro, con lechuga, queso costeño y salsa tártara.</p>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-C5. El "Toro" Parrillero</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$20.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha suiza al carbón, queso costeño, butifarra y un toque de chimichurri costeño.</p>
+                    </div>
+                    <!-- Item 6 -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-C6. El "Rebelde" Tocineta</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$18.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha suiza al carbón, doble tocineta, queso cheddar líquido y lechuga.</p>
+                    </div>
+                    <!-- Item 7 -->
+                    <div class="mb-4 pb-4 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-xl font-bold">P-C7. Perro Americano "Bravísimo"</h4>
+                            <span class="text-xl font-extrabold text-accent ml-4">$15.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Salchicha americana al carbón, maíz tierno, queso costeño, lechuga y aderezo de piña.</p>
+                    </div>
+                </div>
 
-    // Open checkout
-    checkoutBtn.addEventListener('click', () => {
-      if (cartList.length === 0) return;
-      cart.classList.remove('open');
-      checkoutModal.classList.add('open');
-      updateCheckoutProducts();
-    });
+                <!-- IV. SALCHIPAPAS (PERSONALES Y DÚO) -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-red-600">
+                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
+                        <span class="text-accent">|</span> Salchipapas (Personales y Dúo)
+                    </h3>
+                    
+                    <h4 class="text-2xl font-semibold text-white mt-4 mb-4">Porción Personal (SP-P)</h4>
+                    
+                    <!-- Item 1 (P) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-P1. La Clásica con Queso</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$13.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana, lechuga picada y queso costeño rallado.</p>
+                    </div>
+                    <!-- Item 2 (P) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-P4. Salchi-Pollo Desmechado</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$15.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana, pollo desmechado y queso costeño.</p>
+                    </div>
+                    <!-- Item 3 (P) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-P6. La Solitaria (Butifarra)</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$15.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana, y trozos de butifarra con suero costeño.</p>
+                    </div>
+                    <!-- Item 4 (P) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-P8. Salchipapa "Al Carbón"</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$17.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas francesas, salchicha americana AL CARBÓN, lechuga y queso costeño.</p>
+                    </div>
 
-    // Close checkout
-    closeCheckout.addEventListener('click', () => {
-      checkoutModal.classList.remove('open');
-    });
+                    <h4 class="text-2xl font-semibold text-white mt-8 mb-4">Porción Dúo (SP-D)</h4>
 
-    // Close payment
-    closePayment.addEventListener('click', () => {
-      paymentModal.classList.remove('open');
-    });
+                    <!-- Item 1 (D) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-D1. La Dupla Desmechada</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$27.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas, salchicha, carne y pollo desmechado, y queso costeño.</p>
+                    </div>
+                    <!-- Item 2 (D) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-D2. Dúo Tocineta Gratinado</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$28.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas, salchicha suiza, tocineta, queso mozzarella y gratinado.</p>
+                    </div>
+                    <!-- Item 3 (D) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-D5. El 'Peleador' (Chicharrón)</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$30.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas, salchicha, chicharrón crocante, y queso costeño.</p>
+                    </div>
+                    <!-- Item 4 (D) -->
+                    <div class="mb-4 pb-4 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-D6. Dúo Granjero</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$28.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas, salchicha, pollo desmechado, champiñones y queso mozzarella.</p>
+                    </div>
+                </div>
 
-    // Continue shopping
-    continueShopping.addEventListener('click', () => {
-      paymentModal.classList.remove('open');
-    });
+                <!-- V. SALCHIPAPAS (FAMILIAR) Y BEBIDAS -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl border-l-4 border-red-600">
+                    <h3 class="text-3xl font-extrabold color-brava mb-6 border-b pb-2 border-gray-700">
+                        <span class="text-accent">|</span> Porción Familiar <span class="text-white">(SP-F)</span>
+                    </h3>
+                    
+                    <!-- Item 1 (F) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-F1. El Súper-Familiar</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$48.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas francesas grandes, salchicha, jamón, tocineta, maíz tierno, y queso costeño.</p>
+                    </div>
+                    <!-- Item 2 (F) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-F2. La Tabla de Carnes Bravas</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$55.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas, carne y pollo desmechado, chorizo, y chicharrón con mucho queso costeño.</p>
+                    </div>
+                    <!-- Item 3 (F) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-F3. Desgranado Full Topping</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$50.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Base de maíz tierno, pollo y carne desmechada, queso costeño, papitas ripio y salsas.</p>
+                    </div>
+                    <!-- Item 4 (F) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">SP-F5. La Butifarra Extrema</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$58.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas, salchicha, y la adición abundante de butifarra y chicharrón.</p>
+                    </div>
+                    <!-- Item 5 (F) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold color-brava">SP-F8. La Carga Full 'Jefe'</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$65.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Papas, carne desmechada, pollo desmechado, tocineta, chorizo y gratinado de mozzarella.</p>
+                    </div>
 
-    // Payment selection
-    radioOptions.forEach(option => {
-      option.addEventListener('click', () => {
-        radioOptions.forEach(opt => opt.classList.remove('active'));
-        option.classList.add('active');
-        selectedPayment = option.dataset.payment;
-      });
-    });
+                    <h3 class="text-3xl font-extrabold color-brava mt-8 mb-6 border-b pb-2 border-gray-700">
+                        <span class="text-accent">|</span> Bebidas
+                    </h3>
+                    
+                    <!-- Item 1 (B) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">El Corozo 'Bravo'</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$7.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Jugo natural refrescante.</p>
+                    </div>
+                    <!-- Item 2 (B) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">Limonada de Coco</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$10.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">El sabor de la playa en tu mesa.</p>
+                    </div>
+                    <!-- Item 3 (B) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">Lulada Fría</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$8.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">El toque agridulce perfecto.</p>
+                    </div>
+                    <!-- Item 4 (B) -->
+                    <div class="mb-4 pb-4 border-b border-gray-700/50">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">Jugos Naturales</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$7.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Mango, Maracuyá o Limonada.</p>
+                    </div>
+                    <!-- Item 5 (B) -->
+                    <div class="mb-4 pb-4 last:border-b-0">
+                        <div class="flex justify-between items-start">
+                            <h5 class="text-lg font-bold">Gaseosas / Agua</h5>
+                            <span class="text-lg font-extrabold text-accent ml-4">$5.000 COP</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Personal (Lata/Botella).</p>
+                    </div>
 
-    // Confirm WhatsApp
-    confirmWhatsapp.addEventListener('click', () => {
-      const name = document.getElementById('checkout-name').value;
-      const address = document.getElementById('checkout-address').value;
-      const phone = document.getElementById('checkout-phone').value;
+                </div>
+            </div>
+        </section>
 
-      if (!name || !address || !phone) {
-        alert('Por favor completa todos los campos');
-        return;
-      }
 
-      let message = `Hola Ola Negra 🖤\nQuiero confirmar mi pedido:\n\n`;
-      
-      cartList.forEach(item => {
-        message += `${item.name} (Talla: ${item.size}) x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}\n`;
-      });
+        <!-- Sección de Galería/Colección (moved down) -->
+        <section id="galeria" class="py-12 mt-12">
+            <h2 class="text-4xl font-bold mb-8 uppercase border-b pb-2 border-gray-700">
+                <span class="color-brava">|</span> Galería <span class="text-accent">Urbana</span>
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Hamburguesa+Rebelde" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
+                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Perro+Al+Carbon" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
+                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Salchipapa+Jefe" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
+                <img src="https://placehold.co/400x400/27272a/FFFFFF?text=Limonada+Coco" alt="" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-90 transition duration-300 cursor-pointer">
+            </div>
+            <div class="text-center mt-8">
+                <a href="#menu" class="inline-block border-2 border-accent text-accent font-bold py-2 px-6 rounded-full hover:bg-accent hover:text-gray-900 transition duration-300">
+                    Ver Más Platos en La Carta
+                </a>
+            </div>
+        </section>
 
-      message += `\n👤 Nombre: ${name}\n`;
-      message += `📍 Dirección: ${address}\n`;
-      message += `📞 Teléfono: ${phone}\n`;
-      message += `💳 Pago: ${selectedPayment}`;
+        <!-- Sección de Contacto -->
+        <section id="contacto" class="py-12">
+            <h2 class="text-4xl font-bold mb-8 uppercase border-b pb-2 border-gray-700">
+                <span class="text-accent">|</span> Contacto
+            </h2>
+            <div class="bg-gray-800 p-8 rounded-xl shadow-xl max-w-lg mx-auto border-r-8 border-red-600">
+                <form>
+                    <div class="mb-4">
+                        <label for="nombre" class="block text-sm font-medium text-gray-300 mb-1">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:ring-red-600 focus:border-red-600 transition duration-150 text-white" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:ring-red-600 focus:border-red-600 transition duration-150 text-white" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="mensaje" class="block text-sm font-medium text-gray-300 mb-1">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:ring-red-600 focus:border-red-600 transition duration-150 text-white" required></textarea>
+                    </div>
+                    <button type="submit" class="bg-red-600 text-white font-bold py-3 px-6 rounded-full w-full hover:bg-red-700 transition duration-300 uppercase tracking-wider shadow-lg">
+                        Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </section>
 
-      const whatsappUrl = `https://wa.me/573000000000?text=${encodeURIComponent(message)}`;
-      
-      if (selectedPayment === 'Nequi QR') {
-        checkoutModal.classList.remove('open');
-        paymentModal.classList.add('open');
-      } else {
-        window.open(whatsappUrl, '_blank');
-        checkoutModal.classList.remove('open');
-        cartList = [];
-        updateCart();
-      }
-    });
+    </main>
 
-    // Generate checkout products list
-    function updateCheckoutProducts() {
-      checkoutProducts.innerHTML = '<p style="color: var(--light-gray); margin-bottom: 15px;">🧾 Productos:</p>';
-      cartList.forEach(item => {
-        checkoutProducts.innerHTML += `<p style="color: var(--light-gray); margin: 5px 0;">${item.name} (Talla: ${item.size}) x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}</p>`;
-      });
-    }
+    <!-- Pie de Página -->
+    <footer class="bg-gray-900 border-t border-gray-700 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">&copy; 2025 CALLE BRAVA. Todos los derechos reservados.</p>
+            <p class="text-xs text-gray-500 mt-2">Hecho con actitud y la paleta de colores urbana.</p>
+        </div>
+    </footer>
 
-    // Load everything
-    window.onload = function() {
-      setTimeout(hideLoader, 2500);
-      loadProducts();
-    };
-  </script>
+    <!-- Script para el Menú Móvil -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true' || false;
+                button.setAttribute('aria-expanded', !isExpanded);
+                menu.classList.toggle('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
-```
