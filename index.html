@@ -3,672 +3,572 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNAGUI SUSHI うなぎ - Menú Digital</title>
-    <!-- Carga de Tailwind CSS -->
+    <title>CALLE BRAVA - Menú Completo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuración personalizada de Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'unagui-deep-black': '#0a0a0a',      // Negro Fondo
-                        'unagui-charcoal': '#1c1c1c',        // Negro Carbón Tarjetas
-                        'unagui-orange': '#D4A017',          // Mostaza Acento (reemplazo de #cc5500)
-                        'unagui-orange-light': '#40809',    // Mostaza más claro para íconos
-                    },
-                }
-            }
-        }
-    </script>
-    <!-- Carga de Lucide Icons -->
-    <script type="module" src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --orange-brand: #FF6B00;
+            --blue-royal: #002D72;
+            --white-pure: #FFFFFF;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--unagui-deep-black);
-            color: white;
-            min-height: 100vh;
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
         }
-        /* Ocultar barra de scroll en navegación de categorías */
-        #category-nav {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+
+        .bg-orange-brand { background-color: var(--orange-brand); }
+        .text-orange-brand { color: var(--orange-brand); }
+        .bg-blue-royal { background-color: var(--blue-royal); }
+        .text-blue-royal { color: var(--blue-royal) !important; }
+
+        .header-gradient {
+            background: linear-gradient(135deg, var(--blue-royal) 0%, #001a44 100%);
         }
-        #category-nav::-webkit-scrollbar {
-            display: none;
+
+        .food-card {
+            transition: transform 0.2s ease;
         }
-        /* Animaciones del Modal Lateral */
-        .nav-modal-slide-in {
-            transform: translateX(0%);
-            transition: transform 0.3s ease-out;
-        }
-        .nav-modal-slide-out {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in;
-        }
-        /* Clase para indicar que el nombre es clickeable */
-        .clickable-name {
+
+        .category-pill {
+            transition: all 0.2s;
             cursor: pointer;
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            text-decoration-color: #D4A017; /* Cambiado a mostaza */
-            text-underline-offset: 4px;
+            white-space: nowrap;
+            border: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
         }
-        /* Animación para el Modal de Promoción */
-        .promo-modal-enter {
-            animation: fadeInScale 0.3s ease-out forwards;
+
+        .category-pill.active {
+            background-color: var(--orange-brand);
+            color: white;
+            border-color: var(--orange-brand);
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
         }
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .section-divider {
+            grid-column: 1 / -1;
+            padding: 2.5rem 0 1rem 0;
+            border-bottom: 4px solid var(--orange-brand);
+            margin-bottom: 1rem;
+        }
+
+        .sub-category-header {
+            grid-column: 1 / -1;
+            background: #e2e8f0;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 900;
+            color: var(--blue-royal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price-tag {
+            background: rgba(255, 107, 0, 0.1);
+            color: var(--orange-brand);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        .badge-new {
+            background: var(--blue-royal);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            margin-left: 6px;
         }
     </style>
 </head>
-<body class="antialiased bg-unagui-deep-black selection:bg-unagui-orange selection:text-white">
-    <div id="app" class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <!-- CABECERA -->
-        <header class="text-center py-6 mb-6 border-b-2 border-unagui-orange/50 relative">
-            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-                UNAGUI
-            </h1>
-            <p class="text-2xl sm:text-4xl font-['Noto_Serif_JP'] text-unagui-orange mt-1">
-                SUSHI うなぎ
-            </p>
-            <!-- Botón de Menú Hamburguesa (Tres Rallitas) -->
-            <button id="nav-menu-btn" 
-                class="absolute top-6 right-0 p-2 rounded text-white hover:text-unagui-orange transition-colors duration-200"
-                onclick="toggleNavModal(true)"
-            >
-                <i data-lucide="menu" class="w-7 h-7"></i>
-            </button>
-        </header>
-        <!-- SELECCIÓN DE SEDE (PANTALLA INICIAL) -->
-        <div id="sede-selection-container" class="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
-            <h2 class="text-2xl font-bold text-white mb-2">Bienvenido</h2>
-            <p class="text-gray-400 mb-8 text-sm">Selecciona tu sede para ver el menú</p>
-            <div class="space-y-4 w-full max-w-xs">
-                <button 
-                    class="w-full py-4 rounded-xl font-bold text-lg border border-unagui-orange bg-unagui-charcoal text-white hover:bg-unagui-orange hover:text-black transition-all shadow-lg"
-                    onclick="selectSede('Sede Los Cocos')"
-                >
-                    Sede Los Cocos
-                </button>
-                <button 
-                    class="w-full py-4 rounded-xl font-bold text-lg border border-unagui-orange bg-unagui-charcoal text-white hover:bg-unagui-orange hover:text-black transition-all shadow-lg"
-                    onclick="selectSede('Sede Aluna Plaza')"
-                >
-                    Sede Aluna Plaza
-                </button>
+<body class="pb-32">
+
+    <!-- Header -->
+    <header class="header-gradient text-white p-6 rounded-b-[40px] shadow-2xl sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-black italic tracking-tighter uppercase leading-none">CALLE <span class="text-orange-brand">BRAVA</span></h1>
+                <p class="text-[10px] opacity-90 uppercase tracking-[0.2em] font-bold mt-1">El Templo de la Salchipapa 🔥</p>
             </div>
+            <i class="fas fa-fire-alt text-orange-brand text-2xl animate-pulse"></i>
         </div>
-        <!-- CONTENEDOR DEL MENÚ (OCULTO INICIALMENTE) -->
-        <div id="menu-container" class="hidden">
-            <div class="text-center mb-4">
-                <span id="active-sede-display" class="text-xs uppercase tracking-widest text-unagui-orange font-semibold border border-unagui-orange px-2 py-1 rounded"></span>
-            </div>
-            <!-- Navegación de Categorías -->
-            <nav id="category-nav" class="flex overflow-x-auto whitespace-nowrap gap-3 pb-4 mb-4">
-                <!-- Se llena con JS -->
-            </nav>
-            <!-- Lista de Productos -->
-            <main id="menu-content" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <!-- Se llena con JS -->
-            </main>
-            <!-- FOOTER CON DERECHOS RESERVADOS -->
-            <footer class="mt-12 py-4 text-center border-t border-unagui-orange/30">
-                <p class="text-sm text-gray-500">UNAGUI, todos los derechos reservados.</p>
-            </footer>
+        <div class="max-w-5xl mx-auto relative">
+            <input type="text" id="searchInput" onkeyup="searchFood()" placeholder="Busca tu antojo (ej. Trifásica, Porky...)" class="w-full py-3.5 px-12 rounded-2xl text-gray-800 text-sm shadow-inner focus:outline-none focus:ring-4 focus:ring-orange-brand/30 transition-all">
+            <i class="fas fa-search absolute left-4 top-4 text-gray-400"></i>
         </div>
-        <!-- MODAL DE IMAGEN DE PLATO -->
-        <div id="dish-image-modal" class="fixed inset-0 z-[60] bg-black/95 hidden items-center justify-center p-4 backdrop-blur-sm" onclick="closeDishImageModal()">
-            <div class="relative max-w-3xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
-                <button class="absolute -top-12 right-0 text-white hover:text-unagui-orange transition-colors" onclick="closeDishImageModal()">
-                    <i data-lucide="x" class="w-10 h-10"></i>
-                </button>
-                <img id="modal-dish-img" src="" alt="Plato" class="rounded-lg shadow-2xl border-2 border-unagui-orange max-h-[80vh] object-contain w-full bg-unagui-charcoal">
-                <h3 id="modal-dish-title" class="text-2xl font-bold text-white mt-4 text-center"></h3>
-            </div>
-        </div>
+    </header>
+
+    <!-- Categorías -->
+    <div class="flex overflow-x-auto py-5 px-4 gap-3 no-scrollbar max-w-5xl mx-auto sticky top-[158px] bg-[#f8fafc]/95 backdrop-blur-md z-40 border-b border-gray-100">
+        <div class="category-pill active px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('todos', this)">🏠 Todo</div>
+        <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('salchipapas', this)">🍟 Salchipapas</div>
+        <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('hamburguesas', this)">🍔 Hamburguesas</div>
+        <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('perros', this)">🌭 Perros</div>
+        <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('asados', this)">🔥 Asados</div>
+        <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('bebidas', this)">🍹 Bebidas</div>
     </div>
-    <!-- MENÚ LATERAL (DRAWER) -->
-    <div id="nav-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" onclick="toggleNavModal(false, event)">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
-        <div class="fixed inset-y-0 right-0 flex max-w-full pl-10 pointer-events-none">
-            <div id="nav-panel" class="w-screen max-w-xs pointer-events-auto bg-unagui-charcoal nav-modal-slide-out flex flex-col shadow-xl border-l border-gray-800">
-                <div class="flex items-center justify-between px-4 py-6 border-b border-gray-700 bg-unagui-deep-black">
-                    <h2 class="text-lg font-bold text-unagui-orange">Menú y Contacto</h2>
-                    <button type="button" class="text-gray-400 hover:text-white" onclick="toggleNavModal(false)">
-                        <i data-lucide="x" class="w-6 h-6"></i>
-                    </button>
-                </div>
-                <div class="flex-1 overflow-y-auto py-6 px-4 space-y-2">
-                    <!-- Opción: Cambiar Sede -->
-                    <button onclick="showSedeSelection(); toggleNavModal(false);" class="flex items-center w-full p-3 rounded-lg text-gray-200 hover:bg-gray-800 transition-colors">
-                        <i data-lucide="map-pin" class="w-5 h-5 mr-3 text-unagui-orange"></i>
-                        <span class="font-medium">Cambiar de Sede</span>
-                    </button>
-                    <div class="border-t border-gray-700 my-4"></div>
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">Contacta con la Sede</p>
-                    <!-- Opción: WhatsApp (Dinámico y Directo) -->
-                    <a id="whatsapp-link" href="#" target="_blank" class="flex items-center w-full p-3 rounded-lg text-gray-200 hover:bg-gray-800 transition-colors">
-                        <i data-lucide="message-circle" class="w-5 h-5 mr-3 text-green-500"></i>
-                        <span class="font-medium">WhatsApp Directo</span>
-                    </a>
-                    <!-- Opción: Ubicación (Dinámico) -->
-                    <a id="location-link" href="#" target="_blank" class="flex items-center w-full p-3 rounded-lg text-gray-200 hover:bg-gray-800 transition-colors">
-                        <i data-lucide="navigation" class="w-5 h-5 mr-3 text-blue-500"></i>
-                        <span class="font-medium">Ver Ubicación</span>
-                    </a>
-                    <!-- Opción: Instagram (Directo) -->
-                    <a id="instagram-link" href="https://www.instagram.com/unaguisushi_/" target="_blank" class="flex items-center w-full p-3 rounded-lg text-gray-200 hover:bg-gray-800 transition-colors">
-                        <i data-lucide="instagram" class="w-5 h-5 mr-3 text-pink-500"></i>
-                        <span class="font-medium">Instagram</span>
-                    </a>
-                </div>
+
+    <main class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-4" id="menuGrid">
+        
+        <!-- SALCHIPAPAS -->
+        <div class="section-divider" data-category="salchipapas">
+            <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">🍟 EL TEMPLO DE LA SALCHIPAPA</h2>
+            <p class="text-[10px] text-gray-500 font-bold uppercase">Base: Papa francesa artesanal, lechuga fina, ripio "extracrunch" y 4 salsas.</p>
+        </div>
+
+        <div class="sub-category-header" data-category="salchipapas">🍗 LAS INDOMABLES (Personales) <span>EL GOLPE INDIVIDUAL</span></div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA SENCILLA "CON TODO"</h3>
+                <span class="price-tag">$15.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Clásica del barrio: Salchicha manguera, butifarra soledeña y pollo desmechado al carbón.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "BOMBA" DE CERDO</h3>
+                <span class="price-tag">$18.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Ahumado real: Salchicha, chorizo antioqueño y pulpa de cerdo asada a la brasa en trozos melosos.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA MIXTA CALLEJERA</h3>
+                <span class="price-tag">$19.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">El dúo dinámico: Salchicha, carne de res picadita al carbón y pollo desmechado.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "CHORIZO-PAPA"</h3>
+                <span class="price-tag">$17.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Intensa: Doble porción de chorizo parrillero, salchicha y lluvia de queso costeño.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "POLLO-BUTI"</h3>
+                <span class="price-tag">$16.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Bien local: Pollo al carbón y mucha butifarra salteada con cebollín.</p>
+        </div>
+
+        <div class="sub-category-header" data-category="salchipapas">👫 LAS "PARTNER" (Para 2) <span>CON QUESO FUNDIDO</span></div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border-l-4 border-orange-brand" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "TRIFÁSICA" AL CARBÓN</h3>
+                <span class="price-tag">$34.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">La favorita: Pollo desmechado, carne de res y cerdo asado con salchicha y butifarra.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "RANCHO & BRASA"</h3>
+                <span class="price-tag">$36.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Carnívora: Chorizo, tocineta, res al carbón y suiza. Coronada con huevo frito.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "MAICERA ESPECIAL"</h3>
+                <span class="price-tag">$32.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Jugosa: Pollo, cerdo, salchicha y montaña de maíz tierno salteado en mantequilla de ajo.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">GRATINADA "TODO TERRENO"</h3>
+                <span class="price-tag">$38.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Res, pollo, cerdo, chorizo y butifarra bajo una sábana de mozarella dorado.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "CHUZIPAPA MIXTA"</h3>
+                <span class="price-tag">$42.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Base clásica con dos chuzos encima (pollo y carne) bañados en BBQ artesanal.</p>
+        </div>
+
+        <div class="sub-category-header" data-category="salchipapas">👨‍👩‍👧‍👦 LAS FAMILIARES (La Manada) <span>INCLUYEN HUEVOS CODORNIZ</span></div>
+
+        <div class="food-card bg-white rounded-3xl shadow-md p-5 border-2 border-orange-brand" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-lg leading-tight">LA "MONUMENTAL" CANDELA</h3>
+                <span class="price-tag">$65.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Festival de proteínas (pollo, res, cerdo, chorizo, buti, suiza) sobre 1kg de papa.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "PORKY-PAPA" FAMILIAR</h3>
+                <span class="price-tag">$58.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Cerdo asado, chorizo, tocineta crocante y salsa de piña artesanal.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "BARRIADA SUPREMA"</h3>
+                <span class="price-tag">$62.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Mucha salchicha, buti, pollo, res y trozos de bollo limpio asado mezclados.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "CUATRO ESTACIONES"</h3>
+                <span class="price-tag">$68.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Esquinas divididas: Pollo, Res, Cerdo y Embutidos. Centro de queso fundido.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border-2 border-blue-royal" data-category="salchipapas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "MEGAPAPA IMPACTO"</h3>
+                <span class="price-tag">$75.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Trae TODO lo anterior, doble queso y una jarra de jugo de panela con limón de regalo.</p>
+        </div>
+
+        <!-- HAMBURGUESAS -->
+        <div class="section-divider" data-category="hamburguesas">
+            <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">🍔 HAMBURGUESAS "A LA CANDELA"</h2>
+            <p class="text-[10px] text-gray-500 font-bold uppercase">Carne 100% artesanal sellada al carbón.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">1. LA CLÁSICA DE LA CUADRA</h3>
+                <span class="price-tag">$14.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Res (150g), queso costeño asado, vegetales frescos y Tártara Ceniza.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">2. LA "POLLO-CRUNCH"</h3>
+                <span class="price-tag">$18.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Contramuslo al carbón coronado con piel crocante, mozarella y piña melosa.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">3. LA "PORKY-BOMB"</h3>
+                <span class="price-tag">$20.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Res artesanal, cerdo desmechado en BBQ de panela y trozos de chorizo parrillero.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">4. LA "TRIFÁSICA" MONSTRUOSA</h3>
+                <span class="price-tag">$25.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Res, filete de pollo y butifarra abierta. Doble queso (costeño y mozarella).</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">5. LA "CHORIPÁN-BURGER"</h3>
+                <span class="price-tag">$19.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Res coronada con chorizo antioqueño "traqueador", suero al cilantro y ripio.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl shadow-md p-5 border-2 border-orange-brand" data-category="hamburguesas">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-lg leading-tight">6. LA CANDELA SUPREMA</h3>
+                <span class="price-tag">$28.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Doble carne, doble queso, tocineta, pollo desmechado, huevo y papas fritas internas.</p>
+        </div>
+
+        <!-- PERROS -->
+        <div class="section-divider" data-category="perros">
+            <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">🌭 LOS PERROS DE LA CASA</h2>
+            <p class="text-[10px] text-gray-500 font-bold uppercase">Pan artesanal ultra fresco.</p>
+        </div>
+
+        <div class="sub-category-header" data-category="perros">☁️ LINEA VAPOR (Suavecitos)</div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL "VAPORINO" CLÁSICO</h3>
+                <span class="price-tag text-sm">$10.000</span>
             </div>
         </div>
-    </div>
-    <!-- MODAL DE PROMOCIÓN (VENTANA EMERGENTE SOLO EN ALUNA PLAZA) -->
-    <div id="promo-modal" class="fixed inset-0 z-40 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onclick="closePromoModal()">
-        <div id="promo-card" class="w-full max-w-sm bg-unagui-charcoal rounded-xl shadow-2xl border-2 border-unagui-orange/80 overflow-hidden promo-modal-enter" onclick="event.stopPropagation()">
-            <!-- Imagen del Producto Promocional -->
-            <div class="relative h-40 bg-gray-800 flex items-center justify-center">
-                <img id="promo-img" src="" alt="Promoción Destacada" class="w-full h-full object-cover opacity-70">
-                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                    <span class="text-3xl font-bold text-white tracking-widest uppercase"></span>
-                </div>
-            </div>
-            <div class="p-5">
-                <div class="flex items-center justify-between mb-2">
-                    <h4 id="promo-title" class="text-xl font-extrabold text-unagui-orange leading-tight"></h4>
-                    <span id="promo-price" class="text-xl font-bold text-white bg-unagui-orange/20 px-3 py-1 rounded-full"></span>
-                </div>
-                <p id="promo-description" class="text-sm text-gray-300 mb-4"></p>
-                <div class="flex justify-end space-x-3">
-                    <button onclick="closePromoModal()" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-                        Cerrar
-                    </button>
-                    <button onclick="closePromoModal(); /* APRECE PROMOCION SOLO PARA CATEGORIA DE ALUNA PLAZA */" class="px-4 py-2 bg-unagui-orange text-black font-semibold rounded-lg hover:bg-unagui-orange-light transition-colors text-sm">
-                        Ver Detalles
-                    </button>
-                </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL POLLITO AL VAPOR</h3>
+                <span class="price-tag text-sm">$13.000</span>
             </div>
         </div>
-    </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL SUIZO VAPOROSO</h3>
+                <span class="price-tag text-sm">$15.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL "TRI-VAPOR"</h3>
+                <span class="price-tag text-sm">$17.000</span>
+            </div>
+        </div>
+
+        <div class="sub-category-header" data-category="perros">🔥 LINEA CARBÓN (Rústicos)</div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL PERRO "CARBONERO"</h3>
+                <span class="price-tag text-sm">$12.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL PERRO "PORKY-CANDELA"</h3>
+                <span class="price-tag text-sm">$16.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL "CHUZIPERRO" MIXTO</h3>
+                <span class="price-tag text-sm">$20.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">EL PERRO "CHORIZADO"</h3>
+                <span class="price-tag text-sm">$15.000</span>
+            </div>
+        </div>
+
+        <div class="sub-category-header" data-category="perros">💣 ESPECIALES TODO TERRENO</div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-2 border-orange-brand" data-category="perros">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">EL "PERRO-GRATIN"</h3>
+                <span class="price-tag">$18.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Costra gigante de queso costeño frito envolvente.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-2 border-blue-royal" data-category="perros">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">EL "MEGAPERRO CALLEJERO"</h3>
+                <span class="price-tag">$22.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Salchicha jumbo, res, pollo, buti, chorizo y ripio hasta el techo.</p>
+        </div>
+
+        <!-- ASADOS -->
+        <div class="section-divider" data-category="asados">
+            <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">🔥 ASADOS AL CARBÓN</h2>
+            <p class="text-[10px] text-gray-500 font-bold uppercase">Generosos y con todos los juguetes.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border border-gray-100" data-category="asados">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">CHURRASCO DE POLLO</h3>
+                <span class="price-tag">$22.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Dos contramuslos deshuesados en cerveza. Con yuca, suero, bollo y ensalada.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border border-gray-100" data-category="asados">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "PANCETTA" CRIOLLA</h3>
+                <span class="price-tag">$25.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Tocino carnudo asado (piel traqueadora). Con papa salada y bollo de mazorca.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border border-gray-100" data-category="asados">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-base leading-tight">EL "CHUZÓN" DESGRANADO</h3>
+                <span class="price-tag">$20.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Chuzo gigante (res o pollo) sobre maíz tierno y queso costeño.</p>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-md border-2 border-orange-brand" data-category="asados">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-black text-blue-royal uppercase text-lg leading-tight">PICADA "EL VECINDARIO"</h3>
+                <span class="price-tag">$45.000</span>
+            </div>
+            <p class="text-gray-500 text-xs">Para 2-3: Pollo, res, cerdo, chorizo, buti y cascos de papa criolla.</p>
+        </div>
+
+        <!-- BEBIDAS -->
+        <div class="section-divider" data-category="bebidas">
+            <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">🍹 BEBIDAS Y CÓCTELES</h2>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">LIMONADA "COSTEÑA"</h3>
+                <span class="price-tag text-sm">$5.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">COROZO ARTESANAL</h3>
+                <span class="price-tag text-sm">$6.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">LULADA "BARRIO ABAJO"</h3>
+                <span class="price-tag text-sm">$7.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-blue-royal uppercase text-sm">TÉ FRÍO DE LA CASA</h3>
+                <span class="price-tag text-sm">$5.000</span>
+            </div>
+        </div>
+
+        <div class="sub-category-header" data-category="bebidas">🍹 CÓCTELES CHIMBAS Y BARATOS</div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-black text-blue-royal uppercase">EL "GUARO-MOJITO"</h3>
+                <span class="price-tag">$12.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-black text-blue-royal uppercase">EL "RON-PUNCH"</h3>
+                <span class="price-tag">$14.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-black text-blue-royal uppercase">MARGARITA BARRANQUILLERA</h3>
+                <span class="price-tag">$15.000</span>
+            </div>
+        </div>
+
+        <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
+            <div class="flex justify-between items-center">
+                <h3 class="font-black text-blue-royal uppercase">SANGRÍA DE POBRE</h3>
+                <span class="price-tag">$12.000</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Móvil -->
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-8 py-4 z-50 md:hidden flex justify-between items-center shadow-[0_-10px_25px_rgba(0,0,0,0.05)] rounded-t-[30px]">
+        <button class="text-blue-royal flex flex-col items-center gap-1" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <div class="bg-blue-royal/10 p-2 rounded-xl">
+                <i class="fas fa-home text-xl"></i>
+            </div>
+            <span class="text-[9px] font-black uppercase tracking-tighter">Inicio</span>
+        </button>
+        
+        <a href="https://wa.me/573000000000" target="_blank" class="bg-[#25D366] text-white w-16 h-16 rounded-full -mt-12 border-[6px] border-[#f8fafc] shadow-2xl flex items-center justify-center active:scale-90 transition-transform">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </a>
+
+        <button class="text-gray-400 flex flex-col items-center gap-1">
+            <div class="bg-gray-100 p-2 rounded-xl">
+                <i class="fas fa-receipt text-xl"></i>
+            </div>
+            <span class="text-[9px] font-black uppercase tracking-tighter">Mi Pedido</span>
+        </button>
+    </footer>
+
     <script>
-        // --- DATOS DE PROMOCIÓN (EDITAR AQUÍ) ---
-        const promotionData = {
-            title: "EMI ROLL",
-            description: "¡Prueva nuestro plato nuevo! Un delicado balance de palmito trufado, langostino en tempura y queso crema, envuelto en un fino papel de soya que abraza cada sabor como una obra de arte. Déjate sorprender por su suavidad y su magia.",
-            price: " $ 55.000",
-            // Usa una imagen de placeholder si no tienes una URL de imagen real
-            image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Emi%20roll.jpg?raw=true" 
-            // Si tienes una URL, úsala aquí: "https://tudominio.com/foto-promocional.jpg"
-        };
-        // --- FIN DATOS DE PROMOCIÓN ---
-        // --- DETALLES DE SEDES (NO CAMBIAR) ---
-        const sedeDetails = {
-            "Sede Los Cocos": {
-                // WhatsApp: +57 323 322 5787
-                whatsapp: "573233225787",
-                direccion: "cr 1c#24-04, Santa Marta",
-                displayNumber: "+57 323 322 5787",
-                instagram: "https://www.instagram.com/unaguisushi_/"
-            },
-            "Sede Aluna Plaza": {
-                // WhatsApp: +57 310 713 7496
-                whatsapp: "573107137496",
-                direccion: "Aluna Plaza, Santa Marta",
-                displayNumber: "+57 310 713 7496",
-                instagram: "https://www.instagram.com/unaguisushi_/"
-            }
-        };
-        // --- MENÚ BASE ORIGINAL (PARA LOS COCOS) ---
-        const menuDataLosCocos = {
-            "Cocteles de Autor": [
-                { name: "UNAGUI VOLCAN (NEW)", description: "Ron añejo, sirope de frutos rojos y maracuyá, zumo de limón.", price: 35, icon: "volcano", image: null },
-                { name: "SUKURA FLOWER (NEW)", description: "Tequila blanco, curazao, sirope panela, zumo de limón, maracuyá y lyche.", price: 35, icon: "flower", image: null },
-                { name: "TOKYO SMOKE", description: "Mezcal Ojo de Tigre, zumo de limón, miel y té verde.", price: 40, icon: "cigarette", image: null },
-                { name: "MIDORI BASIL", description: "Ginebra, licor de melón, zumo de limón, albahaca y sirope de canela.", price: 35, icon: "leaf", image: null },
-                { name: "ISABELLA MOJITO", description: "Vodka Absolut, agraz, uvas isabellas, limón Tahiti, hierbabuena y azúcar.", price: 28, icon: "grape", image: null },
-                { name: "BUTTERFLY PEA", description: "Absolut Vodka, zumo de limón, sirope lyche, sirope simple, soda y té mariposa.", price: 28, icon: "flower", image: null },
-                { name: "MIYAKO ISLAND", description: "Ginebra, proseco, curazao, zumo de limón y soda.", price: 38, icon: "palmtree", image: null },
-            ],
-            "Cocteles Clásicos": [
-                { name: "MOJITO CLÁSICO", description: "Ron Santero 3 años, limón, hierbabuena, soda.", price: 23, icon: "glass-water", image: null },
-                { name: "MOJITO FRUTA", description: "Maracuyá o Corozo. Ron Santero, limón, hierbabuena, soda.", price: 25, icon: "citrus", image: null },
-                { name: "MARGARITA CLÁSICA", description: "Tequila Olmeca, triple sec, zumo de limón.", price: 25, icon: "glass-water", image: null },
-                { name: "MARGARITA FRUTA", description: "Maracuyá o Corozo. Tequila Olmeca, triple sec, limón.", price: 27, icon: "citrus", image: null },
-                { name: "GIN TONIC", description: "Ginebra, tónica, cascos de limón.", price: 22, icon: "glass-water", image: null },
-                { name: "MOSCOW MULE", description: "Vodka Absolut, sirope jengibre, limón, soda.", price: 25, icon: "glass-water", image: null },
-            ],
-            "Cocteles Premium": [
-                { name: "MARGARITA PATRÓN", description: "Tequila Patrón, triple sec, limón, sirope simple.", price: 40, icon: "star", image: null },
-                { name: "MARGARITA DON JULIO", description: "Tequila Don Julio, triple sec, limón, sirope fruta.", price: 40, icon: "star", image: null },
-                { name: "GIN TONIC BEEFEATER", description: "Ginebra Beefeater, tónica, limón, romero.", price: 37, icon: "star", image: null },
-                { name: "GIN TONIC BOMBAY", description: "Ginebra Bombay, tónica, limón, pimienta.", price: 37, icon: "star", image: null },
-                { name: "PALOMA OAXACA", description: "Mezcal Ojo de Tigre, limón, gaseosa toronja.", price: 40, icon: "star", image: null },
-            ],
-            "Sangrías y Seltzers": [
-                { name: "SANGRÍA DE LA CASA", description: "Vino tinto, piña, naranja, limón, manzana, Ron, Ginger Ale.", price: 25, icon: "wine", image: null },
-                { name: "LYCHEE SELTZER", description: "Lit Seltzer Lychee, agraz, uvas isabellas, paleta de fresa.", price: 30, icon: "sparkles", image: null },
-            ],
-            "Tragos": [
-                { name: "RON HECHICERA", description: "Trago de Ron.", price: 40, icon: "glass-water", image: null },
-                { name: "RON ZACAPA AMBAR", description: "Trago de Ron.", price: 35, icon: "glass-water", image: null },
-                { name: "TEQUILA PATRÓN REP.", description: "Trago de Tequila.", price: 40, icon: "glass-water", image: null },
-                { name: "TEQUILA DON JULIO REP.", description: "Trago de Tequila.", price: 37, icon: "glass-water", image: null },
-                { name: "WHISKY GLENLIVET", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "WHISKY CHIVAS EXTRA", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "JACK DANIEL'S", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "BUCHANANS MASTER", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "MEZCAL OJO DE TIGRE", description: "Trago de Mezcal.", price: 30, icon: "glass-water", image: null },
-            ],
-            "Cervezas": [
-                { name: "STELLA", description: "Cerveza.", price: 18, icon: "beer", image: null },
-                { name: "CORONITA", description: "Cerveza.", price: 15, icon: "beer", image: null },
-                { name: "CERVEZA ASAHI", description: "Cerveza Japonesa.", price: 18, icon: "beer", image: null },
-                { name: "CERVEZA MODELO", description: "Cerveza.", price: 15, icon: "beer", image: null },
-            ],
-            "Limonadas y Sodas": [
-                { name: "LIMONADA COCO", description: "Refrescante limonada de coco.", price: 15, icon: "citrus", image: null },
-                { name: "LIMONADA HIERBABUENA", description: "Refrescante.", price: 15, icon: "leaf", image: null },
-                { name: "LIMONADA JENGIBRE", description: "Refrescante.", price: 15, icon: "citrus", image: null },
-                { name: "LIMONADA VINO", description: "Con un toque de vino.", price: 20, icon: "wine", image: null },
-                { name: "SODA MARACUYA", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA COROZO", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA PANELA", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA FLOR DE JAMAICA", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA FRUTOS ROJOS", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA LYCHEE", description: "Soda Artesanal.", price: 20, icon: "cup-soda", image: null },
-            ],
-            "Soft Drinks": [
-                { name: "AGUA SIN GAS", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "AGUA CON GAS", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "SODA", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "CANADA DRY", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "COCA COLA", description: "Original.", price: 7, icon: "droplet", image: null },
-                { name: "COCA COLA ZERO", description: "Sin azúcar.", price: 7, icon: "droplet", image: null },
-            ],
-          "Entradas": [
-                { name: "KITOKUSHI MAGURO", description: "Rollitos de atún fresco rellenos de cangrejo trufado, queso crema y pepino, con masago, mantequilla de trufa, salsa anguila y dinamita.", price: 45, icon: "scroll", image: null },
-                { name: "TIRADITO DE ATUN ", description: "Langostino, cangrejo vapor, vegetales en papel de arroz.Corte delicado de atún natural, sobre una salsa de frijol de soya infusionada con aceites y especias.", price: 40, icon: "scroll", image: null },
-                { name: "ROLLOS PRIMAVERA", description: "Langostino, cangrejo vapor, vegetales en papel de arroz.", price: 30, icon: "scroll", image: null },
-                { name: "ENSALADA UNAGUI", description: "Wakame fresco con cangrejo, cebollin, aguacate y masago, acompañado de crujientes bocados de salmón tempura rellenos de queso crema, masago y aguacate.", price: 38, icon: "shrimp", image: null },
-                { name: "LANGOSTINOS CHUNEIT", description: "Langostinos tempura en salsa cremosa Chuneit (Agridulces).", price: 40, icon: "shrimp", image: null },
-                { name: "NIGUI CRUNCH", description: "Bocados salmón, arroz con crunch y ensalada cangrejo.", price: 30, icon: "utensils", image: null },
-                { name: "TUNA CRISPY RICE", description: "Arroz crujiente, mousse aguacate y tartar de atún.", price: 30, icon: "utensils", image: null },
-                { name: "TUNA TATAKI", description: "Atún sellado con sésamo sobre salsa ponzu.", price: 40, icon: "fish", image: null },
-                { name: "EDAMAME", description: "Vainas de soya salteadas con sal marina.", price: 18, icon: "bean", image: null },
-                { name: "GYOSAS", description: "Empanaditas vapor rellenas de cerdo y vegetales.", price: 25, icon: "dumpling", image: null },
-                { name: "ENSALADA NEPTUNO", description: "Wakame con salmón y atún fresco, cangrejo, masago y cebollín, bañados en salsa de la casa.", price: 40, icon: "dumpling", image: null },
-                { name: "KANI SALAD", description: "Mezcla Kani, cebollín, dinamita, crunch y salsa Unagui.", price: 40, icon: "salad", image: null },
-                { name: "KUSHIYAKI", description: "Pinchos de lomo fino de res marinados en aceite de sésamo, jengibre, ajo y vinagre de arroz, con un glaseado de salsa teriyaki.", price: 32, icon: "utensils-crossed", image: null },
-                { name: "YAKITORI", description: "Pinchos de pollo marinados y caramelizados en salsa teriyaki, con sésamo, jengibre, ajo y vinagre de arroz.", price: 28, icon: "utensils-crossed", image: null },
-            ],
-            "Niguiris": [
-                { name: "NIGUIRI SAKE", description: "Salmón natural y arroz de sushi.", price: 20, icon: "fish", image: null },
-                { name: "NIGUIRI UNAGUI", description: "Anguila ahumada y arroz de sushi.", price: 25, icon: "fish", image: null },
-                { name: "NIGUIRI MAGURO", description: "Atún natural y arroz.", price: 22, icon: "fish", image: null },
-                { name: "NIGUIRI HAMACHI", description: "Atún aleta amarilla y arroz.", price: 30, icon: "fish", image: null },
-                { name: "NIGUIRI IKURA", description: "Huevas de salmón.", price: 45, icon: "circle-dot", image: null },
-                { name: "NIGUIRI MASAGO", description: "Huevas de cangrejo.", price: 25, icon: "circle-dot", image: null },
-            ],
-            "Sashimi": [
-                { name: "SASHIMI ATÚN", description: "4 piezas de cortes frescos.", price: 30, icon: "fish-symbol", image: null },
-                { name: "SASHIMI SALMÓN", description: "4 piezas de cortes frescos.", price: 30, icon: "fish-symbol", image: null },
-                { name: "SASHIMI HAMACHI", description: "4 piezas de cortes frescos.", price: 60, icon: "fish-symbol", image: null },
-            ],
-            "Rolls Especiales": [
-                { name: "MAXI ROLL", description: "langostino y salmón tempura, cangrejo, wakame, queso crema, cebollín, masago en vuelto en papel de soya", price: 65, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Maxi%20roll.jpg?raw=true" },
-                { name: "EMI ROLL", description: "palmito trufado, langostino tempura, queso crema y envuelto en papel de soya.", price: 55, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Emi%20roll.jpg?raw=true" },
-                { name: "UNAGUI ESPECIAL ROLL", description: "Cangrejo, salmón, queso crema, topping anguila flambeada.", price: 60, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Unagui%20Especial%20Roll.JPG?raw=true" },
-                { name: "DIPSALMON", description: "Langostino tempura, cangrejo, queso, topping salmón.", price: 60, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Dipsalmon%20Roll.JPG?raw=true" },
-                { name: "OVALLE ROLL", description: "langostinos empanizados, queso crema, aguacate y topping de tartar de atún.", price: 48, icon: "disc", image: null },
-                { name: "NIGUI ROLL", description: "Salmón natural, arroz, crunch y ensalada cangrejo.", price: 48, icon: "disc", image: null },
-                { name: "VOLCANO", description: "salmón y langostino empanizado con queso crema, cubiertos con topping de cangrejo, wakame, masago, cebollín y spicy.", price: 55, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Volcano%20roll%20(1).jpg?raw=true" },
-                { name: "TATAKI ROLL", description: "Salmón, queso crema, aguacate, topping tataki atún y mousse de aguacate..", price: 48, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Tataki%20Roll.JPG?raw=true"},
-                { name: "UNAGUI ROLL", description: "anguila y langostinos empanizados con queso crema y cebollín, coronados con topping de cangrejo.", price: 50, icon: "disc", image: null },
-                { name: "LATIN ROLL", description: "langostino empanizado, aguacate y queso crema, rematado con topping de plátano maduro.", price: 45, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Latin%20roll.jpg?raw=true" },
-                { name: "EXPLOSIÓN", description: "langostino tempura, cangrejo y queso crema con pepino, coronado con topping de atún, aguacate y masago.", price: 50, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Explosion.jpg?raw=true" },
-                { name: "OJO DE TIGRE", description: "salmón, atún y cangrejo empanizado con queso crema y aguacate, coronado con ajonjolí negro y salsa dinamita.", price: 55, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Ojo%20de%20Tigre%20Roll.JPG?raw=true" },
-                { name: "FUGI ROLL", description: "Salmón natural con queso crema y cebollín, topping de kakiague y langostinos tempura.", price: 50, icon: "disc", image:"https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Fugi%20roll.jpg?raw=true" },
-                { name: "CALIFORNIA ROLL (CLÁSICO)", description: "cangrejo, aguacate y pepino, coronado con masago y ajonjolí negro.", price: 30, icon: "sun", image: null },
-                
-            ],
-            "Rolls Tempura": [
-                { name: "TEMPURA CRONCH", description: "anguila, cangrejo empanizado, tilapia, salmón, cebollín, queso crema, masago y topping de cangrejo.", price: 55, icon: "flame", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Tempura%20crunch%20(1).jpg?raw=true" },
-                { name: "SKIN TEMPURA", description: "langostinos empanizados con queso crema, piel de salmón crocante, aguacate, wakame y masago.", price: 45, icon: "flame", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Skin%20tempura%20(1).jpg?raw=true" },
-                { name: "TIGGER ESPECIAL", description: "salmón, queso crema y aguacate, coronado con masago y topping de cangrejo gratinado.", price: 55, icon: "layers", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Tigger%20especial%20roll.jpg?raw=true" },
-                
-            ],
-           "Rolls Natural": [
-                { name: "VEGGIE ROLL (VEGANO)", description: "Pepino, espárrago, aguacate, wakame, zanahoria y ajonjolí.", price: 35, icon: "carrot", image: null },
-                { name: "KIURI MAKI (NATURAL)", description: "Cama de pepino, salmón, atún, cangrejo, masago, queso crema, aguacate, acompañado de salsa ponzu.", price: 35, icon: "cucumber", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Kiuri%20Maki%20Natural%20Roll.JPG?raw=true" },
-                { name: "RAINBOW (NATURAL)", description: "Atún, salmón, tilapia y aguacate, coronado con topping de atún, salmón, tilapia y aguacate.", price: 45, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Rainbow%20Roll.JPG?raw=true" },
-                { name: "OSAKA FRAIN (NATURAL)", description: "Rollo de salmón sin arroz con atún, tilapia, cangrejo, aguacate, queso crema y masago.", price: 50, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Osaka%20Frain%20Roll.jpg?raw=true" },
-                { name: "TUNA SPICE MAKI (NATURAL)", description: "atún, crunch, aguacate, sriracha, cebollín y masago.", price: 40, icon: "disc", image: null },
-                { name: "SALMON ESPECIAL (NATURAL)", description: "Salmón, crunch, cebollín, masago y jengibre.", price: 35, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Nigui%20Roll.JPG?raw=true" },
-                { name: "ALASKA ROLL (CLÁSICO)", description: "Salmón, queso crema, aguacate, ajonjolí.", price: 30, icon: "snowflake", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Alaska%20Roll%20(1).JPG?raw=true" },
-            ],
-        };
-        // --- MENÚ DETALLADO (PARA ALUNA PLAZA) basado en el PDF ---
-        const menuDataAlunaPlaza = {
-            "Cocteles de Autor": [
-                { name: "UNAGUI VOLCAN (NEW)", description: "Ron añejo, sirope de frutos rojos y maracuyá, zumo de limón.", price: 35, icon: "volcano", image: null },
-                { name: "SUKURA FLOWER (NEW)", description: "Tequila blanco, curazao, sirope panela, zumo de limón, maracuyá y lyche.", price: 35, icon: "flower", image: null },
-                { name: "TOKYO SMOKE", description: "Mezcal Ojo de Tigre, zumo de limón, miel y té verde.", price: 40, icon: "cigarette", image: null },
-                { name: "MIDORI BASIL", description: "Ginebra, licor de melón, zumo de limón, albahaca y sirope de canela.", price: 35, icon: "leaf", image: null },
-                { name: "ISABELLA MOJITO", description: "Vodka Absolut, agraz, uvas isabellas, limón Tahiti, hierbabuena y azúcar.", price: 28, icon: "grape", image: null },
-                { name: "BUTTERFLY PEA", description: "Absolut Vodka, zumo de limón, sirope lyche, sirope simple, soda y té mariposa.", price: 28, icon: "flower", image: null },
-                { name: "MIYAKO ISLAND", description: "Ginebra, proseco, curazao, zumo de limón y soda.", price: 38, icon: "palmtree", image: null },
-            ],
-            "Cocteles Clásicos": [
-                { name: "MOJITO CLÁSICO", description: "Ron Santero 3 años, limón Tahiti, hierbabuena, sirope simple, soda.", price: 23, icon: "glass-water", image: null },
-                { name: "MOJITO FRUTA (MARACUYA O COROZO)", description: "Ron Santero 3 años, limón Tahiti, hierbabuena, sirope fruta, soda.", price: 25, icon: "citrus", image: null },
-                { name: "MARGARITA CLÁSICA", description: "Tequila Olmeca, triple sec, limón Tahiti, sirope simple.", price: 25, icon: "glass-water", image: null },
-                { name: "MARGARITA FRUTA (MARACUYA O COROZO)", description: "Tequila Olmeca, triple sec, limón Tahiti, sirope fruta.", price: 27, icon: "citrus", image: null },
-                { name: "GIN TONIC", description: "Ginebra, tónica, cascos de limón.", price: 22, icon: "glass-water", image: null },
-                { name: "MOSCOW MULE", description: "Vodka Absolut, sirope jengibre, limón Tahiti, soda.", price: 25, icon: "glass-water", image: null },
-            ],
-            "Cocteles Premium": [
-                { name: "MARGARITA PATRÓN", description: "Tequila Patrón, triple sec, limón Tahiti, sirope simple.", price: 40, icon: "star", image: null },
-                { name: "MARGARITA DON JULIO", description: "Tequila Don Julio, triple sec, limón Tahiti, sirope fruta.", price: 40, icon: "star", image: null },
-                { name: "GIN TONIC BEEFEATER", description: "Ginebra Beefeater, tónica, limón, romero.", price: 37, icon: "star", image: null },
-                { name: "GIN TONIC BOMBAY", description: "Ginebra Bombay, tónica, limón, pimienta.", price: 37, icon: "star", image: null },
-                { name: "PALOMA OAXACA", description: "Mezcal Ojo de Tigre, limón Tahiti, gaseosa toronja.", price: 40, icon: "star", image: null },
-            ],
-            "Sangrías y Seltzers": [
-                { name: "SANGRÍA DE LA CASA", description: "Vino tinto, piña, naranja, limón, manzana, Ron, Ginger Ale.", price: 25, icon: "wine", image: null },
-                { name: "LYCHEE SELTZER", description: "Lit Seltzer Lychee, agraz, uvas isabellas, paleta de fresa.", price: 30, icon: "sparkles", image: null },
-            ],
-            "Tragos": [
-                { name: "RON HECHICERA", description: "Trago de Ron.", price: 40, icon: "glass-water", image: null },
-                { name: "RON ZACAPA AMBAR", description: "Trago de Ron.", price: 35, icon: "glass-water", image: null },
-                { name: "TEQUILA PATRÓN REP.", description: "Trago de Tequila.", price: 40, icon: "glass-water", image: null },
-                { name: "TEQUILA DON JULIO REP.", description: "Trago de Tequila.", price: 37, icon: "glass-water", image: null },
-                { name: "WHISKY GLENLIVET", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "WHISKY CHIVAS EXTRA", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "JACK DANIEL'S", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "BUCHANANS MASTER", description: "Trago de Whisky.", price: 30, icon: "glass-water", image: null },
-                { name: "BUCHANANS 18 AÑOS", description: "Trago de Whisky.", price: 50, icon: "glass-water", image: null },
-                { name: "MEZCAL OJO DE TIGRE", description: "Trago de Mezcal.", price: 30, icon: "glass-water", image: null },
-            ],
-            "Cervezas": [
-                { name: "STELLA", description: "Cerveza.", price: 18, icon: "beer", image: null },
-                { name: "CORONITA", description: "Cerveza.", price: 15, icon: "beer", image: null },
-                { name: "CERVEZA ASAHI", description: "Cerveza Japonesa.", price: 18, icon: "beer", image: null },
-                { name: "CERVEZA MODELO", description: "Cerveza.", price: 15, icon: "beer", image: null },
-            ],
-            "Limonadas y Sodas": [
-                { name: "LIMONADA COCO", description: "Refrescante limonada de coco.", price: 15, icon: "citrus", image: null },
-                { name: "LIMONADA HIERBABUENA", description: "Refrescante.", price: 15, icon: "leaf", image: null },
-                { name: "LIMONADA JENGIBRE", description: "Refrescante.", price: 15, icon: "citrus", image: null },
-                { name: "LIMONADA VINO", description: "Con un toque de vino.", price: 20, icon: "wine", image: null },
-                { name: "SODA MARACUYA", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA COROZO", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA PANELA", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA FLOR DE JAMAICA", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA FRUTOS ROJOS", description: "Soda Artesanal.", price: 15, icon: "cup-soda", image: null },
-                { name: "SODA LYCHEE", description: "Soda Artesanal.", price: 20, icon: "cup-soda", image: null },
-            ],
-            "Soft Drinks": [
-                { name: "AGUA SIN GAS", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "AGUA CON GAS", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "SODA", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "CANADA DRY", description: "Botella.", price: 7, icon: "droplet", image: null },
-                { name: "COCA COLA", description: "Original.", price: 7, icon: "droplet", image: null },
-                { name: "COCA COLA ZERO", description: "Sin azúcar.", price: 7, icon: "droplet", image: null },
-                { name: "CAFÉ AMERICANO", description: "Café de la sierra nevada.", price: 5, icon: "droplet", image: null },
-            ],
-            "Entradas": [
-                { name: "KITOKUSHI MAGURO", description: "Rollitos de atún fresco rellenos de cangrejo trufado, queso crema y pepino, con masago, mantequilla de trufa, salsa anguila y dinamita.", price: 45, icon: "scroll", image: null },
-                { name: "TIRADITO DE ATUN ", description: "Langostino, cangrejo vapor, vegetales en papel de arroz.Corte delicado de atún natural, sobre una salsa de frijol de soya infusionada con aceites y especias.", price: 40, icon: "scroll", image: null },
-                { name: "ROLLOS PRIMAVERA", description: "Langostino, cangrejo vapor, vegetales en papel de arroz.", price: 30, icon: "scroll", image: null },
-                { name: "ENSALADA UNAGUI", description: "Wakame fresco con cangrejo, cebollin, aguacate y masago, acompañado de crujientes bocados de salmón tempura rellenos de queso crema, masago y aguacate.", price: 38, icon: "shrimp", image: null },
-                { name: "LANGOSTINOS CHUNEIT", description: "Langostinos tempura en salsa cremosa Chuneit (Agridulces).", price: 40, icon: "shrimp", image: null },
-                { name: "NIGUI CRUNCH", description: "Bocados salmón, arroz con crunch y ensalada cangrejo.", price: 30, icon: "utensils", image: null },
-                { name: "TUNA CRISPY RICE", description: "Arroz crujiente, mousse aguacate y tartar de atún.", price: 30, icon: "utensils", image: null },
-                { name: "TUNA TATAKI", description: "Atún sellado con sésamo sobre salsa ponzu.", price: 40, icon: "fish", image: null },
-                { name: "EDAMAME", description: "Vainas de soya salteadas con sal marina.", price: 18, icon: "bean", image: null },
-                { name: "GYOSAS", description: "Empanaditas vapor rellenas de cerdo y vegetales.", price: 25, icon: "dumpling", image: null },
-                { name: "ENSALADA NEPTUNO", description: "Wakame con salmón y atún fresco, cangrejo, masago y cebollín, bañados en salsa de la casa.", price: 40, icon: "dumpling", image: null },
-                { name: "KANI SALAD", description: "Mezcla Kani, cebollín, dinamita, crunch y salsa Unagui.", price: 40, icon: "salad", image: null },
-                { name: "KUSHIYAKI", description: "Pinchos de lomo fino de res marinados en aceite de sésamo, jengibre, ajo y vinagre de arroz, con un glaseado de salsa teriyaki.", price: 32, icon: "utensils-crossed", image: null },
-                { name: "YAKITORI", description: "Pinchos de pollo marinados y caramelizados en salsa teriyaki, con sésamo, jengibre, ajo y vinagre de arroz.", price: 28, icon: "utensils-crossed", image: null },
-            ],
-            "Niguiris": [
-                { name: "NIGUIRI SAKE", description: "Salmón natural y arroz de sushi.", price: 20, icon: "fish", image: null },
-                { name: "NIGUIRI UNAGUI", description: "Anguila ahumada y arroz de sushi.", price: 25, icon: "fish", image: null },
-                { name: "NIGUIRI MAGURO", description: "Atún natural y arroz de sushi.", price: 22, icon: "fish", image: null },
-                { name: "NIGUIRI HAMACHI", description: "Atún aleta amarilla y arroz de sushi.", price: 30, icon: "fish", image: null },
-                { name: "NIGUIRI IKURA", description: "Huevas de salmón y arroz de sushi.", price: 45, icon: "circle-dot", image: null },
-                { name: "NIGUIRI MASAGO", description: "Huevas de cangrejo y arroz de sushi.", price: 25, icon: "circle-dot", image: null },
-            ],
-            "Sashimi": [
-                { name: "SASHIMI ATÚN", description: "4 piezas de cortes frescos.", price: 30, icon: "fish-symbol", image: null },
-                { name: "SASHIMI SALMÓN", description: "4 piezas de cortes frescos.", price: 30, icon: "fish-symbol", image: null },
-                { name: "SASHIMI HAMACHI", description: "4 piezas de cortes frescos.", price: 60, icon: "fish-symbol", image: null },
-            ],
-            "Rolls Especiales": [
-                { name: "MAXI ROLL", description: "langostino y salmón tempura, cangrejo, wakame, queso crema, cebollín, masago en vuelto en papel de soya", price: 65, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Maxi%20roll.jpg?raw=true" },
-                { name: "EMI ROLL", description: "palmito trufado, langostino tempura, queso crema y envuelto en papel de soya.", price: 55, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Emi%20roll.jpg?raw=true" },
-                { name: "UNAGUI ESPECIAL ROLL", description: "Cangrejo, salmón, queso crema, topping anguila flambeada.", price: 60, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Unagui%20Especial%20Roll.JPG?raw=true" },
-                { name: "DIPSALMON", description: "Langostino tempura, cangrejo, queso, topping salmón.", price: 60, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Dipsalmon%20Roll.JPG?raw=true" },
-                { name: "OVALLE ROLL", description: "langostinos empanizados, queso crema, aguacate y topping de tartar de atún.", price: 48, icon: "disc", image: null },
-                { name: "NIGUI ROLL", description: "Salmón natural, arroz, crunch y ensalada cangrejo.", price: 48, icon: "disc", image: null },
-                { name: "VOLCANO", description: "salmón y langostino empanizado con queso crema, cubiertos con topping de cangrejo, wakame, masago, cebollín y spicy.", price: 55, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Volcano%20roll%20(1).jpg?raw=true" },
-                { name: "TATAKI ROLL", description: "Salmón, queso crema, aguacate, topping tataki atún y mousse de aguacate..", price: 48, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Tataki%20Roll.JPG?raw=true"},
-                { name: "UNAGUI ROLL", description: "anguila y langostinos empanizados con queso crema y cebollín, coronados con topping de cangrejo.", price: 50, icon: "disc", image: null },
-                { name: "LATIN ROLL", description: "langostino empanizado, aguacate y queso crema, rematado con topping de plátano maduro.", price: 45, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Latin%20roll.jpg?raw=true" },
-                { name: "EXPLOSIÓN", description: "langostino tempura, cangrejo y queso crema con pepino, coronado con topping de atún, aguacate y masago.", price: 50, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Explosion.jpg?raw=true" },
-                { name: "OJO DE TIGRE", description: "salmón, atún y cangrejo empanizado con queso crema y aguacate, coronado con ajonjolí negro y salsa dinamita.", price: 55, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Ojo%20de%20Tigre%20Roll.JPG?raw=true" },
-                { name: "FUGI ROLL", description: "Salmón natural con queso crema y cebollín, topping de kakiague y langostinos tempura.", price: 50, icon: "disc", image:"https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Fugi%20roll.jpg?raw=true" },
-                { name: "CALIFORNIA ROLL (CLÁSICO)", description: "cangrejo, aguacate y pepino, coronado con masago y ajonjolí negro.", price: 30, icon: "sun", image: null },
-                
-            ],
-            "Rolls Tempura": [
-                { name: "TEMPURA CRONCH", description: "anguila, cangrejo empanizado, tilapia, salmón, cebollín, queso crema, masago y topping de cangrejo.", price: 55, icon: "flame", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Tempura%20crunch%20(1).jpg?raw=true" },
-                { name: "SKIN TEMPURA", description: "langostinos empanizados con queso crema, piel de salmón crocante, aguacate, wakame y masago.", price: 45, icon: "flame", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Skin%20tempura%20(1).jpg?raw=true" },
-                { name: "TIGGER ESPECIAL", description: "salmón, queso crema y aguacate, coronado con masago y topping de cangrejo gratinado.", price: 55, icon: "layers", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Tigger%20especial%20roll.jpg?raw=true" },
-                
-            ],
-            "Rolls Natural": [
-                { name: "VEGGIE ROLL (VEGANO)", description: "Pepino, espárrago, aguacate, wakame, zanahoria y ajonjolí.", price: 35, icon: "carrot", image: null },
-                { name: "KIURI MAKI (NATURAL)", description: "Cama de pepino, salmón, atún, cangrejo, masago, queso crema, aguacate, acompañado de salsa ponzu.", price: 35, icon: "cucumber", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Kiuri%20Maki%20Natural%20Roll.JPG?raw=true" },
-                { name: "RAINBOW (NATURAL)", description: "Atún, salmón, tilapia y aguacate, coronado con topping de atún, salmón, tilapia y aguacate.", price: 45, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Rainbow%20Roll.JPG?raw=true" },
-                { name: "OSAKA FRAIN (NATURAL)", description: "Rollo de salmón sin arroz con atún, tilapia, cangrejo, aguacate, queso crema y masago.", price: 50, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Osaka%20Frain%20Roll.jpg?raw=true" },
-                { name: "TUNA SPICE MAKI (NATURAL)", description: "atún, crunch, aguacate, sriracha, cebollín y masago.", price: 40, icon: "disc", image: null },
-                { name: "SALMON ESPECIAL (NATURAL)", description: "Salmón, crunch, cebollín, masago y jengibre.", price: 35, icon: "disc", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Nigui%20Roll.JPG?raw=true" },
-                { name: "ALASKA ROLL (CLÁSICO)", description: "Salmón, queso crema, aguacate, ajonjolí.", price: 30, icon: "snowflake", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Alaska%20Roll%20(1).JPG?raw=true" },
-            ],
-            "Fuertes": [
-                { name: "ARROZ YAKIMESHI", description: "Arroz frito con pollo, langostino, huevo, vegetales, salsa de soya y ajonjolí coronado con cebollin frito.", price: 40, icon: "rice-bowl", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Arroz%20yakimeshi.jpg?raw=true" },
-                { name: "SALMÓN TERIYAKI", description: "salmón a la plancha con preparación al estilo teriyaki, acompañado de arroz oriental.", price: 50, icon: "fish", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Salm%C3%B3n%20teriyaki%20(1).jpg?raw=true" },
-                { name: "PICAÑA ANGUS", description: "noodles salteados con langostinos y vegetales.", price: 65, icon: "steak", image: null },
-                { name: "YAKISOBA DE MARISCO", description: "noodles salteados con langostinos y vegetales.", price: 40, icon: "steak", image: null },
-                { name: "RAMEN AL ESTILO UNAGUI", description: "Fondo de la casa con fideos, cerdo o pollo, huevo, soya, tofu y nori.", price: 40, icon: "bone", image: null },
-                { name: "RAMEN MIXTO UNAGUI", description: "Fondo de la casa con fideos, cerdo o pollo, huevo, soya, tofu y nori.", price: 50, icon: "bone", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Ramen%20(2).jpg?raw=true" },
-                { name: "POKEN DE ATÚN", description: "Atún natural, langostino tempura, cangrejo, edamame, aguacate, pepino y batata.", price: 40, icon: "bone", image: "https://github.com/Bruma-cafe-y-croffle/bruma-asses/blob/main/Poke%20de%20at%C3%BAn.jpg?raw=true" },
-                { name: "POKEN DE SALMÓN", description: "Salmón natural, cangrejo, wakame, zanahoria, pepino, edamame y aguacate.", price: 40, icon: "bone", image: null },
-            ],
-            "Nikkei": [
-                { name: "CEVIMAKI", description: "Finos cortes de sashimi, bañados en salsa de leche de tigre con un toque de sriracha, servidos sobre arroz Unagui.", price: 65, icon: "fish", image: null },
-                { name: "JALEA DE MARISCO", description: "Mixtura de mariscos delicadamente preparados, acompañados de salsa tártara peruana y zarza criolla.", price: 75, icon: "fish", image: null },
-                { name: "CEVICHE MIXTO", description: "Calamares labrados, langostinos, pulpo y pincho de calamares apanados, en leche de tigre, sobre puré de camote tatemado.", price: 55, icon: "fish", image: null },
-                { name: "TIRADITO DE SALMÓN", description: "Salmón curado, bañado en leche de tigre de lulo, acompañado de piel crocante de salmón y miel de ostión, terminado con un hilo de aceite de togarachi.", price: 40, icon: "fish", image: null },
-           ]
-        };
-        // --- UNIFICACIÓN DE MENÚS POR SEDE ---
-        const allMenuData = {
-            "Sede Los Cocos": menuDataLosCocos,
-            "Sede Aluna Plaza": menuDataAlunaPlaza
-        };
-        // --- LÓGICA (NO SE MODIFICA EL DISEÑO NI LA LÓGICA DEL MODAL) ---
-        let activeCategory = null;
-        let activeSede = null;
-        const navModal = document.getElementById('nav-modal');
-        const navPanel = document.getElementById('nav-panel');
-        let promoTimeout = null; // Para guardar el timeout de la promoción
-        function updateNavLinks() {
-            const whatsappLink = document.getElementById('whatsapp-link');
-            const locationLink = document.getElementById('location-link');
-            if (activeSede && sedeDetails[activeSede]) {
-                const details = sedeDetails[activeSede];
-                // Link de WhatsApp con el número correcto de la sede
-                whatsappLink.href = `https://wa.me/${details.whatsapp}?text=Hola%20Unagui%20(${activeSede}),%20quisiera%20hacer%20un%20pedido.`;
-                // Link de Ubicación (Google Maps)
-                locationLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(details.direccion)}`;
-            }
-        }
-        function toggleNavModal(show, event) {
-            if (!show && event && event.target.id !== 'nav-modal') return;
-            if (show) {
-                updateNavLinks();
-                navModal.classList.remove('hidden');
-                setTimeout(() => {
-                    navPanel.classList.remove('nav-modal-slide-out');
-                    navPanel.classList.add('nav-modal-slide-in');
-                }, 10);
-            } else {
-                navPanel.classList.remove('nav-modal-slide-in');
-                navPanel.classList.add('nav-modal-slide-out');
-                setTimeout(() => {
-                    navModal.classList.add('hidden');
-                }, 300);
-            }
-        }
-        function showSedeSelection() {
-            // Limpia el estado y muestra la pantalla de selección de sede
-            document.getElementById('menu-container').classList.add('hidden');
-            document.getElementById('sede-selection-container').classList.remove('hidden');
-            activeSede = null;
-            closePromoModal(); // Asegura que el modal de promo se cierre si vuelve al inicio
-            if (promoTimeout) clearTimeout(promoTimeout); // Detiene el timer si vuelve a la selección
-        }
-        function selectSede(sedeName) {
-            activeSede = sedeName;
-            document.getElementById('active-sede-display').textContent = activeSede;
-            document.getElementById('sede-selection-container').classList.add('hidden');
-            document.getElementById('menu-container').classList.remove('hidden');
-            initializeMenuCategories();
-            updateNavLinks(); // Asegura que los links de contacto se actualicen
-            // Mostrar el modal de promoción después de 2 segundos
-            if (promoTimeout) clearTimeout(promoTimeout);
-            promoTimeout = setTimeout(showPromoModal, 5000); // 2 segundos
-        }
-        function formatPrice(amount) {
-            // Formatea el precio a COP (Pesos Colombianos) con el formato 0.000
-            return new Intl.NumberFormat('es-CO', {
-                style: 'currency',
-                currency: 'COP',
-                minimumFractionDigits: 0
-            }).format(amount * 1000);
-        }
-        // --- LÓGICA DE MODAL DE IMAGEN ---
-        function openImageModal(imgSrc, title) {
-            const modal = document.getElementById('dish-image-modal');
-            const img = document.getElementById('modal-dish-img');
-            const modalTitle = document.getElementById('modal-dish-title');
-            // Si no hay imagen real (null), usamos un placeholder dinámico con el texto en mostaza
-            if (!imgSrc) {
-                img.src = `https://placehold.co/600x400/1c1c1c/D4A017?text=${encodeURIComponent(title)}`;
-            } else {
-                img.src = imgSrc;
-            }
-            modalTitle.textContent = title;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-        function closeDishImageModal() {
-            const modal = document.getElementById('dish-image-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-        // --- LÓGICA DE MODAL DE PROMOCIÓN ---
-        function showPromoModal() {
-            // Solo se muestra si estamos en el menú (activeSede no es nulo)
-            if (!activeSede) return;
-            const modal = document.getElementById('promo-modal');
-            document.getElementById('promo-title').textContent = promotionData.title;
-            document.getElementById('promo-description').textContent = promotionData.description;
-            document.getElementById('promo-price').textContent = promotionData.price;
-            document.getElementById('promo-img').src = promotionData.image;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-        function closePromoModal() {
-            const modal = document.getElementById('promo-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-        // --- LÓGICA DEL MENÚ ---
-        function initializeMenuCategories() {
-            const navContainer = document.getElementById('category-nav');
-            // Carga el menú específico de la sede activa
-            const menuForSede = allMenuData[activeSede];
-            const categories = Object.keys(menuForSede);
-            navContainer.innerHTML = '';
-            categories.forEach((category, index) => {
-                const button = document.createElement('button');
-                button.textContent = category;
-                button.className = `category-btn px-4 py-2 rounded-full font-medium text-sm whitespace-nowrap transition-colors flex-shrink-0 ${index === 0 ? 'bg-unagui-orange text-black' : 'bg-unagui-charcoal text-gray-400 hover:text-white'}`;
-                button.setAttribute('data-category', category);
-                button.onclick = () => showCategory(category);
-                navContainer.appendChild(button);
+        function filterCategory(cat, el) {
+            document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+            
+            const cards = document.querySelectorAll('.food-card');
+            const dividers = document.querySelectorAll('.section-divider');
+            const subHeaders = document.querySelectorAll('.sub-category-header');
+            
+            cards.forEach(card => {
+                if(cat === 'todos' || card.dataset.category === cat) {
+                    card.style.display = 'block';
+                } else { card.style.display = 'none'; }
             });
-            if (categories.length > 0) showCategory(categories[0]);
+
+            dividers.forEach(d => {
+                if(cat === 'todos' || d.dataset.category === cat) {
+                    d.style.display = 'block';
+                } else { d.style.display = 'none'; }
+            });
+
+            subHeaders.forEach(s => {
+                if(cat === 'todos' || s.dataset.category === cat) {
+                    s.style.display = 'flex';
+                } else { s.style.display = 'none'; }
+            });
         }
-        function showCategory(categoryName) {
-            // Carga el menú específico de la sede activa
-            const menuForSede = allMenuData[activeSede];
-            if (activeCategory === categoryName && document.getElementById('menu-content').children.length > 0) return;
-            activeCategory = categoryName;
-            // Actualizar botones de categoría
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                if (btn.getAttribute('data-category') === categoryName) {
-                    btn.className = 'category-btn px-4 py-2 rounded-full font-bold text-sm whitespace-nowrap flex-shrink-0 bg-unagui-orange text-black shadow-lg shadow-yellow-900/50';
+
+        function searchFood() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.food-card');
+            let dividers = document.querySelectorAll('.section-divider');
+            let subHeaders = document.querySelectorAll('.sub-category-header');
+            
+            if(input === "") {
+                filterCategory('todos', document.querySelector('.category-pill'));
+                return;
+            }
+
+            dividers.forEach(d => d.style.display = 'none');
+            subHeaders.forEach(s => s.style.display = 'none');
+
+            cards.forEach(card => {
+                let name = card.querySelector('h3').innerText.toLowerCase();
+                let desc = card.querySelector('p') ? card.querySelector('p').innerText.toLowerCase() : "";
+                if(name.includes(input) || desc.includes(input)) {
+                    card.style.display = 'block';
                 } else {
-                    btn.className = 'category-btn px-4 py-2 rounded-full font-medium text-sm whitespace-nowrap flex-shrink-0 bg-unagui-charcoal text-gray-400 hover:text-white border border-gray-800';
+                    card.style.display = 'none';
                 }
             });
-            // Scroll al botón activo
-            const activeBtn = document.querySelector(`.category-btn[data-category="${categoryName}"]`);
-            if(activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            // Renderizar items
-            const contentContainer = document.getElementById('menu-content');
-            const items = menuForSede[categoryName]; // Usa el menú de la sede activa
-            contentContainer.innerHTML = items.map(item => `
-                <div class="bg-unagui-charcoal p-4 rounded-xl border border-gray-800 hover:border-unagui-orange/40 transition-all flex flex-col justify-between h-full group">
-                    <div class="mb-3">
-                        <div class="flex items-start justify-between mb-1">
-                            <!-- NOMBRE CLICKEABLE para abrir la imagen -->
-                            <h3 class="text-base font-bold text-white leading-tight clickable-name hover:text-unagui-orange transition-colors"
-                                onclick="openImageModal('${item.image || ''}', '${item.name}')"
-                                title="Ver foto de ${item.name}"
-                            >
-                                ${item.name}
-                            </h3>
-                            <i data-lucide="${item.icon || 'circle'}" class="w-4 h-4 text-unagui-orange-light opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-2"></i>
-                        </div>
-                        <p class="text-xs text-gray-400 line-clamp-3">${item.description}</p>
-                    </div>
-                    <!-- Solo mostramos el precio -->
-                    <div class="pt-3 border-t border-gray-800">
-                        <span class="text-lg font-bold text-unagui-orange">${formatPrice(item.price)}</span>
-                    </div>
-                </div>
-            `).join('');
-            lucide.createIcons();
         }
-        // Init
-        window.onload = () => {
-            showSedeSelection();
-            lucide.createIcons();
-        };
     </script>
 </body>
 </html>
-
