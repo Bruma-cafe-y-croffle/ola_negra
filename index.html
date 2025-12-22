@@ -12,31 +12,25 @@
             --blue-royal: #002D72;
             --white-pure: #FFFFFF;
         }
-
         body {
             background-color: #f8fafc;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: #1e293b;
         }
-
         .bg-orange-brand { background-color: var(--orange-brand); }
         .text-orange-brand { color: var(--orange-brand); }
         .bg-blue-royal { background-color: var(--blue-royal); }
         .text-blue-royal { color: var(--blue-royal) !important; }
-
         .header-gradient {
             background: linear-gradient(135deg, var(--blue-royal) 0%, #001a44 100%);
         }
-
         .food-card {
             transition: transform 0.2s ease;
             cursor: pointer;
         }
-
         .food-card:hover {
             transform: translateY(-2px);
         }
-
         .category-pill {
             transition: all 0.2s;
             cursor: pointer;
@@ -46,40 +40,43 @@
             font-weight: 800;
             text-transform: uppercase;
         }
-
         .category-pill.active {
             background-color: var(--orange-brand);
             color: white;
             border-color: var(--orange-brand);
             box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
         }
-
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
         .section-divider {
             grid-column: 1 / -1;
             padding: 2.5rem 0 1rem 0;
             border-bottom: 4px solid var(--orange-brand);
             margin-bottom: 1rem;
         }
-
         .sub-category-header {
             grid-column: 1 / -1;
             background: #e2e8f0;
-            padding: 10px 16px;
-            border-radius: 8px;
+            padding: 12px 16px;
+            border-radius: 10px;
             font-size: 11px;
             font-weight: 900;
             color: var(--blue-royal);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 1.5rem;
+            margin-top: 1.8rem;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-start;
         }
-
+        .sub-category-header span {
+            font-size: 10px;
+            font-weight: 600;
+            color: #475569;
+            letter-spacing: 0.5px;
+            text-transform: none;
+        }
         .price-tag {
             background: rgba(255, 107, 0, 0.1);
             color: var(--orange-brand);
@@ -88,7 +85,6 @@
             font-weight: 900;
             font-size: 1rem;
         }
-
         .badge-top {
             background: var(--orange-brand);
             color: white;
@@ -99,7 +95,6 @@
             display: inline-block;
             margin-top: 4px;
         }
-
         /* Modal de imagen */
         .image-modal {
             display: none;
@@ -113,7 +108,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .image-modal-content {
             max-width: 90%;
             max-height: 90%;
@@ -121,14 +115,12 @@
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
         .image-modal-content img {
             display: block;
             max-width: 100%;
             max-height: 80vh;
             border-radius: 8px;
         }
-
         .close-modal {
             position: absolute;
             top: 20px;
@@ -142,7 +134,6 @@
     </style>
 </head>
 <body class="pb-32">
-
     <!-- Header -->
     <header class="header-gradient text-white p-6 rounded-b-[40px] shadow-2xl sticky top-0 z-50">
         <div class="max-w-5xl mx-auto flex justify-between items-center mb-6">
@@ -152,14 +143,9 @@
             </div>
             <i class="fas fa-fire-alt text-orange-brand text-2xl animate-pulse"></i>
         </div>
-        <div class="max-w-5xl mx-auto relative">
-            <input type="text" id="searchInput" onkeyup="searchFood()" placeholder="Busca tu antojo (ej. Trifásica, Porky...)" class="w-full py-3.5 px-12 rounded-2xl text-gray-800 text-sm shadow-inner focus:outline-none focus:ring-4 focus:ring-orange-brand/30 transition-all">
-            <i class="fas fa-search absolute left-4 top-4 text-gray-400"></i>
-        </div>
     </header>
-
     <!-- Categorías -->
-    <div class="flex overflow-x-auto py-5 px-4 gap-3 no-scrollbar max-w-5xl mx-auto sticky top-[158px] bg-[#f8fafc]/95 backdrop-blur-md z-40 border-b border-gray-100">
+    <div class="flex overflow-x-auto py-5 px-4 gap-3 no-scrollbar max-w-5xl mx-auto sticky top-[110px] bg-[#f8fafc]/95 backdrop-blur-md z-40 border-b border-gray-100">
         <div class="category-pill active px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('todos', this)">🏠 Todo</div>
         <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('salchipapas', this)">🍟 Salchipapas</div>
         <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('hamburguesas', this)">🍔 Hamburguesas</div>
@@ -167,17 +153,15 @@
         <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('asados', this)">🔥 Asados</div>
         <div class="category-pill px-4 py-2 rounded-xl bg-white shadow-sm" onclick="filterCategory('bebidas', this)">🍹 Bebidas</div>
     </div>
-
     <main class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-4" id="menuGrid">
-        
         <!-- SALCHIPAPAS -->
         <div class="section-divider" data-category="salchipapas">
             <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">EL TEMPLO DE LA SALCHIPAPA 🔥</h2>
             <p class="text-[10px] text-gray-500 font-bold uppercase">Donde el carbón hace la magia y el sabor manda</p>
         </div>
-
-        <div class="sub-category-header" data-category="salchipapas">🍗 LAS INDOMABLES (Personales - El golpe individual) <span>Base: Papa francesa artesanal, lechuga picada fina, ripio "extracrunch" y el cuarteto de salsas.</span></div>
-
+        <div class="sub-category-header" data-category="salchipapas">🍗 LAS INDOMABLES (Personales - El golpe individual)<br>
+            <span>Base: Papa francesa artesanal, lechuga picada fina, ripio "extracrunch" y el cuarteto de salsas.</span>
+        </div>
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=SEN%C3%87ILLA+CON+TODO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA SENCILLA "CON TODO"</h3>
@@ -185,7 +169,6 @@
             </div>
             <p class="text-gray-500 text-xs">La clásica del barrio: Salchicha manguera, butifarra soledeña y nuestro pollo desmechado al carbón.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=BOMBA+DE+CERDO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "BOMBA" DE CERDO</h3>
@@ -193,7 +176,6 @@
             </div>
             <p class="text-gray-500 text-xs">Sabor ahumado: Salchicha, chorizo antioqueño y pulpa de cerdo asada a la brasa en trozos melosos.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=MIXTA+CALLEJERA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA MIXTA CALLEJERA</h3>
@@ -201,7 +183,6 @@
             </div>
             <p class="text-gray-500 text-xs">El dúo dinámico: Salchicha, carne de res picadita al carbón y pollo desmechado. ¡No necesita más!</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=CHORIZO-PAPA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "CHORIZO-PAPA"</h3>
@@ -209,7 +190,6 @@
             </div>
             <p class="text-gray-500 text-xs">Intensa: Doble porción de chorizo parrillero, salchicha y una lluvia de queso costeño que se pierde entre el calor.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=POLLO-BUTI')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "POLLO-BUTI"</h3>
@@ -217,9 +197,9 @@
             </div>
             <p class="text-gray-500 text-xs">Bien local: Pollo al carbón y mucha butifarra salteada con cebollín.</p>
         </div>
-
-        <div class="sub-category-header" data-category="salchipapas">👫 LAS "PARTNER" (Para 2 personas - Bien cargadas) <span>Bandejas medianas que desbordan sabor. Incluyen queso mozarella fundido.</span></div>
-
+        <div class="sub-category-header" data-category="salchipapas">👫 LAS "PARTNER" (Para 2 personas - Bien cargadas)<br>
+            <span>Bandejas medianas que desbordan sabor. Incluyen queso mozarella fundido.</span>
+        </div>
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border-l-4 border-orange-brand" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=TRIF%C3%81SICA+AL+CARB%C3%93N')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "TRIFÁSICA" AL CARBÓN</h3>
@@ -228,7 +208,6 @@
             <div class="badge-top">🔥 TOP</div>
             <p class="text-gray-500 text-xs mt-1">La favorita: Pollo desmechado, carne de res y cerdo asado. Todo combinado con salchicha y butifarra.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=RANCHO+%26+BRASA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "RANCHO & BRASA"</h3>
@@ -236,7 +215,6 @@
             </div>
             <p class="text-gray-500 text-xs">Para carnívoros: Chorizo, tocineta, carne de res al carbón y salchicha suiza. Coronada con un huevo frito.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=MAICERA+ESPECIAL')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "MAICERA ESPECIAL"</h3>
@@ -244,7 +222,6 @@
             </div>
             <p class="text-gray-500 text-xs">Jugosa: Pollo, cerdo, salchicha y una montaña de maíz tierno salteado a la brasa con mantequilla de ajo.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=GRATINADA+TODO+TERRENO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA GRATINADA "TODO TERRENO"</h3>
@@ -252,7 +229,6 @@
             </div>
             <p class="text-gray-500 text-xs">El mar de queso: Res, pollo, cerdo, chorizo y butifarra bajo una sábana de queso mozarella dorado al carbón.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=CHUZIPAPA+MIXTA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "CHUZIPAPA MIXTA"</h3>
@@ -260,9 +236,9 @@
             </div>
             <p class="text-gray-500 text-xs">Impactante: La base de salchipapa clásica con dos chuzos encima: uno de pollo y uno de carne, bañados en BBQ artesanal.</p>
         </div>
-
-        <div class="sub-category-header" data-category="salchipapas">👨‍👩‍👧‍👦 LAS FAMILIARES (La Manada - El banquete final) <span>Bandejas XL para 4-5 personas. Incluyen huevos de codorniz y bollo limpio asado.</span></div>
-
+        <div class="sub-category-header" data-category="salchipapas">👨‍👩‍👧‍👦 LAS FAMILIARES (La Manada - El banquete final)<br>
+            <span>Bandejas XL para 4-5 personas. Incluyen huevos de codorniz y bollo limpio asado.</span>
+        </div>
         <div class="food-card bg-white rounded-3xl shadow-md p-5 border-2 border-orange-brand" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=MONUMENTAL+CANDELA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-lg leading-tight">LA "MONUMENTAL" CANDELA</h3>
@@ -271,7 +247,6 @@
             <div class="badge-top">🔥 TOP</div>
             <p class="text-gray-500 text-xs mt-1">La reina de la casa: Pollo desmechado, carne de res, cerdo, chorizo, butifarra y salchicha suiza. Es un festival de proteínas sobre un kilo de papa.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=PORKY-PAPA+FAMILIAR')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "PORKY-PAPA" FAMILIAR</h3>
@@ -279,7 +254,6 @@
             </div>
             <p class="text-gray-500 text-xs">Especial de cerdo: Cerdo asado, chorizo, tocineta crocante y salchicha, con un toque de salsa de piña artesanal que corta la grasa.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=BARRIADA+SUPREMA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "BARRIADA SUPREMA"</h3>
@@ -287,7 +261,6 @@
             </div>
             <p class="text-gray-500 text-xs">Volumen puro: Mucha salchicha manguera, mucha butifarra, pollo desmechado, carne de res y el toque secreto: trozos de bollo limpio asado mezclados.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=CUATRO+ESTACIONES')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "CUATRO ESTACIONES" CARNIVORA</h3>
@@ -295,7 +268,6 @@
             </div>
             <p class="text-gray-500 text-xs">Dividida para no pelear: Una esquina de Pollo, una de Res, una de Cerdo y una de Embutidos (Chorizo/Buti), todas unidas por un centro de queso fundido.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border-2 border-blue-royal" data-category="salchipapas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=MEGAPAPA+IMPACTO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "MEGAPAPA IMPACTO"</h3>
@@ -304,13 +276,11 @@
             <div class="badge-top">🔥 TOP</div>
             <p class="text-gray-500 text-xs mt-1">El reto final: Trae absolutamente TODO lo anterior, más doble ración de queso y una jarra de jugo de panela con limón de regalo.</p>
         </div>
-
         <!-- HAMBURGUESAS -->
         <div class="section-divider" data-category="hamburguesas">
             <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">HAMBURGUESAS "A LA CANDELA" 🍔</h2>
             <p class="text-[10px] text-gray-500 font-bold uppercase">Carne 100% artesanal, sellada al carbón</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=CL%C3%81SICA+DE+LA+CUADRA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">1. LA CLÁSICA DE LA CUADRA</h3>
@@ -318,7 +288,6 @@
             </div>
             <p class="text-gray-500 text-xs">El sabor real: Carne de res (150g) asada al carbón, queso costeño asado, lechuga fresca, tomate y cebolla blanca. El toque: Bañada en nuestra Tártara Ceniza. Es la hamburguesa "de confianza" pero con sabor a asado de verdad.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=POLLO-CRUNCH')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">2. LA "POLLO-CRUNCH" PARRILLERA</h3>
@@ -326,7 +295,6 @@
             </div>
             <p class="text-gray-500 text-xs">Doble textura: Filete de contramuslo de pollo marinado y asado al carbón, coronado con una capa de piel de pollo crocante (chicharrón de pollo). El toque: Queso mozarella fundido, lechuga y nuestra Salsa de Piña Melosa que va increíble con el pollo.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=PORKY-BOMB')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">3. LA "PORKY-BOMB" (Especial de Cerdo)</h3>
@@ -334,7 +302,6 @@
             </div>
             <p class="text-gray-500 text-xs">La diferente: Carne de res artesanal, pero encima lleva cerdo desmechado en BBQ de panela y trozos de chorizo parrillero. El toque: Doble queso y cebolla grillé al carbón. Es una explosión de sabor ahumado y dulce.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=TRIF%C3%81SICA+MONSTRUOSA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">4. LA "TRIFÁSICA" MONSTRUOSA</h3>
@@ -342,7 +309,6 @@
             </div>
             <p class="text-gray-500 text-xs">Para los que no se deciden: Carne de res, filete de pollo al carbón y una capa de butifarra soledeña esparramada (abierta y asada). El toque: Una sábana de queso costeño rallado y queso mozarella gratinado. ¡Es pesada y gloriosa!</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-sm p-5 border border-gray-100" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=CHORIP%C3%81N-BURGER')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">5. LA "CHORIPÁN-BURGER"</h3>
@@ -350,7 +316,6 @@
             </div>
             <p class="text-gray-500 text-xs">Estilo parrillero: Carne de res artesanal coronada con un chorizo antioqueño abierto a la mitad y asado hasta que quede "traqueador". El toque: Mucho suero al cilantro y ripio de papa para el toque crocante.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl shadow-md p-5 border-2 border-orange-brand" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=CANDELA+SUPREMA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-lg leading-tight">6. LA "CANDELA SUPREMA" (La de la Casa)</h3>
@@ -359,15 +324,14 @@
             <div class="badge-top">🔥 TOP</div>
             <p class="text-gray-500 text-xs mt-1">El reto: Doble carne de res, doble queso, tocineta ahumada al carbón, pollo desmechado y un huevo frito con la yema blandita. El toque: Servida con una pequeña porción de papas fritas dentro de la misma hamburguesa para que absorba todos los jugos.</p>
         </div>
-
         <!-- PERROS -->
         <div class="section-divider" data-category="perros">
             <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">LOS PERROS DE LA CASA</h2>
             <p class="text-[10px] text-gray-500 font-bold uppercase">Tú eliges: ¿Suavecito al Vapor o Ahumado al Carbón?</p>
         </div>
-
-        <div class="sub-category-header" data-category="perros">☁️ LINEA VAPOR (Los "Suavecitos" - Tradición Pura) <span>Pan artesanal ultra suave, salchicha jumbo cocida al vapor, lechuga hilo y ripio.</span></div>
-
+        <div class="sub-category-header" data-category="perros">☁️ LINEA VAPOR (Los "Suavecitos" - Tradición Pura)<br>
+            <span>Pan artesanal ultra suave, salchicha jumbo cocida al vapor, lechuga hilo y ripio.</span>
+        </div>
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=VAPORINO+CL%C3%81SICO')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL "VAPORINO" CLÁSICO</h3>
@@ -375,7 +339,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">La sencillez perfecta: Salchicha jumbo al vapor, queso costeño rallado como nieve y nuestras 4 salsas.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=POLLITO+AL+VAPOR')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL POLLITO AL VAPOR</h3>
@@ -383,7 +346,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Súper tierno: Salchicha al vapor coronada con una montaña de pollo desmechado jugoso (cocido en su propio caldo) y mucha salsa tártara.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=SUIZO+VAPOROSO')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL SUIZO VAPOROSO</h3>
@@ -391,7 +353,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">El de siempre: Salchicha suiza premium al vapor, extra queso mozarella fundido y una lluvia de maíz tierno.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=TRI-VAPOR')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL "TRI-VAPOR"</h3>
@@ -399,9 +360,9 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">El combo completo: Salchicha al vapor, pollo desmechado y butifarra soledeña picadita (también al vapor para que no pierda jugosidad).</p>
         </div>
-
-        <div class="sub-category-header" data-category="perros">🔥 LINEA CARBÓN (Los "Rústicos" - Sabor a Brasa) <span>Pan artesanal sellado en la parrilla, salchicha parrillera con marca de brasa y lechuga fresca.</span></div>
-
+        <div class="sub-category-header" data-category="perros">🔥 LINEA CARBÓN (Los "Rústicos" - Sabor a Brasa)<br>
+            <span>Pan artesanal sellado en la parrilla, salchicha parrillera con marca de brasa y lechuga fresca.</span>
+        </div>
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=PERRO+CARBONERO')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL PERRO "CARBONERO"</h3>
@@ -409,7 +370,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Sabor a calle: Salchicha manguera asada al carbón, cebolla grillé ahumada y queso costeño asado.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=PORKY-CANDELA')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL PERRO "PORKY-CANDELA"</h3>
@@ -417,7 +377,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Puro poder: Salchicha al carbón coronada con trozos de cerdo asado y tocineta crocante. Bañado en BBQ de piña.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=CHUZIPERRO+MIXTO')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL "CHUZIPERRO" MIXTO</h3>
@@ -425,7 +384,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">La locura del menú: Un perro al carbón que encima lleva un mini chuzo de carne de res. Es medio perro, medio asado.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=PERRO+CHORIZADO')">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">EL PERRO "CHORIZADO"</h3>
@@ -433,9 +391,9 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Intensidad pura: En lugar de salchicha, lleva un chorizo antioqueño abierto en mariposa y asado al carbón, con suero al cilantro.</p>
         </div>
-
-        <div class="sub-category-header" data-category="perros">💣 LOS PERROS ESPECIALES "TODO TERRENO" <span>Estos son los que la gente pide para grabar videos y subir a redes sociales.</span></div>
-
+        <div class="sub-category-header" data-category="perros">💣 LOS PERROS ESPECIALES "TODO TERRENO"<br>
+            <span>Estos son los que la gente pide para grabar videos y subir a redes sociales.</span>
+        </div>
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-2 border-orange-brand" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=PERRO-GRATIN')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">EL "PERRO-GRATIN" AL CARBÓN</h3>
@@ -443,30 +401,26 @@
             </div>
             <p class="text-gray-500 text-xs">El volcán: Salchicha suiza, pollo desmechado al carbón y una costra gigante de queso costeño frito que envuelve todo el perro.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-2 border-blue-royal" data-category="perros" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=MEGAPERRO+CALLEJERO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">EL "MEGAPERRO CALLEJERO"</h3>
                 <span class="price-tag">$22.000</span>
             </div>
             <div class="badge-top">🔥 TOP</div>
-            <p class="text-gray-500 text-xs mt-1">No apto para cardíacos: Salchicha jumbo, carne de res al carbón, pollo desmechado, butifarra, chorizo y ripio hasta el techo. ¡Se come con cuchillo y tenedor!</p>
+            <p class="text-gray-500 text-xs mt-1">No apto para cardíacos: Salchicha jumbo, carne de res al carbón, pollo, butifarra, chorizo y papa ripio hasta el techo. ¡Se come con cuchillo y tenedor!</p>
         </div>
-
         <!-- ASADOS -->
         <div class="section-divider" data-category="asados">
             <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">🔥 ASADOS AL CARBÓN (El "Poder" de la Brasa)</h2>
             <p class="text-[10px] text-gray-500 font-bold uppercase">En un barrio popular, el asado debe ser generoso y venir con "mantenimiento" (acompañamientos que llenen).</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border border-gray-100" data-category="asados" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=CHURRASCO+DE+POLLO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">EL CHURRASCO DE POLLO "CANDELA"</h3>
                 <span class="price-tag">$22.000</span>
             </div>
-            <p class="text-gray-500 text-xs">El plato estrella: Dos contramuslos deshuesados (más jugosos que la pechuga) abiertos en mariposa, marinados en cerveza y especias, asados a fuego lento. Acompaña: Yuca cocida con suero, bollo limpio y ensalada fresca.</p>
+            <p class="text-gray-500 text-xs">El plato estrella: Dos contramuslos deshuesados abiertos en mariposa, marinados en cerveza y especias, asados a fuego lento. Acompaña: papa casco y ensalada fresca.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border border-gray-100" data-category="asados" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=PANCETTA+CRIOLLA')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">LA "PANCETTA" CRIOLLA</h3>
@@ -474,7 +428,6 @@
             </div>
             <p class="text-gray-500 text-xs">Diferente: Tocino de cerdo carnudo asado al carbón hasta que la piel traquee. Se sirve en trozos con limón mandarina. Acompaña: Papa salada y bollo de mazorca.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border border-gray-100" data-category="asados" onclick="openImageModal('https://placehold.co/600x400/002D72/FFFFFF?text=CHUZ%C3%93N+DESGRANADO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-base leading-tight">EL "CHUZÓN" DESGRANADO</h3>
@@ -482,7 +435,6 @@
             </div>
             <p class="text-gray-500 text-xs">Fusión: Un chuzo gigante (carne o pollo) servido sobre una cama de maíz tierno salteado y queso costeño rallado (sin papa frita, para variar).</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-md border-2 border-orange-brand" data-category="asados" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=PICADA+VECINDARIO')">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-black text-blue-royal uppercase text-lg leading-tight">PICADA "EL VECINDARIO"</h3>
@@ -491,12 +443,10 @@
             <div class="badge-top">🔥 TOP</div>
             <p class="text-gray-500 text-xs mt-1">De todo un poco: Pollo, carne de res, cerdo, chorizo y butifarra. El secreto: Agrégale cascos de papa criolla frita y mucha salsa tártara ahumada en el centro.</p>
         </div>
-
         <!-- BEBIDAS -->
         <div class="section-divider" data-category="bebidas">
             <h2 class="text-blue-royal font-black uppercase text-2xl italic tracking-tighter">🥤 BEBIDAS SIN ALCOHOL (Refrescancia Total)</h2>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">LIMONADA "COSTEÑA" (Panela & Limón)</h3>
@@ -504,7 +454,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">El clásico aguapanela bien fría con mucho limón criollo y hielo frapé. Es la que más margen de ganancia deja.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">COROZO "HIT" ARTESANAL</h3>
@@ -512,7 +461,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Jugo de corozo natural (muy rojo) servido con una rodaja de limón y mucha azúcar en el borde del vaso (escarchado).</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">LULADA "BARRIO ABAJO"</h3>
@@ -520,7 +468,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Lulo machacado (no licuado) con mucha leche condensada y hielo. Es un postre y bebida a la vez.</p>
         </div>
-
         <div class="food-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-blue-royal uppercase text-sm">TÉ FRÍO DE LA CASA</h3>
@@ -528,9 +475,9 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Té negro preparado por ti con toques de hierbabuena y naranja. Mucho más barato que comprarlo en botella.</p>
         </div>
-
-        <div class="sub-category-header" data-category="bebidas">🍹 CÓCTELES "CHIMBAS Y BARATOS" <span>Para que sean baratos, usaremos Aguardiente o Ron Blanco nacional (que son económicos) y frutas locales.</span></div>
-
+        <div class="sub-category-header" data-category="bebidas">🍹 CÓCTELES "CHIMBAS Y BARATOS"<br>
+            <span>Para que sean baratos, usaremos Aguardiente o Ron Blanco nacional (que son económicos) y frutas locales.</span>
+        </div>
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-black text-blue-royal uppercase">EL "GUARO-MOJITO"</h3>
@@ -538,7 +485,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Ingredientes: Aguardiente, limón, azúcar, mucha hierbabuena y soda (o Sprite para ahorrar). Por qué pega: Es refrescante, el aguardiente es barato y a la gente le encanta la presentación con verde.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-black text-blue-royal uppercase">EL "RON-PUNCH" FRUTAL</h3>
@@ -546,7 +492,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Ingredientes: Ron blanco (el más económico), jugo de corozo concentrado, jarabe de azúcar y un toque de naranja. Presentación: Un color rojo intenso que se ve increíble en fotos.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-black text-blue-royal uppercase">MARGARITA "BARRANQUILLERA"</h3>
@@ -554,7 +499,6 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Ingredientes: Tequila (uno básico), triple sec nacional y jugo de mango biche o limón. El toque: El borde del vaso con sal y pimienta picante.</p>
         </div>
-
         <div class="food-card bg-white rounded-3xl p-5 shadow-sm border-t-4 border-blue-royal" data-category="bebidas">
             <div class="flex justify-between items-center">
                 <h3 class="font-black text-blue-royal uppercase">LA "SANGRÍA DE POBRE" (Clericó)</h3>
@@ -562,9 +506,7 @@
             </div>
             <p class="text-gray-500 text-xs mt-2">Ingredientes: Vino tinto de caja (pero bien frío), Sprite, y trozos de manzana y pera.</p>
         </div>
-
     </main>
-
     <!-- Footer Móvil -->
     <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-8 py-4 z-50 md:hidden flex justify-between items-center shadow-[0_-10px_25px_rgba(0,0,0,0.05)] rounded-t-[30px]">
         <button class="text-blue-royal flex flex-col items-center gap-1" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -573,11 +515,9 @@
             </div>
             <span class="text-[9px] font-black uppercase tracking-tighter">Inicio</span>
         </button>
-        
         <a href="https://wa.me/573000000000" target="_blank" class="bg-[#25D366] text-white w-16 h-16 rounded-full -mt-12 border-[6px] border-[#f8fafc] shadow-2xl flex items-center justify-center active:scale-90 transition-transform">
             <i class="fab fa-whatsapp text-3xl"></i>
         </a>
-
         <button class="text-gray-400 flex flex-col items-center gap-1">
             <div class="bg-gray-100 p-2 rounded-xl">
                 <i class="fas fa-receipt text-xl"></i>
@@ -585,7 +525,6 @@
             <span class="text-[9px] font-black uppercase tracking-tighter">Mi Pedido</span>
         </button>
     </footer>
-
     <!-- Modal de imagen -->
     <div id="imageModal" class="image-modal">
         <span class="close-modal" onclick="closeImageModal()">&times;</span>
@@ -593,17 +532,14 @@
             <img id="modalImage" src="" alt="Imagen del plato">
         </div>
     </div>
-
     <script>
         function openImageModal(imageUrl) {
             document.getElementById('modalImage').src = imageUrl;
             document.getElementById('imageModal').style.display = 'flex';
         }
-
         function closeImageModal() {
             document.getElementById('imageModal').style.display = 'none';
         }
-
         // Cerrar modal al hacer clic fuera de la imagen
         window.onclick = function(event) {
             const modal = document.getElementById('imageModal');
@@ -611,56 +547,26 @@
                 closeImageModal();
             }
         }
-
         function filterCategory(cat, el) {
             document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
             el.classList.add('active');
-            
             const cards = document.querySelectorAll('.food-card');
             const dividers = document.querySelectorAll('.section-divider');
             const subHeaders = document.querySelectorAll('.sub-category-header');
-            
             cards.forEach(card => {
                 if(cat === 'todos' || card.dataset.category === cat) {
                     card.style.display = 'block';
                 } else { card.style.display = 'none'; }
             });
-
             dividers.forEach(d => {
                 if(cat === 'todos' || d.dataset.category === cat) {
                     d.style.display = 'block';
                 } else { d.style.display = 'none'; }
             });
-
             subHeaders.forEach(s => {
                 if(cat === 'todos' || s.dataset.category === cat) {
                     s.style.display = 'flex';
                 } else { s.style.display = 'none'; }
-            });
-        }
-
-        function searchFood() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.food-card');
-            let dividers = document.querySelectorAll('.section-divider');
-            let subHeaders = document.querySelectorAll('.sub-category-header');
-            
-            if(input === "") {
-                filterCategory('todos', document.querySelector('.category-pill'));
-                return;
-            }
-
-            dividers.forEach(d => d.style.display = 'none');
-            subHeaders.forEach(s => s.style.display = 'none');
-
-            cards.forEach(card => {
-                let name = card.querySelector('h3').innerText.toLowerCase();
-                let desc = card.querySelector('p') ? card.querySelector('p').innerText.toLowerCase() : "";
-                if(name.includes(input) || desc.includes(input)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
             });
         }
     </script>
