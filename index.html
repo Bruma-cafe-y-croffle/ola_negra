@@ -210,7 +210,7 @@ align-items: center;
 justify-content: center;
 font-size: 16px;
 }
-/* Carousel styles - AUMENTADO EL TAMAÑO */
+/* Carousel styles - IMÁGENES MUCHO MÁS GRANDES */
 .carousel-container {
 position: relative;
 width: 100%;
@@ -224,7 +224,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 display: none;
 position: relative;
 width: 100%;
-height: 280px; /* Aumentado de 220px a 280px para móviles */
+height: 400px; /* Aumentado significativamente para móviles */
 }
 .carousel-slide.active {
 display: block;
@@ -245,21 +245,22 @@ bottom: 0;
 left: 0;
 right: 0;
 background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, transparent 100%);
-padding: 15px;
+padding: 25px;
 color: white;
 z-index: 10;
 }
 .carousel-title {
 font-weight: 900;
-font-size: 1.4rem;
+font-size: 1.8rem; /* Aumentado para mejor legibilidad */
 color: var(--orange-brand);
-margin-bottom: 4px;
+margin-bottom: 8px;
 text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 .carousel-desc {
-font-size: 0.95rem;
-max-width: 80%;
+font-size: 1.15rem; /* Aumentado */
+max-width: 85%;
 text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+line-height: 1.4;
 }
 .carousel-nav {
 position: absolute;
@@ -268,10 +269,10 @@ transform: translateY(-50%);
 background: rgba(0,0,0,0.6);
 color: white;
 border: none;
-width: 36px;
-height: 36px;
+width: 48px; /* Aumentado */
+height: 48px; /* Aumentado */
 border-radius: 50%;
-font-size: 1.2rem;
+font-size: 1.6rem; /* Aumentado */
 display: flex;
 align-items: center;
 justify-content: center;
@@ -280,37 +281,37 @@ z-index: 20;
 transition: all 0.3s ease;
 }
 .carousel-nav:hover {
-background: rgba(0,0,0,0.8);
-transform: translateY(-50%) scale(1.1);
+background: rgba(0,0,0,0.85);
+transform: translateY(-50%) scale(1.15);
 }
 .carousel-prev {
-left: 10px;
+left: 20px; /* Ajustado */
 }
 .carousel-next {
-right: 10px;
+right: 20px; /* Ajustado */
 }
 .carousel-dots {
 position: absolute;
-bottom: 10px;
+bottom: 20px; /* Ajustado */
 left: 0;
 right: 0;
 display: flex;
 justify-content: center;
-gap: 8px;
+gap: 12px; /* Aumentado */
 z-index: 20;
 }
 .carousel-dot {
-width: 8px;
-height: 8px;
+width: 12px; /* Aumentado */
+height: 12px; /* Aumentado */
 border-radius: 50%;
-background: rgba(255,255,255,0.5);
+background: rgba(255,255,255,0.6);
 cursor: pointer;
 transition: all 0.3s ease;
 }
 .carousel-dot.active {
 background: var(--orange-brand);
-width: 20px;
-border-radius: 4px;
+width: 28px; /* Aumentado */
+border-radius: 5px; /* Ajustado */
 }
 /* Footer styles */
 .footer-contact {
@@ -318,17 +319,17 @@ border-top: 1px solid #3f3f46;
 margin-top: 2rem;
 padding-top: 1.5rem;
 }
-/* Responsive adjustments */
+/* Responsive adjustments - TAMAÑOS MÁXIMOS */
 @media (min-width: 768px) {
 .carousel-slide {
-height: 360px; /* Aumentado de 280px a 360px para tablets */
+height: 550px; /* Aumentado para tablets */
 }
 .carousel-title {
-font-size: 2rem;
+font-size: 2.6rem; /* Aumentado */
 }
 .carousel-desc {
-font-size: 1.2rem;
-max-width: 60%;
+font-size: 1.6rem; /* Aumentado */
+max-width: 70%;
 }
 .section-divider {
 padding: 2rem 0 0.8rem 0;
@@ -337,13 +338,24 @@ border-bottom-width: 4px;
 }
 @media (min-width: 1024px) {
 .carousel-slide {
-height: 420px; /* Aumentado de 320px a 420px para desktop */
+height: 700px; /* Aumentado para desktop */
+}
+.carousel-title {
+font-size: 3.2rem; /* Aumentado */
+}
+.carousel-desc {
+font-size: 1.9rem; /* Aumentado */
+max-width: 65%;
+}
+.carousel-nav {
+width: 60px;
+height: 60px;
+font-size: 2.2rem;
 }
 }
 </style>
 </head>
 <body class="pb-8">
-<!-- Top Contact Bar - MOVIDO AL FOOTER -->
 <!-- Header - Compact Version -->
 <header class="sticky top-0 z-50 bg-dark shadow-lg">
 <div class="mx-auto max-w-5xl px-4 py-2">
@@ -360,7 +372,7 @@ Fast & fire 🔥
 </div>
 </div>
 </header>
-<!-- Featured Carousel - CON IMÁGENES MÁS GRANDES -->
+<!-- Featured Carousel - CON IMÁGENES MUCHO MÁS GRANDES -->
 <div class="max-w-5xl mx-auto px-4 py-3">
 <div class="carousel-container">
 <div class="carousel-slide active">
@@ -582,6 +594,15 @@ Fast & fire 🔥
 </div>
 <div class="badge-top">🔥 TOP</div>
 <p class="text-gray-300 text-[10px] md:text-xs mt-1">El reto: Carne de res, doble queso, tocineta ahumada al carbón, pollo y un huevo frito con la yema blandita, cebolla caramelizada y tomate fresco. El toque: Servida con una pequeña porción de papas fritas como acompañete.</p>
+</div>
+<!-- NUEVA HAMBURGUESA ARTISAN HOUSE -->
+<div class="food-card bg-dark-card rounded-2xl shadow-xl p-4 border-2 border-orange-brand" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=ARTISAN+HOUSE')">
+<div class="flex justify-between items-start mb-1.5">
+<h3 class="font-black uppercase text-lg leading-tight">ARTISAN HOUSE</h3>
+<span class="price-tag">$20.900</span>
+</div>
+<div class="badge-top">🔥 LA DE LA CASA</div>
+<p class="text-gray-300 text-[10px] md:text-xs mt-1">Carne artesanal de molienda selecta y tocineta crocante, fundidas en queso y resguardadas en un pan brioche de la casa. Acompañado con cebollas encurtidas de la casa y pepinillos, sobre vegetales frescos del huerto. Se acompaña de papas rústicas.</p>
 </div>
 <!-- PERROS -->
 <div class="section-divider" data-category="perros">
