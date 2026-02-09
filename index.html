@@ -210,7 +210,7 @@ align-items: center;
 justify-content: center;
 font-size: 16px;
 }
-/* Carousel styles - IMÁGENES MÁS GRANDES */
+/* Carousel styles - AUMENTADO EL TAMAÑO */
 .carousel-container {
 position: relative;
 width: 100%;
@@ -224,7 +224,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 display: none;
 position: relative;
 width: 100%;
-height: 320px; /* Aumentado significativamente para móviles */
+height: 280px; /* Aumentado de 220px a 280px para móviles */
 }
 .carousel-slide.active {
 display: block;
@@ -245,22 +245,21 @@ bottom: 0;
 left: 0;
 right: 0;
 background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, transparent 100%);
-padding: 20px;
+padding: 15px;
 color: white;
 z-index: 10;
 }
 .carousel-title {
 font-weight: 900;
-font-size: 1.6rem; /* Aumentado para mejor legibilidad */
+font-size: 1.4rem;
 color: var(--orange-brand);
-margin-bottom: 6px;
+margin-bottom: 4px;
 text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 .carousel-desc {
-font-size: 1.05rem; /* Aumentado */
-max-width: 85%;
+font-size: 0.95rem;
+max-width: 80%;
 text-shadow: 0 1px 2px rgba(0,0,0,0.9);
-line-height: 1.4;
 }
 .carousel-nav {
 position: absolute;
@@ -269,10 +268,10 @@ transform: translateY(-50%);
 background: rgba(0,0,0,0.6);
 color: white;
 border: none;
-width: 42px; /* Aumentado */
-height: 42px; /* Aumentado */
+width: 36px;
+height: 36px;
 border-radius: 50%;
-font-size: 1.4rem; /* Aumentado */
+font-size: 1.2rem;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -281,49 +280,55 @@ z-index: 20;
 transition: all 0.3s ease;
 }
 .carousel-nav:hover {
-background: rgba(0,0,0,0.85);
-transform: translateY(-50%) scale(1.15);
+background: rgba(0,0,0,0.8);
+transform: translateY(-50%) scale(1.1);
 }
 .carousel-prev {
-left: 15px; /* Ajustado */
+left: 10px;
 }
 .carousel-next {
-right: 15px; /* Ajustado */
+right: 10px;
 }
 .carousel-dots {
 position: absolute;
-bottom: 15px; /* Ajustado */
+bottom: 10px;
 left: 0;
 right: 0;
 display: flex;
 justify-content: center;
-gap: 10px; /* Aumentado */
+gap: 8px;
 z-index: 20;
 }
 .carousel-dot {
-width: 10px; /* Aumentado */
-height: 10px; /* Aumentado */
+width: 8px;
+height: 8px;
 border-radius: 50%;
-background: rgba(255,255,255,0.6);
+background: rgba(255,255,255,0.5);
 cursor: pointer;
 transition: all 0.3s ease;
 }
 .carousel-dot.active {
 background: var(--orange-brand);
-width: 24px; /* Aumentado */
-border-radius: 5px; /* Ajustado */
+width: 20px;
+border-radius: 4px;
 }
-/* Responsive adjustments - TAMAÑOS AÚN MÁS GRANDES */
+/* Footer styles */
+.footer-contact {
+border-top: 1px solid #3f3f46;
+margin-top: 2rem;
+padding-top: 1.5rem;
+}
+/* Responsive adjustments */
 @media (min-width: 768px) {
 .carousel-slide {
-height: 420px; /* Aumentado de 280px a 420px para tablets */
+height: 360px; /* Aumentado de 280px a 360px para tablets */
 }
 .carousel-title {
-font-size: 2.3rem; /* Aumentado */
+font-size: 2rem;
 }
 .carousel-desc {
-font-size: 1.4rem; /* Aumentado */
-max-width: 70%;
+font-size: 1.2rem;
+max-width: 60%;
 }
 .section-divider {
 padding: 2rem 0 0.8rem 0;
@@ -332,53 +337,13 @@ border-bottom-width: 4px;
 }
 @media (min-width: 1024px) {
 .carousel-slide {
-height: 520px; /* Aumentado de 320px a 520px para desktop */
-}
-.carousel-title {
-font-size: 2.8rem; /* Aumentado */
-}
-.carousel-desc {
-font-size: 1.65rem; /* Aumentado */
-max-width: 65%;
-}
-.carousel-nav {
-width: 50px;
-height: 50px;
-font-size: 1.8rem;
+height: 420px; /* Aumentado de 320px a 420px para desktop */
 }
 }
 </style>
 </head>
 <body class="pb-8">
-<!-- Top Contact Bar -->
-<div class="bg-dark-secondary border-b border-gray-800">
-<div class="max-w-5xl mx-auto px-3 py-1.5 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-300">
-<div class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1 mb-2 md:mb-0">
-<div class="flex items-center">
-<span class="mr-1 text-green-500"><i class="fas fa-mobile-alt"></i></span>
-<span>320 571 2682</span>
-</div>
-<div class="flex items-center">
-<span class="mr-1 text-yellow-500"><i class="fas fa-map-marker-alt"></i></span>
-<span>Villa olimpica Primera estapa</span>
-</div>
-<div class="flex items-center">
-<span class="mr-1 text-blue-400"><i class="fas fa-clock"></i></span>
-<span>4:00 PM - 12AM | Todos los días</span>
-</div>
-</div>
-<div class="flex space-x-3">
-<a href="https://wa.me/573205712682" target="_blank" class="text-[#25D366] hover:text-[#128C7E] transition-colors flex items-center font-bold">
-<i class="fab fa-whatsapp text-xl mr-1"></i>
-<span class="hidden sm:inline">WhatsApp</span>
-</a>
-<a href="https://instagram.com/brasa_brava00" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors flex items-center font-bold">
-<i class="fab fa-instagram text-xl mr-1"></i>
-<span class="hidden sm:inline">Instagram</span>
-</a>
-</div>
-</div>
-</div>
+<!-- Top Contact Bar - MOVIDO AL FOOTER -->
 <!-- Header - Compact Version -->
 <header class="sticky top-0 z-50 bg-dark shadow-lg">
 <div class="mx-auto max-w-5xl px-4 py-2">
@@ -395,7 +360,7 @@ Fast & fire 🔥
 </div>
 </div>
 </header>
-<!-- Featured Carousel - CON IMÁGENES MUCHO MÁS GRANDES -->
+<!-- Featured Carousel - CON IMÁGENES MÁS GRANDES -->
 <div class="max-w-5xl mx-auto px-4 py-3">
 <div class="carousel-container">
 <div class="carousel-slide active">
@@ -618,15 +583,6 @@ Fast & fire 🔥
 <div class="badge-top">🔥 TOP</div>
 <p class="text-gray-300 text-[10px] md:text-xs mt-1">El reto: Carne de res, doble queso, tocineta ahumada al carbón, pollo y un huevo frito con la yema blandita, cebolla caramelizada y tomate fresco. El toque: Servida con una pequeña porción de papas fritas como acompañete.</p>
 </div>
-<!-- NUEVA HAMBURGUESA ARTISAN HOUSE -->
-<div class="food-card bg-dark-card rounded-2xl shadow-xl p-4 border-2 border-orange-brand" data-category="hamburguesas" onclick="openImageModal('https://placehold.co/600x400/FF6B00/FFFFFF?text=ARTISAN+HOUSE')">
-<div class="flex justify-between items-start mb-1.5">
-<h3 class="font-black uppercase text-lg leading-tight">ARTISAN HOUSE</h3>
-<span class="price-tag">$20.900</span>
-</div>
-<div class="badge-top">🔥 LA DE LA CASA</div>
-<p class="text-gray-300 text-[10px] md:text-xs mt-1">Carne artesanal de molienda selecta y tocineta crocante, fundidas en queso y resguardadas en un pan brioche de la casa. Acompañado con cebollas encurtidas de la casa y pepinillos, sobre vegetales frescos del huerto. Se acompaña de papas rústicas.</p>
-</div>
 <!-- PERROS -->
 <div class="section-divider" data-category="perros">
 <h2 class="text-orange-brand font-black uppercase text-xl md:text-2xl italic tracking-tighter">LOS PERROS DE LA CASA</h2>
@@ -753,7 +709,7 @@ Fast & fire 🔥
 </div>
 <p class="text-gray-300 text-[10px] md:text-xs">El clásico callejero elevado al siguiente nivel. Salchicha manguito (Suiza) seleccionada, asada a fuego lento sobre el carbón, queso mozzarella fundido, nuestra dulce salsa de piña de la casa y lluvia de ripio de papa.</p>
 </div>
-<!-- BEBIDAS - SECCIÓN CORREGIDA -->
+<!-- BEBIDAS - SECCIÓN COMPLETAMENTE CORREGIDA -->
 <div class="section-divider" data-category="bebidas">
 <h2 class="text-orange-brand font-black uppercase text-xl md:text-2xl italic tracking-tighter">🥤 BEBIDAS</h2>
 </div>
@@ -839,6 +795,42 @@ Fast & fire 🔥
 <p class="text-gray-300 text-[10px] md:text-xs mt-1.5">Ron, zumo de limón y un toque de miel coronado con soda y mucho hielo.</p>
 </div>
 </main>
+
+<!-- Footer con información de contacto -->
+<footer class="footer-contact bg-dark-secondary">
+<div class="max-w-5xl mx-auto px-4 py-4">
+<div class="flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-300">
+<div class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 mb-3 md:mb-0">
+<div class="flex items-center">
+<span class="mr-1 text-green-500"><i class="fas fa-mobile-alt"></i></span>
+<span>320 571 2682</span>
+</div>
+<div class="flex items-center">
+<span class="mr-1 text-yellow-500"><i class="fas fa-map-marker-alt"></i></span>
+<span>Villa olimpica Primera estapa</span>
+</div>
+<div class="flex items-center">
+<span class="mr-1 text-blue-400"><i class="fas fa-clock"></i></span>
+<span>4:00 PM - 12AM | Todos los días</span>
+</div>
+</div>
+<div class="flex space-x-4 mt-3 md:mt-0">
+<a href="https://wa.me/573205712682" target="_blank" class="text-[#25D366] hover:text-[#128C7E] transition-colors flex items-center font-bold">
+<i class="fab fa-whatsapp text-xl mr-1"></i>
+<span class="hidden sm:inline">WhatsApp</span>
+</a>
+<a href="https://instagram.com/brasa_brava00" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors flex items-center font-bold">
+<i class="fab fa-instagram text-xl mr-1"></i>
+<span class="hidden sm:inline">Instagram</span>
+</a>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-800 text-center text-[9px] text-gray-500">
+<p>© 2026 BRASA BRAVA - Todos los derechos reservados. El sabor que enciende tu noche.</p>
+</div>
+</div>
+</footer>
+
 <!-- Modal de imagen -->
 <div id="imageModal" class="image-modal">
 <span class="close-modal" onclick="closeImageModal()">&times;</span>
