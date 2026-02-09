@@ -210,7 +210,7 @@ align-items: center;
 justify-content: center;
 font-size: 16px;
 }
-/* Carousel styles - IMÁGENES MUCHO MÁS GRANDES */
+/* Carousel styles - TEXTO AJUSTADO PARA NO CUBRIR IMÁGENES */
 .carousel-container {
 position: relative;
 width: 100%;
@@ -224,7 +224,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 display: none;
 position: relative;
 width: 100%;
-height: 400px; /* Aumentado significativamente para móviles */
+height: 320px; /* Tamaño equilibrado */
 }
 .carousel-slide.active {
 display: block;
@@ -244,35 +244,38 @@ position: absolute;
 bottom: 0;
 left: 0;
 right: 0;
-background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, transparent 100%);
-padding: 25px;
+/* Gradiente más sutil para no opacar demasiado la imagen */
+background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 35%, transparent 100%);
+padding: 18px 20px 20px;
 color: white;
 z-index: 10;
 }
 .carousel-title {
 font-weight: 900;
-font-size: 1.8rem; /* Aumentado para mejor legibilidad */
+font-size: 1.5rem; /* Reducido significativamente */
 color: var(--orange-brand);
-margin-bottom: 8px;
-text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+margin-bottom: 5px;
+text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+letter-spacing: -0.5px;
 }
 .carousel-desc {
-font-size: 1.15rem; /* Aumentado */
-max-width: 85%;
+font-size: 0.95rem; /* Reducido significativamente */
+max-width: 75%;
 text-shadow: 0 1px 2px rgba(0,0,0,0.9);
-line-height: 1.4;
+line-height: 1.35;
+opacity: 0.95;
 }
 .carousel-nav {
 position: absolute;
 top: 50%;
 transform: translateY(-50%);
-background: rgba(0,0,0,0.6);
+background: rgba(0,0,0,0.5);
 color: white;
 border: none;
-width: 48px; /* Aumentado */
-height: 48px; /* Aumentado */
+width: 40px;
+height: 40px;
 border-radius: 50%;
-font-size: 1.6rem; /* Aumentado */
+font-size: 1.3rem;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -281,28 +284,28 @@ z-index: 20;
 transition: all 0.3s ease;
 }
 .carousel-nav:hover {
-background: rgba(0,0,0,0.85);
-transform: translateY(-50%) scale(1.15);
+background: rgba(0,0,0,0.75);
+transform: translateY(-50%) scale(1.1);
 }
 .carousel-prev {
-left: 20px; /* Ajustado */
+left: 15px;
 }
 .carousel-next {
-right: 20px; /* Ajustado */
+right: 15px;
 }
 .carousel-dots {
 position: absolute;
-bottom: 20px; /* Ajustado */
+bottom: 15px;
 left: 0;
 right: 0;
 display: flex;
 justify-content: center;
-gap: 12px; /* Aumentado */
+gap: 10px;
 z-index: 20;
 }
 .carousel-dot {
-width: 12px; /* Aumentado */
-height: 12px; /* Aumentado */
+width: 10px;
+height: 10px;
 border-radius: 50%;
 background: rgba(255,255,255,0.6);
 cursor: pointer;
@@ -310,8 +313,8 @@ transition: all 0.3s ease;
 }
 .carousel-dot.active {
 background: var(--orange-brand);
-width: 28px; /* Aumentado */
-border-radius: 5px; /* Ajustado */
+width: 24px;
+border-radius: 5px;
 }
 /* Footer styles */
 .footer-contact {
@@ -319,17 +322,18 @@ border-top: 1px solid #3f3f46;
 margin-top: 2rem;
 padding-top: 1.5rem;
 }
-/* Responsive adjustments - TAMAÑOS MÁXIMOS */
+/* Responsive adjustments - TEXTOS PROPORCIONALES */
 @media (min-width: 768px) {
 .carousel-slide {
-height: 550px; /* Aumentado para tablets */
+height: 420px;
 }
 .carousel-title {
-font-size: 2.6rem; /* Aumentado */
+font-size: 1.9rem; /* Aumentado moderadamente para tablets */
+letter-spacing: -0.8px;
 }
 .carousel-desc {
-font-size: 1.6rem; /* Aumentado */
-max-width: 70%;
+font-size: 1.15rem; /* Aumentado moderadamente */
+max-width: 65%;
 }
 .section-divider {
 padding: 2rem 0 0.8rem 0;
@@ -338,19 +342,23 @@ border-bottom-width: 4px;
 }
 @media (min-width: 1024px) {
 .carousel-slide {
-height: 700px; /* Aumentado para desktop */
+height: 500px; /* Altura equilibrada para desktop */
 }
 .carousel-title {
-font-size: 3.2rem; /* Aumentado */
+font-size: 2.3rem; /* Tamaño óptimo para desktop */
+letter-spacing: -1px;
 }
 .carousel-desc {
-font-size: 1.9rem; /* Aumentado */
-max-width: 65%;
+font-size: 1.4rem; /* Tamaño óptimo para desktop */
+max-width: 60%;
 }
 .carousel-nav {
-width: 60px;
-height: 60px;
-font-size: 2.2rem;
+width: 48px;
+height: 48px;
+font-size: 1.6rem;
+}
+.carousel-content {
+padding: 22px 25px 25px;
 }
 }
 </style>
@@ -372,7 +380,7 @@ Fast & fire 🔥
 </div>
 </div>
 </header>
-<!-- Featured Carousel - CON IMÁGENES MUCHO MÁS GRANDES -->
+<!-- Featured Carousel - CON TEXTO AJUSTADO -->
 <div class="max-w-5xl mx-auto px-4 py-3">
 <div class="carousel-container">
 <div class="carousel-slide active">
@@ -386,7 +394,7 @@ Fast & fire 🔥
 <img src="https://i.pinimg.com/736x/18/3f/1a/183f1ad29635a92f5c56de988f31d95f.jpg" alt="Hamburguesa Candela Suprema">
 <div class="carousel-content">
 <h2 class="carousel-title">🍔 HAMBURGUESA CANDELA SUPREMA</h2>
-<p class="carousel-desc">Carne, Pan artesanal tipo brionch, sellada al carbón con tocineta ahumada</p>
+<p class="carousel-desc">Carne, pan artesanal tipo brioche, sellada al carbón con tocineta ahumada</p>
 </div>
 </div>
 <div class="carousel-slide">
