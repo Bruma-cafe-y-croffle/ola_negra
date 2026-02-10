@@ -210,28 +210,30 @@ align-items: center;
 justify-content: center;
 font-size: 16px;
 }
-/* Carousel styles - TEXTO AJUSTADO PARA NO CUBRIR IMÁGENES */
+/* Carousel styles - SIN TEXTO, SOLO IMÁGENES */
 .carousel-container {
 position: relative;
 width: 100%;
 max-width: 1200px;
 margin: 0 auto;
-border-radius: 12px;
+border-radius: 16px;
 overflow: hidden;
-box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+margin-top: 10px;
+margin-bottom: 10px;
 }
 .carousel-slide {
 display: none;
 position: relative;
 width: 100%;
-height: 320px; /* Tamaño equilibrado */
+height: 320px;
 }
 .carousel-slide.active {
 display: block;
-animation: fade 0.7s ease-in-out;
+animation: fade 1s ease-in-out;
 }
 @keyframes fade {
-from { opacity: 0.7; }
+from { opacity: 0.9; }
 to { opacity: 1; }
 }
 .carousel-slide img {
@@ -239,82 +241,63 @@ width: 100%;
 height: 100%;
 object-fit: cover;
 }
-.carousel-content {
-position: absolute;
-bottom: 0;
-left: 0;
-right: 0;
-/* Gradiente más sutil para no opacar demasiado la imagen */
-background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 35%, transparent 100%);
-padding: 18px 20px 20px;
-color: white;
-z-index: 10;
-}
-.carousel-title {
-font-weight: 900;
-font-size: 1.5rem; /* Reducido significativamente */
-color: var(--orange-brand);
-margin-bottom: 5px;
-text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-letter-spacing: -0.5px;
-}
-.carousel-desc {
-font-size: 0.95rem; /* Reducido significativamente */
-max-width: 75%;
-text-shadow: 0 1px 2px rgba(0,0,0,0.9);
-line-height: 1.35;
-opacity: 0.95;
-}
+/* Controles de navegación mejorados para verse sobre las imágenes */
 .carousel-nav {
 position: absolute;
 top: 50%;
 transform: translateY(-50%);
-background: rgba(0,0,0,0.5);
+background: rgba(0,0,0,0.65);
 color: white;
 border: none;
-width: 40px;
-height: 40px;
+width: 48px;
+height: 48px;
 border-radius: 50%;
-font-size: 1.3rem;
+font-size: 1.5rem;
 display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
 z-index: 20;
-transition: all 0.3s ease;
+transition: all 0.4s ease;
+box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 .carousel-nav:hover {
-background: rgba(0,0,0,0.75);
-transform: translateY(-50%) scale(1.1);
+background: rgba(255,107,0,0.92);
+transform: translateY(-50%) scale(1.12);
+box-shadow: 0 6px 20px rgba(255,107,0,0.5);
 }
 .carousel-prev {
-left: 15px;
+left: 20px;
 }
 .carousel-next {
-right: 15px;
+right: 20px;
 }
 .carousel-dots {
 position: absolute;
-bottom: 15px;
+bottom: 20px;
 left: 0;
 right: 0;
 display: flex;
 justify-content: center;
-gap: 10px;
+gap: 12px;
 z-index: 20;
 }
 .carousel-dot {
-width: 10px;
-height: 10px;
+width: 12px;
+height: 12px;
 border-radius: 50%;
-background: rgba(255,255,255,0.6);
+background: rgba(255,255,255,0.75);
 cursor: pointer;
-transition: all 0.3s ease;
+transition: all 0.4s ease;
+border: 2px solid transparent;
 }
 .carousel-dot.active {
 background: var(--orange-brand);
-width: 24px;
-border-radius: 5px;
+width: 32px;
+border-radius: 6px;
+border-color: white;
+box-shadow: 0 0 0 2px var(--orange-brand);
+transform: scale(1.1);
 }
 /* Footer styles */
 .footer-contact {
@@ -322,44 +305,46 @@ border-top: 1px solid #3f3f46;
 margin-top: 2rem;
 padding-top: 1.5rem;
 }
-/* Responsive adjustments - TEXTOS PROPORCIONALES */
+/* Responsive adjustments */
 @media (min-width: 768px) {
 .carousel-slide {
 height: 420px;
 }
-.carousel-title {
-font-size: 1.9rem; /* Aumentado moderadamente para tablets */
-letter-spacing: -0.8px;
-}
-.carousel-desc {
-font-size: 1.15rem; /* Aumentado moderadamente */
-max-width: 65%;
-}
-.section-divider {
-padding: 2rem 0 0.8rem 0;
-border-bottom-width: 4px;
+.carousel-nav {
+width: 56px;
+height: 56px;
+font-size: 1.8rem;
 }
 }
 @media (min-width: 1024px) {
 .carousel-slide {
-height: 500px; /* Altura equilibrada para desktop */
-}
-.carousel-title {
-font-size: 2.3rem; /* Tamaño óptimo para desktop */
-letter-spacing: -1px;
-}
-.carousel-desc {
-font-size: 1.4rem; /* Tamaño óptimo para desktop */
-max-width: 60%;
+height: 500px;
 }
 .carousel-nav {
-width: 48px;
-height: 48px;
-font-size: 1.6rem;
+width: 64px;
+height: 64px;
+font-size: 2rem;
 }
-.carousel-content {
-padding: 22px 25px 25px;
+.carousel-dots {
+bottom: 25px;
+gap: 14px;
 }
+.carousel-dot {
+width: 14px;
+height: 14px;
+}
+.carousel-dot.active {
+width: 36px;
+}
+}
+/* Animación suave para los dots */
+@keyframes pulse {
+0% { transform: scale(1); opacity: 1; }
+50% { transform: scale(1.05); opacity: 0.9; }
+100% { transform: scale(1); opacity: 1; }
+}
+.carousel-dot.active {
+animation: pulse 2s infinite;
 }
 </style>
 </head>
@@ -380,29 +365,23 @@ Fast & fire 🔥
 </div>
 </div>
 </header>
-<!-- Featured Carousel - CON TEXTO AJUSTADO -->
+<!-- Featured Carousel - SIN TEXTO, SOLO IMÁGENES -->
 <div class="max-w-5xl mx-auto px-4 py-3">
 <div class="carousel-container">
 <div class="carousel-slide active">
 <img src="https://i.pinimg.com/736x/82/aa/ce/82aace920012e306879dbcb8eadc9f0b.jpg" alt="Salchipapa Monumental">
-<div class="carousel-content">
-<h2 class="carousel-title"></h2>
-<p class="carousel-desc"></p>
-</div>
 </div>
 <div class="carousel-slide">
 <img src="https://i.pinimg.com/736x/18/3f/1a/183f1ad29635a92f5c56de988f31d95f.jpg" alt="Hamburguesa Candela Suprema">
-<div class="carousel-content">
-<h2 class="carousel-title"></h2>
-<p class="carousel-desc"></p>
-</div>
 </div>
 <div class="carousel-slide">
 <img src="https://i.pinimg.com/736x/57/37/17/573717f937f154b00a321d470f7670bb.jpg" alt="Burrito Todo Terreno">
-<div class="carousel-content">
-<h2 class="carousel-title"></h2>
-<p class="carousel-desc"></p>
 </div>
+<div class="carousel-slide">
+<img src="https://i.pinimg.com/736x/ad/06/16/ad0616c92ed55d422a0287c721f181e3.jpg" alt="Artisan House">
+</div>
+<div class="carousel-slide">
+<img src="https://i.pinimg.com/736x/cd/a0/f5/cda0f528339a6c5d8697b81e4b62b592.jpg" alt="Perro Callejero">
 </div>
 <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)">&lt;</button>
 <button class="carousel-nav carousel-next" onclick="changeSlide(1)">&gt;</button>
@@ -410,6 +389,8 @@ Fast & fire 🔥
 <span class="carousel-dot active" onclick="currentSlide(0)"></span>
 <span class="carousel-dot" onclick="currentSlide(1)"></span>
 <span class="carousel-dot" onclick="currentSlide(2)"></span>
+<span class="carousel-dot" onclick="currentSlide(3)"></span>
+<span class="carousel-dot" onclick="currentSlide(4)"></span>
 </div>
 </div>
 </div>
@@ -742,7 +723,6 @@ Fast & fire 🔥
 <div class="section-divider" data-category="bebidas">
 <h2 class="text-orange-brand font-black uppercase text-xl md:text-2xl italic tracking-tighter">🥤 BEBIDAS</h2>
 </div>
-
 <!-- JUGOS NATURALES -->
 <div class="sub-category-header" data-category="bebidas">
 🧃 JUGOS NATURALES<br>
@@ -776,7 +756,6 @@ Fast & fire 🔥
 </div>
 <p class="text-gray-300 text-[9px] md:text-xs mt-1.5">Dulce y refrescante con toque de cereza</p>
 </div>
-
 <!-- GASEOSAS -->
 <div class="sub-category-header" data-category="bebidas">
 🥤 GASEOSAS<br>
@@ -796,7 +775,6 @@ Fast & fire 🔥
 </div>
 <p class="text-gray-300 text-[10px] md:text-xs mt-1.5">Manzana, uva, kola, colombiana.</p>
 </div>
-
 <!-- COCTELES -->
 <div class="sub-category-header" data-category="bebidas">
 🍹 COCTELES ESPECIALES<br>
@@ -824,7 +802,6 @@ Fast & fire 🔥
 <p class="text-gray-300 text-[10px] md:text-xs mt-1.5">Ron, zumo de limón y un toque de miel coronado con soda y mucho hielo.</p>
 </div>
 </main>
-
 <!-- Footer con información de contacto -->
 <footer class="footer-contact bg-dark-secondary">
 <div class="max-w-5xl mx-auto px-4 py-4">
@@ -859,7 +836,6 @@ Fast & fire 🔥
 </div>
 </div>
 </footer>
-
 <!-- Modal de imagen -->
 <div id="imageModal" class="image-modal">
 <span class="close-modal" onclick="closeImageModal()">&times;</span>
@@ -877,7 +853,7 @@ Fast & fire 🔥
 </div>
 </div>
 <script>
-// Carousel functionality
+// Carousel functionality - CARRUSEL DE 5 IMÁGENES SIN TEXTO
 let slideIndex = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 const dots = document.querySelectorAll('.carousel-dot');
@@ -894,10 +870,10 @@ showSlide(slideIndex + n);
 function currentSlide(n) {
 showSlide(n);
 }
-// Auto slide
+// Auto slide - CADA 7 SEGUNDOS PARA APRECIAR MEJOR LAS IMÁGENES
 setInterval(() => {
 changeSlide(1);
-}, 4000);
+}, 7000);
 // Initialize first slide
 showSlide(0);
 // Category filtering
