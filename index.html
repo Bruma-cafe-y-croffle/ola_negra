@@ -429,16 +429,16 @@
                     { id: 108, name: "PERRO FRANCÉS TROPICAL", price: 23900, desc: "Pan francés relleno con salchicha, queso fundido, chicharrón crocante y piña caramelizada, creando un contraste perfecto entre dulce y salado.", img: IMAGES.perroFrances }
                 ],
                 "Alitas Brava": [
-                    { id: 151, name: "ALITAS - BBQ", price: 22900, desc: "Alitas doradas y crujientes (6 unidades) bañadas en salsa BBQ. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "BBQ" },
-                    { id: 152, name: "ALITAS - CHIPOTLE", price: 23900, desc: "Alitas doradas y crujientes (6 unidades) bañadas en salsa Chipotle. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "Chipotle" },
-                    { id: 153, name: "ALITAS - MIEL PICANTE", price: 23900, desc: "Alitas doradas y crujientes (6 unidades) bañadas en salsa Miel Picante. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "Miel Picante" },
-                    { id: 154, name: "ALITAS - BÚFALO", price: 24900, desc: "Alitas doradas y crujientes (6 unidades) bañadas en salsa Búfalo. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "Búfalo" }
+                    { id: 151, name: "BBQ", price: 17900, desc: "Alitas doradas y crujientes (12 unidades) bañadas en salsa BBQ. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "BBQ" },
+                    { id: 152, name: "CHIPOTLE", price: 16000, desc: "Alitas doradas y crujientes (12 unidades) bañadas en salsa Chipotle. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "Chipotle" },
+                    { id: 153, name: "MIEL PICANTE", price: 19000, desc: "Alitas doradas y crujientes (12 unidades) bañadas en salsa Miel Picante. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "Miel Picante" },
+                    { id: 154, name: "BÚFALO", price: 17900, desc: "Alitas doradas y crujientes (12 unidades) bañadas en salsa Búfalo. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "Búfalo" }
                 ],
                 "Boneless Brava": [
-                    { id: 161, name: "BONELESS - BBQ", price: 26900, desc: "Crujientes trozos de pollo apanado (6 unidades) bañados en salsa BBQ. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "BBQ" },
-                    { id: 162, name: "BONELESS - CHIPOTLE", price: 27900, desc: "Crujientes trozos de pollo apanado (6 unidades) bañados en salsa Chipotle. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Chipotle" },
-                    { id: 163, name: "BONELESS - MIEL PICANTE", price: 27900, desc: "Crujientes trozos de pollo apanado (6 unidades) bañados en salsa Miel Picante. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Miel Picante" },
-                    { id: 164, name: "BONELESS - BÚFALO", price: 28900, desc: "Crujientes trozos de pollo apanado (6 unidades) bañados en salsa Búfalo. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Búfalo" }
+                    { id: 161, name: "BBQ", price: 10000, desc: "Crujientes trozos de pollo apanado bañados en salsa BBQ. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "BBQ" },
+                    { id: 162, name: "CHIPOTLE", price: 12900, desc: "Crujientes trozos de pollo apanado bañados en salsa Chipotle. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Chipotle" },
+                    { id: 163, name: "MIEL PICANTE", price: 14900, desc: "Crujientes trozos de pollo apanado bañados en salsa Miel Picante. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Miel Picante" },
+                    { id: 164, name: "BÚFALO", price: 12900, desc: "Crujientes trozos de pollo apanado bañados en salsa Búfalo. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Búfalo" }
                 ],
                 "Salchis": [
                     { id: 201, name: "LA SENCILLA", price: 12000, desc: "La clásica del barrio: Salchicha, queso costeño, lechuga, papa francesa y salsas ahumadas de la casa.", img: IMAGES.salchi1, size: "Personal" },
@@ -569,9 +569,6 @@
                         {item.isTop && <span className="badge-top">🔥 TOP</span>}
                         {item.isCrocante && <span className="badge-crocante">🔥 CROCANTE</span>}
                         {item.isArtisan && <span className="badge-artesanal">🏠 ARTESANAL</span>}
-                        {item.isJugo && <span className="badge-jugo">🧃 NATURAL</span>}
-                        {item.isGaseosa && <span className="badge-gaseosa">🥤 GASEOSA</span>}
-                        {item.isCocktail && <span className="badge-cocktail">🍹 COCTEL</span>}
                         <p className="text-xs sm:text-sm italic opacity-70 font-light leading-relaxed mb-2">{item.desc}</p>
                         <button 
                             onClick={handleAdd}
@@ -605,7 +602,7 @@
                                 <span className="uppercase-elegant !text-[7px] opacity-60">WhatsApp</span>
                             </a>
                             <a 
-                                href="https://instagram.com/brazabrava" 
+                                href="https://instagram.com/braza_brava00" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 className="social-icon text-[#f4f1ea] hover:text-brava transition-colors flex flex-col items-center gap-1"
