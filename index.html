@@ -153,6 +153,66 @@
             margin-bottom: 4px;
         }
 
+        .badge-vapor {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-rustico {
+            background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-artesanal {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-cocktail {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-jugo {
+            background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-gaseosa {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
         .sauce-badge {
             background: rgba(249, 115, 22, 0.1);
             color: var(--brava-orange);
@@ -180,6 +240,70 @@
         @keyframes scrollPulse {
             0%, 100% { opacity: 0.4; }
             50% { opacity: 0.8; }
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            padding: 0 20px;
+        }
+
+        .section-header-title {
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--forest);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .section-header-line {
+            width: 60px;
+            height: 2px;
+            background: var(--brava-orange);
+            border-radius: 2px;
+        }
+
+        .section-header-subtitle {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 50%;
+            margin-top: 4px;
+        }
+
+        .vertical-section-header {
+            text-align: center;
+            margin: 40px 0 24px 0;
+            padding: 16px 0;
+            border-top: 1px solid rgba(27, 38, 27, 0.15);
+            border-bottom: 1px solid rgba(27, 38, 27, 0.15);
+        }
+
+        .vertical-section-title {
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 4px;
+        }
+
+        .vertical-section-subtitle {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 50%;
+        }
+
+        .vertical-section-line {
+            width: 40px;
+            height: 2px;
+            background: var(--brava-orange);
+            margin: 12px auto;
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -235,7 +359,12 @@
             picada: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1f4c5e9e2-97ec-4c44-9ad1-aa4fcfad7b9c.png",
             hotdog: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c662673c-41aa-4bba-a94d-6ad456293f68.png",
             burger: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/11769e51a-9406-4c8d-bd57-b0d6d8972bcd.png",
-            lemonade: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/19dfe31c7-c19a-41bc-8d7e-44b925c0d21c.png",
+            burger2: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1f9a8b7c6-5d4e-3f2a-1b0c-9d8e7f6a5b4c.png",
+            burger3: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1a8b7c6d5-4e3f-2a1b-0c9d-8e7f6a5b4c3d.png",
+            burger4: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1b7c6d5e4-3f2a-1b0c-9d8e-7f6a5b4c3d2e.png",
+            burger5: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c6d5e4f3-2a1b-0c9d-8e7f-6a5b4c3d2e1f.png",
+            burger6: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1d5e4f3a2-1b0c-9d8e-7f6a-5b4c3d2e1f0a.png",
+            burger7: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1e4f3a2b1-0c9d-8e7f-6a5b-4c3d2e1f0a9b.png",
             wings: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1a2b3c4d5-6e7f-8g9h-0i1j-2k3l4m5n6o7p.png",
             polpetta: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c9934cf2-9843-4d33-bf46-208dc4a364f5.png",
             bianco: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1747b5b35-4a9d-4281-aa89-2fe97c7300ca.png",
@@ -256,7 +385,14 @@
             salchi10: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1a3b4c5d6-7e8f-9a0b-1c2d-3e4f5a6b7c8d.png",
             salchi11: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1b4c5d6e7-8f9a-0b1c-2d3e-4f5a6b7c8d9e.png",
             salchi12: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c5d6e7f8-9a0b-1c2d-3e4f-5a6b7c8d9e0f.png",
-            salchi13: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1d6e7f8a9-0b1c-2d3e-4f5a-6b7c8d9e0f1a.png"
+            salchi13: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1d6e7f8a9-0b1c-2d3e-4f5a-6b7c8d9e0f1a.png",
+            perroVapor: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1e7f8a9b0-1c2d-3e4f-5a6b-7c8d9e0f1a2b.png",
+            polloVapor: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1f8a9b0c1-2d3e-4f5a-6b7c-8d9e0f1a2b3c.png",
+            suizoVapor: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1a9b0c1d2-3e4f-5a6b-7c8d-9e0f1a2b3c4d.png",
+            perroCarbon: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1b0c1d2e3-4f5a-6b7c-8d9e-0f1a2b3c4d5e.png",
+            perroPorky: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c1d2e3f4-5a6b-7c8d-9e0f-1a2b3c4d5e6f.png",
+            perroChuzi: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1d2e3f4a5-6b7c-8d9e-0f1a-2b3c4d5e6f7a.png",
+            perroChorizo: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1e3f4a5b6-7c8d-9e0f-1a2b-3c4d5e6f7a8b.png"
         };
 
         const MENU_DATA = {
@@ -285,39 +421,76 @@
                     { id: 163, name: "BONELESS BRAVA - MIEL PICANTE", price: 27900, desc: "Crujientes trozos de pollo apanado (6 unidades) bañados en salsa Miel Picante. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Miel Picante" },
                     { id: 164, name: "BONELESS BRAVA - BÚFALO", price: 28900, desc: "Crujientes trozos de pollo apanado (6 unidades) bañados en salsa Búfalo. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Búfalo" }
                 ],
-                "Salchis Personales": [
-                    { id: 201, name: "LA SENCILLA", price: 12000, desc: "La clásica del barrio: Salchicha, queso costeño, lechuga, papa francesa y salsas ahumadas de la casa.", img: IMAGES.salchi1 },
-                    { id: 202, name: "LA INDECENTE", price: 14900, desc: "Intensa: Salsachicha, butifarra, chorizo, queso costeño, papa chongo, lechuga, salsas de la casa ahumada, coronado con maiz tierno.", img: IMAGES.salchi2 },
-                    { id: 203, name: "LA CALLEJERA CORONADA", price: 18000, desc: "Algo diferente: Salchicha, butifarra y chorizo bien dorados, papas crujientes y una corona de doble tocineta, queso costeño.", img: IMAGES.salchi3 },
-                    { id: 204, name: "MIXTA CALLEJERA", price: 18900, desc: "El dúo dinámico: Salchicha, carne de res picadita al carbón y pollo con pimentón y cebolla asada queso costeño.", img: IMAGES.salchi4 }
+                "Salchis": [
+                    { id: 201, name: "LA SENCILLA", price: 12000, desc: "La clásica del barrio: Salchicha, queso costeño, lechuga, papa francesa y salsas ahumadas de la casa.", img: IMAGES.salchi1, size: "Personal" },
+                    { id: 202, name: "LA INDECENTE", price: 14900, desc: "Intensa: Salsachicha, butifarra, chorizo, queso costeño, papa chongo, lechuga, salsas de la casa ahumada, coronado con maiz tierno.", img: IMAGES.salchi2, size: "Personal" },
+                    { id: 203, name: "LA CALLEJERA CORONADA", price: 18000, desc: "Algo diferente: Salchicha, butifarra y chorizo bien dorados, papas crujientes y una corona de doble tocineta, queso costeño.", img: IMAGES.salchi3, size: "Personal" },
+                    { id: 204, name: "MIXTA CALLEJERA", price: 18900, desc: "El dúo dinámico: Salchicha, carne de res picadita al carbón y pollo con pimentón y cebolla asada queso costeño.", img: IMAGES.salchi4, size: "Personal" },
+                    { id: 301, name: "LA TRIFÁSICA AL CARBÓN", price: 30900, desc: "🔥 TOP - La favorita: Pollo, carne de res y cerdo asado. Todo combinado con salchicha y butifarra.", img: IMAGES.salchi5, isTop: true, size: "Para Dos" },
+                    { id: 302, name: "EL RANCHO", price: 29000, desc: "Para carnívoros: Chorizo parrillero, salchicha, tocineta, carne de res al carbón platano maduro en cubos papa chongo, lechuga fresca y salsas ahumadas de la casa.", img: IMAGES.salchi6, size: "Para Dos" },
+                    { id: 303, name: "LA TEQUEADORA", price: 37000, desc: "🔥 CROCANTE - La favorita: Pollo, carne de res y cerdo asados al carbon, salchicha, butifarra, chorizo parrillero, chicharon, pimentones, cebolla, queso gratinado y maiz tierno.", img: IMAGES.salchi7, isCrocante: true, size: "Para Dos" },
+                    { id: 304, name: "LA RANCHO & BRASA", price: 31900, desc: "Para carnívoros: Chorizo, salchicha, tocineta, chicharon, salchicha suiza y gratinado con papa chongo, lechuga y salsas de humo de la casa.", img: IMAGES.salchi8, size: "Para Dos" },
+                    { id: 305, name: "LA MAICERA ESPECIAL", price: 25900, desc: "Jugosa: Pollo, cerdo, salchicha y una montaña de platano maduro con salsas de la casa.", img: IMAGES.salchi9, size: "Para Dos" },
+                    { id: 306, name: "LA GRATINADA TODO TERRENO", price: 38000, desc: "El mar de queso: Pollo, cerdo, chorizo y butifarra bajo una sábana de queso mozarella, queso costeño y maiz salteado.", img: IMAGES.salchi10, size: "Para Dos" },
+                    { id: 401, name: "LA MONUMENTAL CANDELA", price: 45900, desc: "🔥 TOP - La reina de la casa: Pollo, carne de res, cerdo, chorizo parrillero, butifarra, salchicha suiza, tocineta, maiz tierno, queso gratinado.", img: IMAGES.salchi11, isTop: true, size: "Familiar" },
+                    { id: 402, name: "LA PORKY FAMILIAR", price: 39900, desc: "Especial de cerdo: Cerdo asado, chorizo, tocineta crocante, salchicha, chorizo parrillero y queso gratinado.", img: IMAGES.salchi12, size: "Familiar" },
+                    { id: 403, name: "LA BARRIADA", price: 43000, desc: "Volumen puro: Mucha salchicha, butifarra, pollo, carne de res y el toque secreto: trozos de bollo limpio asado mezclados.", img: IMAGES.salchi13, size: "Familiar" }
                 ],
-                "Salchis Para Dos": [
-                    { id: 301, name: "LA TRIFÁSICA AL CARBÓN", price: 30900, desc: "🔥 TOP - La favorita: Pollo, carne de res y cerdo asado. Todo combinado con salchicha y butifarra.", img: IMAGES.salchi5, isTop: true },
-                    { id: 302, name: "EL RANCHO", price: 29000, desc: "Para carnívoros: Chorizo parrillero, salchicha, tocineta, carne de res al carbón platano maduro en cubos papa chongo, lechuga fresca y salsas ahumadas de la casa.", img: IMAGES.salchi6 },
-                    { id: 303, name: "LA TEQUEADORA", price: 37000, desc: "🔥 CROCANTE - La favorita: Pollo, carne de res y cerdo asados al carbon, salchicha, butifarra, chorizo parrillero, chicharon, pimentones, cebolla, queso gratinado y maiz tierno.", img: IMAGES.salchi7, isCrocante: true },
-                    { id: 304, name: "LA RANCHO & BRASA", price: 31900, desc: "Para carnívoros: Chorizo, salchicha, tocineta, chicharon, salchicha suiza y gratinado con papa chongo, lechuga y salsas de humo de la casa.", img: IMAGES.salchi8 },
-                    { id: 305, name: "LA MAICERA ESPECIAL", price: 25900, desc: "Jugosa: Pollo, cerdo, salchicha y una montaña de platano maduro con salsas de la casa.", img: IMAGES.salchi9 },
-                    { id: 306, name: "LA GRATINADA TODO TERRENO", price: 38000, desc: "El mar de queso: Pollo, cerdo, chorizo y butifarra bajo una sábana de queso mozarella, queso costeño y maiz salteado.", img: IMAGES.salchi10 }
+                "Perros al Vapor": [
+                    { id: 501, name: "EL VAPORINO CLÁSICO", price: 8000, desc: "La sencillez perfecta: Salchicha al vapor, queso costeño rallado como nieve y nuestras 4 salsas acompañado con papa francesa.", img: IMAGES.perroVapor, isVapor: true },
+                    { id: 502, name: "EL POLLITO AL VAPOR", price: 13000, desc: "Súper tierno: Salchicha al vapor coronada con una montaña de pollo jugoso y mucha salsa tártara.", img: IMAGES.polloVapor, isVapor: true },
+                    { id: 503, name: "EL SUIZO VAPOROSO", price: 16000, desc: "El de siempre: Salchicha suiza premium al vapor, extra queso mozarella fundido y una lluvia de maíz tierno.", img: IMAGES.suizoVapor, isVapor: true }
                 ],
-                "Salchis Familiares": [
-                    { id: 401, name: "LA MONUMENTAL CANDELA", price: 45900, desc: "🔥 TOP - La reina de la casa: Pollo, carne de res, cerdo, chorizo parrillero, butifarra, salchicha suiza, tocineta, maiz tierno, queso gratinado.", img: IMAGES.salchi11, isTop: true },
-                    { id: 402, name: "LA PORKY FAMILIAR", price: 39900, desc: "Especial de cerdo: Cerdo asado, chorizo, tocineta crocante, salchicha, chorizo parrillero y queso gratinado.", img: IMAGES.salchi12 },
-                    { id: 403, name: "LA BARRIADA", price: 43000, desc: "Volumen puro: Mucha salchicha, butifarra, pollo, carne de res y el toque secreto: trozos de bollo limpio asado mezclados.", img: IMAGES.salchi13 }
+                "Perros Rústicos": [
+                    { id: 601, name: "EL PERRO CARBONERO", price: 12000, desc: "Sabor a calle: Salchicha asada al carbón, cebolla caramelizada, papa ripio, queso costeño asado y salsas de la casa.", img: IMAGES.perroCarbon, isRustico: true },
+                    { id: 602, name: "EL PERRO PORKY-CANDELA", price: 18000, desc: "Puro poder: Salchicha al carbón coronada con trozos de cerdo asado y tocineta crocante, bañado en BBQ, salsa tartara de humo.", img: IMAGES.perroPorky, isRustico: true },
+                    { id: 603, name: "EL CHUZIPERRO MIXTO", price: 22000, desc: "La locura del menú: Un perro al carbón con salchicha suiza, queso fundido, pollo, maiz tierno papa ripio y salsas de la casa.", img: IMAGES.perroChuzi, isRustico: true },
+                    { id: 604, name: "EL PERRO CHORIZADO", price: 15000, desc: "Intensidad pura: Chorizo antioqueño abierto en mariposa y asado al carbón, con salsas, papa ripio, queso costeño.", img: IMAGES.perroChorizo, isRustico: true }
                 ],
                 "Burguers": [
-                    { id: 501, name: "Hamburgesa de la Selva", price: 29000, desc: "Res seleccionada, queso fundido y cebollas crujientes.", img: IMAGES.burger }
+                    { id: 701, name: "LA CLÁSICA DE LA CUADRA", price: 12900, desc: "El sabor real: Carne de res asada al carbón, queso asado, lechuga fresca, tomate y cebolla blanca. El toque: Bañada en nuestra Tártara Ceniza. Es la hamburguesa 'de confianza' pero con sabor a asado de verdad.", img: IMAGES.burger },
+                    { id: 702, name: "LA POLLO-CRUNCH PARRILLERA", price: 18900, desc: "Doble textura: Filete de pollo marinado y asado al carbón, coronado con una capa de chicharrón. El toque: Queso mozarella fundido, lechuga y nuestra Salsa de Piña Melosa que va increíble con el pollo.", img: IMAGES.burger2 },
+                    { id: 703, name: "LA PORKY", price: 15900, desc: "La diferente: Carne de res, pero encima lleva tocineta y trozos de chorizo parrillero. El toque: Doble queso y cebolla caramelizada. Es una explosión de sabor ahumado y dulce.", img: IMAGES.burger3 },
+                    { id: 704, name: "LA TRIFÁSICA MONSTRUOSA", price: 18000, desc: "Para los que no se deciden: Carne de res, filete de pollo al carbón, huevo y platano. El toque: Una sábana de queso mozarella gratinado coronado con maiz tierno. ¡Es pesada y gloriosa!", img: IMAGES.burger4 },
+                    { id: 705, name: "LA CHORIPÁN-BURGER", price: 15000, desc: "Estilo parrillero: Carne de res coronada con chorizo antioqueño abierto a la mitad y asado hasta que quede 'traqueador'. El toque: Muchas salsas y ripio de papa para el toque crocante.", img: IMAGES.burger5 },
+                    { id: 706, name: "LA CANDELA SUPREMA", price: 18900, desc: "🔥 TOP - El reto: Pan brioche de la casa, carne de res artesanal, doble queso fundido, tocineta ahumada al carbón, pollo y un huevo frito con la yema blandita, cebolla caramelizada y tomate fresco. El toque: Servida con una pequeña porción de papas fritas como acompañante.", img: IMAGES.burger6, isTop: true },
+                    { id: 707, name: "ARTISAN HOUSE", price: 20900, desc: "🔥 LA DE LA CASA - Carne artesanal de molienda selecta y tocineta crocante, fundidas en queso y resguardadas en un pan brioche de la casa. Acompañado con cebollas encurtidas de la casa y pepinillos, sobre vegetales frescos del huerto. Se acompaña de papas rústicas.", img: IMAGES.burger7, isArtisan: true }
                 ],
-                "Perros Calientes": [
-                    { id: 601, name: "Perro de Autor", price: 18000, desc: "Pan artesanal, salchicha jumbo y lluvia de ripio.", img: IMAGES.hotdog }
+                "Jugos Naturales": [
+                    { id: 801, name: "Jugo de Corozo", price: 2500, desc: "Jugo de corozo con un toque de sabor a canela. Refrescancia 100% natural, sin conservantes.", isJugo: true },
+                    { id: 802, name: "Jugo de Tamarindo", price: 3000, desc: "Refrescante y con sabor tradicional. Refrescancia 100% natural, sin conservantes.", isJugo: true },
+                    { id: 803, name: "Limonada de Coco", price: 6000, desc: "La combinación perfecta de limón y coco. Refrescancia 100% natural, sin conservantes.", isJugo: true },
+                    { id: 804, name: "Limonada Cerezada", price: 6000, desc: "Dulce y refrescante con toque de cereza. Refrescancia 100% natural, sin conservantes.", isJugo: true }
                 ],
-                "Bebidas": [
-                    { id: 701, name: "Limonada Natural", price: 7500, desc: "Cítricos frescos de la región.", img: IMAGES.lemonade },
-                    { id: 702, name: "Gaseosa", price: 5000, desc: "Variedad de sabores.", img: IMAGES.coffee }
+                "Gaseosas": [
+                    { id: 901, name: "Coca-Cola Original 400ml", price: 3500, desc: "Bébelo, disfrútalo y que nadie te quite la sonrisa. Botella PET.", isGaseosa: true },
+                    { id: 902, name: "Postobón Surtido", price: 2500, desc: "Bébelo, disfrútalo y que nadie te quite la sonrisa. Manzana, uva, kola, colombiana.", isGaseosa: true }
+                ],
+                "Cocteles Especiales": [
+                    { id: 1001, name: "Cuba Libre", price: 12000, desc: "El toque perfecto para acompañar tu comida. Ron, Coca-Cola, limón.", isCocktail: true },
+                    { id: 1002, name: "Corozo Frozen Mist", price: 14000, desc: "El toque perfecto para acompañar tu comida. Ron, jugo de corozo frappé, limón.", isCocktail: true },
+                    { id: 1003, name: "Cristal Rum", price: 13000, desc: "El toque perfecto para acompañar tu comida. Ron, zumo de limón y un toque de miel coronado con soda y mucho hielo.", isCocktail: true }
                 ]
             }
         };
 
-        const ItemCard = ({ item, onAdd, delay, isHorizontal }) => {
+        const SectionHeader = ({ title, subtitle }) => (
+            <div className="section-header flex-shrink-0">
+                <h4 className="section-header-title">{title}</h4>
+                <div className="section-header-line"></div>
+                {subtitle && <p className="section-header-subtitle">{subtitle}</p>}
+            </div>
+        );
+
+        const VerticalSectionHeader = ({ title, subtitle }) => (
+            <div className="vertical-section-header">
+                <h4 className="vertical-section-title">{title}</h4>
+                <div className="vertical-section-line"></div>
+                {subtitle && <p className="vertical-section-subtitle">{subtitle}</p>}
+            </div>
+        );
+
+        const ItemCard = ({ item, onAdd, delay, isHorizontal, isVertical }) => {
             const [added, setAdded] = useState(false);
 
             const handleAdd = () => {
@@ -339,8 +512,14 @@
                         <div className="px-1">
                             {item.isTop && <span className="badge-top">🔥 TOP</span>}
                             {item.isCrocante && <span className="badge-crocante">🔥 CROCANTE</span>}
+                            {item.isVapor && <span className="badge-vapor">💨 AL VAPOR</span>}
+                            {item.isRustico && <span className="badge-rustico">🔥 AL CARBÓN</span>}
+                            {item.isArtisan && <span className="badge-artesanal">🏠 ARTESANAL</span>}
+                            {item.isJugo && <span className="badge-jugo">🧃 NATURAL</span>}
+                            {item.isGaseosa && <span className="badge-gaseosa">🥤 GASEOSA</span>}
+                            {item.isCocktail && <span className="badge-cocktail">🍹 COCTEL</span>}
                             {item.sauceName && <span className="sauce-badge">🌶️ Salsa {item.sauceName}</span>}
-                            <p className="text-base italic opacity-80 font-light leading-snug mb-3 line-clamp-3">{item.desc}</p>
+                            <p className="text-base italic opacity-80 font-light leading-snug mb-3 line-clamp-4">{item.desc}</p>
                         </div>
                         
                         <div className="flex justify-between items-center px-1 mt-2">
@@ -356,25 +535,31 @@
                 );
             }
 
+            // Vertical card (for Salchis and Beverages)
             return (
-                <div className="reveal" style={{ animationDelay: delay }}>
-                    <div className="group relative aspect-[16/10] rounded-lg overflow-hidden shadow-lg mb-5 border border-black/5">
-                        <img src={item.img} className="w-full h-full object-cover grayscale-[5%] transition-transform duration-1000 group-hover:scale-110" alt={item.name} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                        <div className="absolute bottom-4 left-5 text-white">
-                            <h4 className="text-3xl italic font-medium tracking-wide">{item.name}</h4>
+                <div className="reveal flex gap-4 mb-6 items-start" style={{ animationDelay: delay }}>
+                    {item.img && (
+                        <div className="w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden shadow-md border border-black/5">
+                            <img src={item.img} className="w-full h-full object-cover grayscale-[5%]" alt={item.name} />
                         </div>
-                    </div>
-                    <div className="flex justify-between items-start mb-1">
-                        <p className="text-xl italic opacity-80 font-light leading-snug flex-1 mr-6">{item.desc}</p>
-                        <p className="text-2xl font-bold tracking-tighter text-brava">${item.price.toLocaleString()}</p>
-                    </div>
-                    <div className="flex justify-end">
+                    )}
+                    <div className="flex-1">
+                        <div className="flex justify-between items-start mb-1">
+                            <h4 className="text-xl italic font-medium">{item.name}</h4>
+                            <p className="text-lg font-bold text-brava">${item.price.toLocaleString()}</p>
+                        </div>
+                        {item.isTop && <span className="badge-top">🔥 TOP</span>}
+                        {item.isCrocante && <span className="badge-crocante">🔥 CROCANTE</span>}
+                        {item.isArtisan && <span className="badge-artesanal">🏠 ARTESANAL</span>}
+                        {item.isJugo && <span className="badge-jugo">🧃 NATURAL</span>}
+                        {item.isGaseosa && <span className="badge-gaseosa">🥤 GASEOSA</span>}
+                        {item.isCocktail && <span className="badge-cocktail">🍹 COCTEL</span>}
+                        <p className="text-sm italic opacity-70 font-light leading-snug mb-2">{item.desc}</p>
                         <button 
                             onClick={handleAdd}
-                            className="btn-add-subtle uppercase-elegant !text-[10px] font-bold"
+                            className="btn-add-subtle uppercase-elegant !text-[8px] font-bold"
                         >
-                            {added ? "Seleccionado 🌿" : "Agregar a la selección"}
+                            {added ? "Seleccionado 🌿" : "Agregar"}
                         </button>
                     </div>
                 </div>
@@ -484,6 +669,33 @@
 
             const currentItems = scene === 'tarde' ? MENU_DATA.tarde : MENU_DATA.parrilla[activeSub];
             const isParrilla = scene === 'parrilla';
+            const isSalchis = activeSub === "Salchis";
+            const isBeverage = ["Jugos Naturales", "Gaseosas", "Cocteles Especiales"].includes(activeSub);
+
+            const getSalchisBySize = () => {
+                const sizes = [
+                    { key: "Personal", title: "Personales", subtitle: "Para uno" },
+                    { key: "Para Dos", title: "Para Dos", subtitle: "Para compartir" },
+                    { key: "Familiar", title: "Familiares", subtitle: "Para todos" }
+                ];
+                
+                const result = [];
+                sizes.forEach(sizeInfo => {
+                    const itemsOfSize = currentItems.filter(item => item.size === sizeInfo.key);
+                    if (itemsOfSize.length > 0) {
+                        result.push({
+                            type: 'section',
+                            title: sizeInfo.title,
+                            subtitle: sizeInfo.subtitle,
+                            items: itemsOfSize
+                        });
+                    }
+                });
+                
+                return result;
+            };
+
+            const salchisSections = isSalchis ? getSalchisBySize() : [];
 
             return (
                 <div className="min-h-screen relative">
@@ -502,7 +714,7 @@
                         </button>
                     </header>
 
-                    <main className="pt-32 px-6 max-w-6xl mx-auto relative z-10">
+                    <main className="pt-32 px-6 max-w-4xl mx-auto relative z-10 pb-40">
                         <div className="text-center mb-12 reveal">
                             <h3 className="text-5xl italic font-light">{scene === 'tarde' ? 'Dulce Atardecer' : 'La Brasa de Autor'}</h3>
                             <div className="h-1 w-12 bg-brava mx-auto mt-4 rounded-full opacity-60"></div>
@@ -522,30 +734,69 @@
                             </div>
                         )}
 
-                        <div className="relative">
-                            <div 
-                                className={`flex overflow-x-auto gap-6 pb-8 no-scrollbar ${isParrilla ? 'horizontal-scroll' : ''}`}
-                                style={{ scrollBehavior: 'smooth' }}
-                            >
+                        {!isSalchis && !isBeverage && (
+                            <div className="relative">
+                                <div 
+                                    className={`flex overflow-x-auto gap-6 pb-8 no-scrollbar ${isParrilla ? 'horizontal-scroll' : ''}`}
+                                    style={{ scrollBehavior: 'smooth' }}
+                                >
+                                    {currentItems.map((item, idx) => (
+                                        <ItemCard 
+                                            key={item.id} 
+                                            item={item} 
+                                            onAdd={addToCart} 
+                                            delay={`${idx * 0.1}s`}
+                                            isHorizontal={isParrilla}
+                                        />
+                                    ))}
+                                </div>
+                                
+                                {isParrilla && currentItems.length > 1 && (
+                                    <div className="flex justify-center items-center gap-2 mt-2 text-xs opacity-40 italic scroll-hint">
+                                        <span>← Desliza para ver más →</span>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {isSalchis && (
+                            <div className="space-y-8">
+                                {salchisSections.map((section, sectionIdx) => (
+                                    <div key={sectionIdx}>
+                                        <VerticalSectionHeader title={section.title} subtitle={section.subtitle} />
+                                        <div className="space-y-2">
+                                            {section.items.map((item, itemIdx) => (
+                                                <ItemCard 
+                                                    key={item.id} 
+                                                    item={item} 
+                                                    onAdd={addToCart} 
+                                                    delay={`${(sectionIdx * 10 + itemIdx) * 0.1}s`}
+                                                    isHorizontal={false}
+                                                    isVertical={true}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {isBeverage && (
+                            <div className="space-y-6">
                                 {currentItems.map((item, idx) => (
                                     <ItemCard 
                                         key={item.id} 
                                         item={item} 
                                         onAdd={addToCart} 
                                         delay={`${idx * 0.1}s`}
-                                        isHorizontal={isParrilla}
+                                        isHorizontal={false}
+                                        isVertical={true}
                                     />
                                 ))}
                             </div>
-                            
-                            {isParrilla && currentItems.length > 1 && (
-                                <div className="flex justify-center items-center gap-2 mt-2 text-xs opacity-40 italic scroll-hint">
-                                    <span>← Desliza para ver más →</span>
-                                </div>
-                            )}
-                        </div>
+                        )}
 
-                        {isParrilla && currentItems.length > 1 && (
+                        {isParrilla && currentItems.length > 1 && !isSalchis && !isBeverage && (
                             <div className="flex justify-center gap-2 mt-4">
                                 {currentItems.map((_, idx) => (
                                     <div 
