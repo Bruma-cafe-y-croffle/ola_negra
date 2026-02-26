@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Braza Brava | Menú Experiencia Elegante</title>
     
-    <!-- Scripts Base -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fuente Elegante: Cormorant Garamond -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
     
     <style>
@@ -174,6 +172,15 @@
             transform: translateY(-3px);
             opacity: 0.8;
         }
+
+        .scroll-hint {
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
     </style>
 </head>
 <body>
@@ -188,13 +195,23 @@
             </svg>
         );
 
-        const ToucanLogo = () => (
-            <div className="relative w-24 h-24 mb-4 opacity-95">
+        const ToucanLogo = ({ size = "w-24 h-24" }) => (
+            <div className={`relative ${size} mb-4 opacity-95`}>
                 <svg viewBox="0 0 100 100" className="w-full h-full">
                     <path d="M70 20 C50 20 30 35 30 55 C30 75 50 85 50 85 C50 85 70 75 70 55 C70 40 60 25 50 25" fill="#1b261b" />
                     <path d="M50 25 C65 25 85 30 90 45 L50 55 Z" fill="#f97316" />
                     <path d="M50 55 L90 45 C85 60 75 70 50 70 Z" fill="#dc2626" />
                     <circle cx="45" cy="40" r="1.5" fill="white" />
+                </svg>
+            </div>
+        );
+
+        const SimpleToucanLogo = () => (
+            <div className="relative w-16 h-16 opacity-80">
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <path d="M70 20 C50 20 30 35 30 55 C30 75 50 85 50 85 C50 85 70 75 70 55 C70 40 60 25 50 25" fill="#f4f1ea" />
+                    <path d="M50 25 C65 25 85 30 90 45 L50 55 Z" fill="#f97316" />
+                    <path d="M50 55 L90 45 C85 60 75 70 50 70 Z" fill="#dc2626" />
                 </svg>
             </div>
         );
@@ -249,15 +266,12 @@
             ],
             parrilla: {
                 "Platos de la Casa": [
-                    { id: 101, name: "Costillas Braza Brava", price: 46000, desc: "Cocción lenta por 8 horas en melaza orgánica y especias.", img: IMAGES.ribs },
-                    { id: 102, name: "Picada Brava", price: 38000, desc: "Ensamble de carnes nobles, papa criolla y guacamole.", img: IMAGES.picada },
                     { id: 103, name: "CUZZETIELLO POLPETTA NAPOLITANO", price: 28900, desc: "Pan artesanal redondo relleno de jugosas albóndigas napolitanas bañadas en salsa roja casera y cubiertas con queso fundido, gratinado al momento.", img: IMAGES.polpetta },
                     { id: 104, name: "CUZZETIELLO BIANCO DI POLLO", price: 27900, desc: "Pan artesanal relleno de pollo desmechado en salsa blanca cremosa, con maíz dulce y queso fundido, gratinado hasta quedar dorado.", img: IMAGES.bianco },
                     { id: 105, name: "CHEESESTEAK BRAVA DE RES", price: 32900, desc: "Pan francés tostado, ligeramente crujiente por fuera y suave por dentro, relleno de carne salteada al punto, bañada en cremosa salsa de queso, acompañada de lechuga fresca, tomate en rodajas y cebolla caramelizada. Servido con papas francesas doradas y crujientes.", img: IMAGES.cheesesteak },
                     { id: 106, name: "PAN PIZZA PEPPERONI BRAVA", price: 24900, desc: "Pan francés tostado con mantequilla de ajo, cubierto con pasta de tomate artesanal, abundante queso mozzarella fundido y pepperoni dorado al horno. Crujiente por fuera, suave y jugoso por dentro.", img: IMAGES.pizza },
                     { id: 107, name: "PERRO FRANCÉS BRAVA", price: 21900, desc: "Pan francés relleno con salchicha caliente, queso fundido y tocineta caramelizada crujiente, sellado al momento para mantener todo el sabor en cada mordida.", img: IMAGES.perroBrava },
-                    { id: 108, name: "PERRO FRANCÉS TROPICAL", price: 23900, desc: "Pan francés relleno con salchicha, queso fundido, chicharrón crocante y piña caramelizada, creando un contraste perfecto entre dulce y salado.", img: IMAGES.perroTropical },
-                    { id: 109, name: "BONELESS BRAVA", price: 26900, desc: "Crujientes trozos de pollo apanado, dorados al punto. Acompañados de papas francesas.", img: IMAGES.boneless, hasSauce: true }
+                    { id: 108, name: "PERRO FRANCÉS TROPICAL", price: 23900, desc: "Pan francés relleno con salchicha, queso fundido, chicharrón crocante y piña caramelizada, creando un contraste perfecto entre dulce y salado.", img: IMAGES.perroTropical }
                 ],
                 "Alitas Brava": [
                     { id: 151, name: "ALITAS BRAVA - BBQ", price: 22900, desc: "Alitas doradas y crujientes (6 unidades) bañadas en salsa BBQ. Acompañadas de bollo o papas francesas.", img: IMAGES.wings, sauceName: "BBQ" },
@@ -272,23 +286,23 @@
                     { id: 164, name: "BONELESS BRAVA - BÚFALO", price: 28900, desc: "Crujientes trozos de pollo apanado (6 unidades) bañados en salsa Búfalo. Acompañados de papas francesas.", img: IMAGES.boneless, sauceName: "Búfalo" }
                 ],
                 "Salchis Personales": [
-                    { id: 201, name: "LA SENCILLA \"PA´ EL VACILE\"", price: 12000, desc: "La clásica del barrio: Salchicha, queso costeño, lechuga, papa francesa y salsas ahumadas de la casa.", img: IMAGES.salchi1 },
-                    { id: 202, name: "LA \"INDECENTE\"", price: 14900, desc: "Intensa: Salsachicha, butifarra, chorizo, queso costeño, papa chongo, lechuga, salsas de la casa ahumada, coronado con maiz tierno.", img: IMAGES.salchi2 },
-                    { id: 203, name: "LA \"CALLEJERA CORONADA\"", price: 18000, desc: "Algo diferente: Salchicha, butifarra y chorizo bien dorados, papas crujientes y una corona de doble tocineta, queso costeño que no pide permiso 🥓.", img: IMAGES.salchi3 },
-                    { id: 204, name: "MIXTA CALLEJERA", price: 18900, desc: "El dúo dinámico: Salchicha, carne de res picadita al carbón y pollo con pimentón y cebolla asada queso costeño. ¡No necesita más!", img: IMAGES.salchi4 }
+                    { id: 201, name: "LA SENCILLA", price: 12000, desc: "La clásica del barrio: Salchicha, queso costeño, lechuga, papa francesa y salsas ahumadas de la casa.", img: IMAGES.salchi1 },
+                    { id: 202, name: "LA INDECENTE", price: 14900, desc: "Intensa: Salsachicha, butifarra, chorizo, queso costeño, papa chongo, lechuga, salsas de la casa ahumada, coronado con maiz tierno.", img: IMAGES.salchi2 },
+                    { id: 203, name: "LA CALLEJERA CORONADA", price: 18000, desc: "Algo diferente: Salchicha, butifarra y chorizo bien dorados, papas crujientes y una corona de doble tocineta, queso costeño.", img: IMAGES.salchi3 },
+                    { id: 204, name: "MIXTA CALLEJERA", price: 18900, desc: "El dúo dinámico: Salchicha, carne de res picadita al carbón y pollo con pimentón y cebolla asada queso costeño.", img: IMAGES.salchi4 }
                 ],
                 "Salchis Para Dos": [
-                    { id: 301, name: "LA \"TRIFÁSICA\" AL CARBÓN", price: 30900, desc: "🔥 TOP - La favorita: Pollo, carne de res y cerdo asado. Todo combinado con salchicha y butifarra.", img: IMAGES.salchi5, isTop: true },
-                    { id: 302, name: "\"EL RANCHO\"", price: 29000, desc: "Para carnívoros: Chorizo parrillero, salchicha, tocineta, carne de res al carbón platano maduro en cubos papa chongo, lechuga fresca y salsas ahumadas de la casa.", img: IMAGES.salchi6 },
-                    { id: 303, name: "LA \"TEQUEADORA\"", price: 37000, desc: "🔥 CROCANTE - La favorita: Pollo, carne de res y cerdo asados al carbon, salchicha, butifarra, chorizo parrillero, chicharon, pimentones, cebolla, queso gratinado y maiz tierno.", img: IMAGES.salchi7, isCrocante: true },
-                    { id: 304, name: "LA \"RANCHO & BRASA\"", price: 31900, desc: "Para carnívoros: Chorizo, salchicha, tocineta, chicharon, salchicha suiza y gratinado con papa chongo, lechuga y salsas de humo de la casa.", img: IMAGES.salchi8 },
-                    { id: 305, name: "LA \"MAICERA ESPECIAL\"", price: 25900, desc: "Jugosa: Pollo, cerdo, salchicha y una montaña de platano maduro con salsas de la casa.", img: IMAGES.salchi9 },
-                    { id: 306, name: "LA GRATINADA \"TODO TERRENO\"", price: 38000, desc: "El mar de queso: Pollo, cerdo, chorizo y butifarra bajo una sábana de queso mozarella, queso costeño y maiz salteado.", img: IMAGES.salchi10 }
+                    { id: 301, name: "LA TRIFÁSICA AL CARBÓN", price: 30900, desc: "🔥 TOP - La favorita: Pollo, carne de res y cerdo asado. Todo combinado con salchicha y butifarra.", img: IMAGES.salchi5, isTop: true },
+                    { id: 302, name: "EL RANCHO", price: 29000, desc: "Para carnívoros: Chorizo parrillero, salchicha, tocineta, carne de res al carbón platano maduro en cubos papa chongo, lechuga fresca y salsas ahumadas de la casa.", img: IMAGES.salchi6 },
+                    { id: 303, name: "LA TEQUEADORA", price: 37000, desc: "🔥 CROCANTE - La favorita: Pollo, carne de res y cerdo asados al carbon, salchicha, butifarra, chorizo parrillero, chicharon, pimentones, cebolla, queso gratinado y maiz tierno.", img: IMAGES.salchi7, isCrocante: true },
+                    { id: 304, name: "LA RANCHO & BRASA", price: 31900, desc: "Para carnívoros: Chorizo, salchicha, tocineta, chicharon, salchicha suiza y gratinado con papa chongo, lechuga y salsas de humo de la casa.", img: IMAGES.salchi8 },
+                    { id: 305, name: "LA MAICERA ESPECIAL", price: 25900, desc: "Jugosa: Pollo, cerdo, salchicha y una montaña de platano maduro con salsas de la casa.", img: IMAGES.salchi9 },
+                    { id: 306, name: "LA GRATINADA TODO TERRENO", price: 38000, desc: "El mar de queso: Pollo, cerdo, chorizo y butifarra bajo una sábana de queso mozarella, queso costeño y maiz salteado.", img: IMAGES.salchi10 }
                 ],
                 "Salchis Familiares": [
-                    { id: 401, name: "LA \"MONUMENTAL\" CANDELA", price: 45900, desc: "🔥 TOP - La reina de la casa: Pollo, carne de res, cerdo, chorizo parrillero, butifarra, salchicha suiza, tocineta, maiz tierno, queso gratinado.", img: IMAGES.salchi11, isTop: true },
-                    { id: 402, name: "LA \"PORKY\" FAMILIAR", price: 39900, desc: "Especial de cerdo: Cerdo asado, chorizo, tocineta crocante, salchicha, chorizo parrillero y queso gratinado.", img: IMAGES.salchi12 },
-                    { id: 403, name: "LA \"BARRIADA\"", price: 43000, desc: "Volumen puro: Mucha salchicha, butifarra, pollo, carne de res y el toque secreto: trozos de bollo limpio asado mezclados.", img: IMAGES.salchi13 }
+                    { id: 401, name: "LA MONUMENTAL CANDELA", price: 45900, desc: "🔥 TOP - La reina de la casa: Pollo, carne de res, cerdo, chorizo parrillero, butifarra, salchicha suiza, tocineta, maiz tierno, queso gratinado.", img: IMAGES.salchi11, isTop: true },
+                    { id: 402, name: "LA PORKY FAMILIAR", price: 39900, desc: "Especial de cerdo: Cerdo asado, chorizo, tocineta crocante, salchicha, chorizo parrillero y queso gratinado.", img: IMAGES.salchi12 },
+                    { id: 403, name: "LA BARRIADA", price: 43000, desc: "Volumen puro: Mucha salchicha, butifarra, pollo, carne de res y el toque secreto: trozos de bollo limpio asado mezclados.", img: IMAGES.salchi13 }
                 ],
                 "Burguers": [
                     { id: 501, name: "Hamburgesa de la Selva", price: 29000, desc: "Res seleccionada, queso fundido y cebollas crujientes.", img: IMAGES.burger }
@@ -368,43 +382,47 @@
         };
 
         const Footer = () => (
-            <footer className="bg-[#1b261b] text-[#f4f1ea] py-12 px-6 mt-20">
+            <footer className="bg-[#1b261b] text-[#f4f1ea] py-16 px-6 mt-20 border-t-2 border-brava/20">
                 <div className="max-w-4xl mx-auto">
                     <div className="flex flex-col items-center justify-center space-y-6">
-                        {/* Logo pequeño */}
-                        <div className="opacity-60">
-                            <ToucanLogo />
-                        </div>
+                        <SimpleToucanLogo />
                         
-                        {/* Redes Sociales */}
-                        <div className="flex items-center gap-6">
+                        <h3 className="text-3xl italic font-light tracking-tight">Braza Brava</h3>
+                        
+                        <div className="flex items-center gap-8">
                             <a 
                                 href="https://wa.me/573205712682" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="social-icon text-[#f4f1ea] hover:text-brava transition-colors"
+                                className="social-icon text-[#f4f1ea] hover:text-brava transition-colors flex flex-col items-center gap-2"
                             >
-                                <WhatsAppIcon className="w-8 h-8" />
+                                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                                    <WhatsAppIcon className="w-6 h-6" />
+                                </div>
+                                <span className="uppercase-elegant !text-[8px] opacity-60">WhatsApp</span>
                             </a>
                             <a 
                                 href="https://instagram.com/brazabrava" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="social-icon text-[#f4f1ea] hover:text-brava transition-colors"
+                                className="social-icon text-[#f4f1ea] hover:text-brava transition-colors flex flex-col items-center gap-2"
                             >
-                                <InstagramIcon className="w-8 h-8" />
+                                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                                    <InstagramIcon className="w-6 h-6" />
+                                </div>
+                                <span className="uppercase-elegant !text-[8px] opacity-60">Instagram</span>
                             </a>
                         </div>
                         
-                        {/* Texto de derechos reservados */}
-                        <div className="text-center space-y-2">
-                            <p className="uppercase-elegant opacity-60 !text-[10px]">© 2025 Braza Brava</p>
+                        <div className="w-24 h-px bg-brava/30 my-4"></div>
+                        
+                        <div className="text-center space-y-3">
+                            <p className="uppercase-elegant opacity-50 !text-[9px]">© 2025 Braza Brava</p>
                             <p className="text-lg italic opacity-40">Todos los derechos reservados</p>
                             <p className="uppercase-elegant opacity-30 !text-[8px] tracking-wider">Calle 7b #57-79 Villa Olímpica</p>
                         </div>
                         
-                        {/* Decoración de hoja */}
-                        <LeafSVG className="w-16 h-16 opacity-10 mt-4" />
+                        <LeafSVG className="w-12 h-12 opacity-15 mt-6" />
                     </div>
                 </div>
             </footer>
@@ -415,7 +433,6 @@
             const [activeSub, setActiveSub] = useState("Platos de la Casa");
             const [cart, setCart] = useState([]);
             const [showCart, setShowCart] = useState(false);
-            const scrollContainerRef = useRef(null);
 
             const addToCart = (item) => {
                 setCart(prev => {
@@ -432,18 +449,6 @@
                 cart.forEach(i => text += `🌿 ${i.qty}x ${i.name} — $${(i.price * i.qty).toLocaleString()}\n`);
                 text += `\n*Total: $${total.toLocaleString()}*`;
                 window.open(`https://wa.me/573205712682?text=${encodeURIComponent(text)}`);
-            };
-
-            const scrollLeft = () => {
-                if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-                }
-            };
-
-            const scrollRight = () => {
-                if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-                }
             };
 
             if (scene === 'landing') {
@@ -517,31 +522,8 @@
                             </div>
                         )}
 
-                        {/* Horizontal Scroll for Items */}
-                        <div className="relative group">
-                            {currentItems.length > 1 && (
-                                <>
-                                    <button 
-                                        onClick={scrollLeft}
-                                        className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-brava hover:text-white transition-all"
-                                    >
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                        </svg>
-                                    </button>
-                                    <button 
-                                        onClick={scrollRight}
-                                        className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-brava hover:text-white transition-all"
-                                    >
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </button>
-                                </>
-                            )}
-                            
+                        <div className="relative">
                             <div 
-                                ref={scrollContainerRef}
                                 className={`flex overflow-x-auto gap-6 pb-8 no-scrollbar ${isParrilla ? 'horizontal-scroll' : ''}`}
                                 style={{ scrollBehavior: 'smooth' }}
                             >
@@ -555,9 +537,14 @@
                                     />
                                 ))}
                             </div>
+                            
+                            {isParrilla && currentItems.length > 1 && (
+                                <div className="flex justify-center items-center gap-2 mt-2 text-xs opacity-40 italic scroll-hint">
+                                    <span>← Desliza para ver más →</span>
+                                </div>
+                            )}
                         </div>
 
-                        {/* Navigation Indicators */}
                         {isParrilla && currentItems.length > 1 && (
                             <div className="flex justify-center gap-2 mt-4">
                                 {currentItems.map((_, idx) => (
@@ -570,10 +557,8 @@
                         )}
                     </main>
 
-                    {/* Footer */}
                     <Footer />
 
-                    {/* CARRITO */}
                     {showCart && (
                         <div className="fixed inset-0 z-[100] flex justify-end">
                             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowCart(false)}></div>
