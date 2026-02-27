@@ -214,6 +214,46 @@
             margin-bottom: 4px;
         }
 
+        .badge-cafe {
+            background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+            color: white;
+            font-size: 0.55rem;
+            padding: 2px 6px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-waffle {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            font-size: 0.55rem;
+            padding: 2px 6px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-frappe {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            font-size: 0.55rem;
+            padding: 2px 6px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .badge-panaderia {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            color: white;
+            font-size: 0.55rem;
+            padding: 2px 6px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
         .sauce-badge {
             background: rgba(249, 115, 22, 0.1);
             color: var(--brava-orange);
@@ -307,7 +347,6 @@
             border-radius: 2px;
         }
 
-        /* Mobile optimizations */
         @media (max-width: 640px) {
             .horizontal-scroll-item {
                 min-width: 280px !important;
@@ -375,7 +414,17 @@
 
         const IMAGES = {
             waffle: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/138b450bf-8531-48bd-a8a5-b134f87eb869.png",
+            waffleArandano: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1a2b3c4d5-6e7f-8g9h-0i1j-2k3l4m5n6o7p.png",
+            waffleAlmendras: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1b3c4d5e6-7f8g-9h0i-1j2k-3l4m5n6o7p8q.png",
+            waffleGirasol: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c4d5e6f7-8g9h-0i1j-2k3l-4m5n6o7p8q9r.png",
             coffee: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/183351d0f-e451-4a0b-aca1-2d3a5baa308d.png",
+            espresso: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1d5e6f7a8-9h0i-1j2k-3l4m-5n6o7p8q9r0s.png",
+            cafeOlla: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1e6f7a8b9-0i1j-2k3l-4m5n-6o7p8q9r0s1t.png",
+            cafeCanela: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1f7a8b9c0-1j2k-3l4m-5n6o-7p8q9r0s1t2u.png",
+            cafeVainilla: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1a8b9c0d1-2k3l-4m5n-6o7p-8q9r0s1t2u3v.png",
+            panaderia: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1b9c0d1e2-3l4m-5n6o-7p8q-9r0s1t2u3v4w.png",
+            frappe: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c0d1e2f3-4m5n-6o7p-8q9r-0s1t2u3v4w5x.png",
+            frappeMango: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1d1e2f3a4-5n6o-7p8q-9r0s-1t2u3v4w5x6y.png",
             ribs: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1dde13a9b-73d6-4e06-a4e1-480beac44148.png",
             picada: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1f4c5e9e2-97ec-4c44-9ad1-aa4fcfad7b9c.png",
             hotdog: "https://image.qwenlm.ai/public_source/23ed0034-6901-4098-92b5-6350eee317b0/1c662673c-41aa-4bba-a94d-6ad456293f68.png",
@@ -415,10 +464,31 @@
         };
 
         const MENU_DATA = {
-            tarde: [
-                { id: 1, name: "Waffle Silvestre", price: 21000, desc: "Frutos rojos recolectados, miel de abejas de la reserva.", img: IMAGES.waffle },
-                { id: 2, name: "Tinto de Montaña", price: 5500, desc: "Grano seleccionado de la Sierra Nevada.", img: IMAGES.coffee }
-            ],
+            tarde: {
+                "Café de Especialidad": [
+                    { id: 1, name: "Espresso Sierra", price: 5500, desc: "Café de especialidad de la Sierra. Intenso y aromático.", img: IMAGES.espresso, isCafe: true },
+                    { id: 2, name: "Café de Olla", price: 6000, desc: "Café de especialidad de la Sierra preparado tradicionalmente con canela y panela.", img: IMAGES.cafeOlla, isCafe: true },
+                    { id: 3, name: "Café de Canela", price: 6000, desc: "Café de especialidad de la Sierra con un toque suave de canela.", img: IMAGES.cafeCanela, isCafe: true },
+                    { id: 4, name: "Café Vainilla", price: 6500, desc: "Café de especialidad de la Sierra con esencia natural de vainilla.", img: IMAGES.cafeVainilla, isCafe: true }
+                ],
+                "Panadería": [
+                    { id: 10, name: "Pan Artesanal", price: 8000, desc: "Pan recién horneado de la casa. Perfecto para acompañar tu café.", img: IMAGES.panaderia, isPanaderia: true },
+                    { id: 11, name: "Croissant de Mantequilla", price: 9000, desc: "Croissant francés horneado diariamente. Crujiente por fuera, suave por dentro.", img: IMAGES.panaderia, isPanaderia: true },
+                    { id: 12, name: "Pan de Queso", price: 7500, desc: "Pan tradicional con queso costeño. Ideal para compartir.", img: IMAGES.panaderia, isPanaderia: true }
+                ],
+                "Waffles Artesanales": [
+                    { id: 20, name: "Waffle de Arándano", price: 18000, desc: "Waffle artesanal con relleno de arándanos frescos y miel.", img: IMAGES.waffleArandano, isWaffle: true },
+                    { id: 21, name: "Waffle de Almendras", price: 19000, desc: "Waffle artesanal con almendras tostadas y miel de abejas.", img: IMAGES.waffleAlmendras, isWaffle: true },
+                    { id: 22, name: "Waffle de Girasol", price: 18500, desc: "Waffle artesanal con semillas de girasol y miel.", img: IMAGES.waffleGirasol, isWaffle: true },
+                    { id: 23, name: "Waffle Mixto", price: 21000, desc: "Waffle artesanal con arándanos, almendras y semillas de girasol.", img: IMAGES.waffle, isWaffle: true }
+                ],
+                "Bebidas Frappé": [
+                    { id: 30, name: "Frappé de Café", price: 12000, desc: "Bebida fría de café con hielo y leche. Refrescante y energizante.", img: IMAGES.frappe, isFrappe: true },
+                    { id: 31, name: "Frappé de Mango con Jengibre", price: 14000, desc: "Bebida fría de mango fresco con un toque picante de jengibre.", img: IMAGES.frappeMango, isFrappe: true },
+                    { id: 32, name: "Frappé de Vainilla", price: 12000, desc: "Bebida fría cremosa con esencia natural de vainilla.", img: IMAGES.frappe, isFrappe: true },
+                    { id: 33, name: "Frappé de Chocolate", price: 13000, desc: "Bebida fría de chocolate belga con hielo y leche.", img: IMAGES.frappe, isFrappe: true }
+                ]
+            },
             parrilla: {
                 "Platos de la Casa": [
                     { id: 103, name: "CUZZETIELLO POLPETTA", price: 28900, desc: "Pan artesanal redondo relleno de jugosas albóndigas napolitanas bañadas en salsa roja casera y cubiertas con queso fundido, gratinado al momento.", img: IMAGES.cuzzetiello },
@@ -537,6 +607,10 @@
                             {item.isJugo && <span className="badge-jugo">🧃 NATURAL</span>}
                             {item.isGaseosa && <span className="badge-gaseosa">🥤 GASEOSA</span>}
                             {item.isCocktail && <span className="badge-cocktail">🍹 COCTEL</span>}
+                            {item.isCafe && <span className="badge-cafe">☕ ESPECIALIDAD</span>}
+                            {item.isWaffle && <span className="badge-waffle">🧇 ARTESANAL</span>}
+                            {item.isFrappe && <span className="badge-frappe">🥤 FRAPPÉ</span>}
+                            {item.isPanaderia && <span className="badge-panaderia">🥐 PANADERÍA</span>}
                             {item.sauceName && <span className="sauce-badge">🌶️ {item.sauceName}</span>}
                             <p className="text-xs sm:text-sm italic opacity-80 font-light leading-relaxed mb-2 line-clamp-3">{item.desc}</p>
                         </div>
@@ -569,6 +643,13 @@
                         {item.isTop && <span className="badge-top">🔥 TOP</span>}
                         {item.isCrocante && <span className="badge-crocante">🔥 CROCANTE</span>}
                         {item.isArtisan && <span className="badge-artesanal">🏠 ARTESANAL</span>}
+                        {item.isCafe && <span className="badge-cafe">☕ ESPECIALIDAD</span>}
+                        {item.isWaffle && <span className="badge-waffle">🧇 ARTESANAL</span>}
+                        {item.isFrappe && <span className="badge-frappe">🥤 FRAPPÉ</span>}
+                        {item.isPanaderia && <span className="badge-panaderia">🥐 PANADERÍA</span>}
+                        {item.isJugo && <span className="badge-jugo">🧃 NATURAL</span>}
+                        {item.isGaseosa && <span className="badge-gaseosa">🥤 GASEOSA</span>}
+                        {item.isCocktail && <span className="badge-cocktail">🍹 COCTEL</span>}
                         <p className="text-xs sm:text-sm italic opacity-70 font-light leading-relaxed mb-2">{item.desc}</p>
                         <button 
                             onClick={handleAdd}
@@ -630,7 +711,7 @@
 
         function App() {
             const [scene, setScene] = useState('landing');
-            const [activeSub, setActiveSub] = useState("Platos de la Casa");
+            const [activeSub, setActiveSub] = useState("Café de Especialidad");
             const [cart, setCart] = useState([]);
             const [showCart, setShowCart] = useState(false);
 
@@ -663,12 +744,12 @@
                             <p className="uppercase-elegant text-brava mb-10 italic font-bold">Reserva Gastronómica</p>
                             
                             <div className="flex flex-col gap-4 w-full max-w-[280px] mb-12">
-                                <button onClick={() => setScene('tarde')} className="bg-white py-5 px-5 rounded-md shadow-sm transition-all hover:shadow-xl border border-[#1b261b]/5 flex flex-col items-center group">
-                                    <span className="text-xl italic font-semibold text-[#1b261b] group-hover:text-brava transition-colors">Experiencia de Tarde</span>
-                                    <span className="uppercase-elegant text-[8px] opacity-50 mt-1 block">Café & Repostería</span>
+                                <button onClick={() => {setScene('tarde'); setActiveSub("Café de Especialidad");}} className="bg-white py-5 px-5 rounded-md shadow-sm transition-all hover:shadow-xl border border-[#1b261b]/5 flex flex-col items-center group">
+                                    <span className="text-xl italic font-semibold text-[#1b261b] group-hover:text-brava transition-colors">Para Tardear</span>
+                                    <span className="uppercase-elegant text-[8px] opacity-50 mt-1 block">Café, Waffles & Más</span>
                                 </button>
                                 
-                                <button onClick={() => setScene('parrilla')} className="bg-[#1b261b] text-white py-5 px-5 rounded-md shadow-2xl transition-all flex flex-col items-center hover:bg-[#253525]">
+                                <button onClick={() => {setScene('parrilla'); setActiveSub("Platos de la Casa");}} className="bg-[#1b261b] text-white py-5 px-5 rounded-md shadow-2xl transition-all flex flex-col items-center hover:bg-[#253525]">
                                     <span className="text-xl italic font-semibold">La Brasa de Autor</span>
                                     <span className="uppercase-elegant text-[8px] text-brava mt-1 block font-bold">Cocina de Fuego</span>
                                 </button>
@@ -682,10 +763,12 @@
                 );
             }
 
-            const currentItems = scene === 'tarde' ? MENU_DATA.tarde : MENU_DATA.parrilla[activeSub];
+            const currentItems = scene === 'tarde' ? MENU_DATA.tarde[activeSub] : MENU_DATA.parrilla[activeSub];
+            const isTarde = scene === 'tarde';
             const isParrilla = scene === 'parrilla';
             const isSalchis = activeSub === "Salchis";
             const isBeverage = ["Jugos Naturales", "Gaseosas", "Cocteles Especiales"].includes(activeSub);
+            const isTardeCategory = ["Café de Especialidad", "Panadería", "Waffles Artesanales", "Bebidas Frappé"].includes(activeSub);
 
             const getSalchisBySize = () => {
                 const sizes = [
@@ -731,13 +814,13 @@
 
                     <main className="pt-28 px-4 max-w-4xl mx-auto relative z-10 pb-40">
                         <div className="text-center mb-10 reveal">
-                            <h3 className="text-4xl italic font-light">{scene === 'tarde' ? 'Dulce Atardecer' : 'La Brasa de Autor'}</h3>
+                            <h3 className="text-4xl italic font-light">{isTarde ? 'Para Tardear' : 'La Brasa de Autor'}</h3>
                             <div className="h-1 w-10 bg-brava mx-auto mt-3 rounded-full opacity-60"></div>
                         </div>
 
-                        {isParrilla && (
+                        {(isParrilla || isTarde) && (
                             <div className="flex overflow-x-auto gap-3 pb-5 mb-6 no-scrollbar justify-start sm:justify-center">
-                                {Object.keys(MENU_DATA.parrilla).map(cat => (
+                                {Object.keys(isTarde ? MENU_DATA.tarde : MENU_DATA.parrilla).map(cat => (
                                     <button 
                                         key={cat}
                                         onClick={() => setActiveSub(cat)}
@@ -749,7 +832,7 @@
                             </div>
                         )}
 
-                        {!isSalchis && !isBeverage && (
+                        {!isSalchis && !isBeverage && !isTardeCategory && (
                             <div className="relative">
                                 <div 
                                     className={`flex overflow-x-auto gap-4 pb-6 no-scrollbar ${isParrilla ? 'horizontal-scroll' : ''}`}
@@ -774,25 +857,38 @@
                             </div>
                         )}
 
-                        {isSalchis && (
-                            <div className="space-y-6">
-                                {salchisSections.map((section, sectionIdx) => (
-                                    <div key={sectionIdx}>
-                                        <VerticalSectionHeader title={section.title} subtitle={section.subtitle} />
-                                        <div className="space-y-2">
-                                            {section.items.map((item, itemIdx) => (
-                                                <ItemCard 
-                                                    key={item.id} 
-                                                    item={item} 
-                                                    onAdd={addToCart} 
-                                                    delay={`${(sectionIdx * 10 + itemIdx) * 0.1}s`}
-                                                    isHorizontal={false}
-                                                    isVertical={true}
-                                                />
-                                            ))}
+                        {(isSalchis || isTardeCategory) && (
+                            <div className="space-y-4">
+                                {isSalchis ? (
+                                    salchisSections.map((section, sectionIdx) => (
+                                        <div key={sectionIdx}>
+                                            <VerticalSectionHeader title={section.title} subtitle={section.subtitle} />
+                                            <div className="space-y-2">
+                                                {section.items.map((item, itemIdx) => (
+                                                    <ItemCard 
+                                                        key={item.id} 
+                                                        item={item} 
+                                                        onAdd={addToCart} 
+                                                        delay={`${(sectionIdx * 10 + itemIdx) * 0.1}s`}
+                                                        isHorizontal={false}
+                                                        isVertical={true}
+                                                    />
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))
+                                ) : (
+                                    currentItems.map((item, idx) => (
+                                        <ItemCard 
+                                            key={item.id} 
+                                            item={item} 
+                                            onAdd={addToCart} 
+                                            delay={`${idx * 0.1}s`}
+                                            isHorizontal={false}
+                                            isVertical={true}
+                                        />
+                                    ))
+                                )}
                             </div>
                         )}
 
@@ -811,7 +907,7 @@
                             </div>
                         )}
 
-                        {isParrilla && currentItems.length > 1 && !isSalchis && !isBeverage && (
+                        {(isParrilla || isTarde) && currentItems.length > 1 && !isSalchis && !isBeverage && !isTardeCategory && (
                             <div className="flex justify-center gap-2 mt-4">
                                 {currentItems.map((_, idx) => (
                                     <div 
